@@ -1,0 +1,56 @@
+body {
+    font-family: 'Roboto';
+}
+
+        /* navigation bar stuff */
+.layout-transparent {
+    background: url('Images/HomeBG.jpg') center / cover;
+}
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+color: white;           /*  Use 87% black instead if your background is light. */
+}
+
+.mdl-layout__content{
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    padding: 0;
+}
+
+.welcome-card-wide.mdl-card {
+    width: 40%;
+    float: left;
+}
+.welcome-card-wide > .mdl-card__title {
+    color: white;
+    height: 176px;
+    background: black /*url('../assets/demos/welcome_card.jpg') center / cover; */
+}
+.welcome-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+
+.fixtures-card-wide.mdl-card {
+    margin-left: 50%;
+    width: 40%;
+}
+.fixtures-card-wide > .mdl-card__title {
+    color: white;
+    background: indigo;
+}
+.fixtures-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.fixtures-table-container.mdl-card__supporting-text{
+    width: 100%;
+    padding: 0;
+}
+
+
+.mdl-data-table{
+    width: 100%;
+}
+

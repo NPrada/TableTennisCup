@@ -1,0 +1,44 @@
+body {
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+/* navigation bar stuff */
+.layout-transparent {
+    background: url('Images/HomeBG.jpg') center / cover;
+}
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+    color: white;           /*  Use 87% black instead if your background is light. */
+}
+.mdl-layout__content{
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    padding: 0;
+}
+/*  CSS to make the playoffs diagram */
+table {
+    border: 0;
+    border-spacing: 0;
+}
+.bb{
+    border-bottom: 2px solid black !important;
+    height: 30px;
+    width: 30px;
+}
+.br{
+    border-right: 2px solid black !important;
+    height: 30px;
+    width: 30px;
+}
+.namecell {
+    background-color: cornflowerblue;
+    height: 30px;
+    width: 120px;
+}
+.scorecell{
+    background-color: lightcoral;
+    height: 30px;
+    width: 40px;
+}

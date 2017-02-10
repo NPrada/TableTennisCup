@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Material Design lite framework -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <title>Lughborough Table Tennis Cup</title>
+    <link rel="stylesheet" type="text/css" href="CupPage.css">
+    <link rel="stylesheet" type="text/css" href="NewCup.css">
+
+
+
+</head>
+<body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="">Cup Information</a>
+                <a class="mdl-navigation__link" href="">Fixtures</a>
+                <a class="mdl-navigation__link" href="">Teams</a>
+                <a class="mdl-navigation__link" href="">Login</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Cup Information</a>
+            <a class="mdl-navigation__link" href="">Fixtures</a>
+            <a class="mdl-navigation__link" href="">Teams</a>
+            <a class="mdl-navigation__link" href="">Login</a>
+        </nav>
+    </div>
+    </header>
+    <main class="mdl-layout__content">
+
+        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">
+            <div class="mdl-card__title">
+                <h3 class="mdl-card__title-text">Group 1</h3>
+            </div>
+            <div class="fixtures-table-container mdl-card__supporting-text">
+                <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                        <th class="mdl-data-table__cell--non-numeric">Home</th>
+                        <th class="mdl-data-table__cell--non-numeric">Away</th>
+                        <th class="mdl-data-table__cell--non-numeric">Score</th>
+                        <th class="mdl-data-table__cell--non-numeric">Date</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">1</td>
+                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
+                        <td class="mdl-data-table__cell--non-numeric">London</td>
+                        <td class="mdl-data-table__cell--non-numeric">210-150</td>
+                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2</td>
+                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
+                        <td class="mdl-data-table__cell--non-numeric">Manchester</td>
+                        <td class="mdl-data-table__cell--non-numeric">212-420</td>
+                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                        <td class="mdl-data-table__cell--non-numeric">London</td>
+                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
+                        <td class="mdl-data-table__cell--non-numeric">0-0</td>
+                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">4</td>
+                        <td class="mdl-data-table__cell--non-numeric">Manchester</td>
+                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
+                        <td class="mdl-data-table__cell--non-numeric">0-0</td>
+                        <td class="mdl-data-table__cell--non-numeric">- -</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
