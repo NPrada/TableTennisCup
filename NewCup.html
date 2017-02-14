@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <!-- Include Material Design lite framework -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -149,18 +149,16 @@
         <div>
             <br>
             <button class="addGroup mdl-button mdl-js-button mdl-button--raised" v-on:click="show = !show">Add new Group</button>
-            <!-- use the modal component, pass in the prop -->
 
         </div>
 
-        <modal v-if="showModal" @close="showModal = false">
+        <modal v-if="showModal" @close="showModal = false">             <!-- When the modal is rendered -->
             <!--
               you can use custom content here to overwrite
               default content
             -->
 
-        </modal>                                                          <!-- When the modal is rendered -->
-        </div>
+        </modal>
 
 
         <!-- HTML for the modal  -->
