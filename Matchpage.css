@@ -1,3 +1,13 @@
 .date {
     text-align: center
 }
+
+td.cell-border{
+    border: 5px solid white;
+}
+td.title-text{
+    font-size: 24px;
+}
+td.center {
+    text-align: center
+}
