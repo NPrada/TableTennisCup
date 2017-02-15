@@ -15,6 +15,8 @@ td.center {
     text-align: center
 }
 .game-table{
+    margin-left: 6px;
+    float: left;
     border: 1px solid black;
     width: 50px;
     height: 50px;
