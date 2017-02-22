@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Include Material Design lite framework -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -48,53 +48,53 @@
 
     <main class="mdl-layout__content">
         <div id="app">
-        <table class="layout-Table">
-            <tr>
-                <td style="width: 40%" valign="top">
-                    <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">                                           <!-- fixtures cars is wrong -->
-                        <div class="mdl-card__title">
-                            <h3 class="mdl-card__title-text" >Group 1</h3>
-                        </div>
-                        <!-- Group Table of Points -->
-                        <div class="mdl-card__supporting-text fixtures-table-container ">
-                            <table class="mdl-data-table mdl-js-data-table">
-                                <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">#</th>
-                                    <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                    <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">1</td>
-                                    <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                    <td class="mdl-data-table__cell--non-numeric">6</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">2</td>
-                                    <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                                    <td class="mdl-data-table__cell--non-numeric">3</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">3</td>
-                                    <td class="mdl-data-table__cell--non-numeric">London</td>
-                                    <td class="mdl-data-table__cell--non-numeric">3</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">4</td>
-                                    <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                    <td class="mdl-data-table__cell--non-numeric">0</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Sub menu of Group -->
-                        <div class="mdl-card__menu">
-                            <button id="menu-group1"
-                                    class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
-                                <i class="material-icons">more_vert</i>
-                            </button>
+            <table class="layout-Table">
+                <tr>
+                    <td style="width: 40%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">                                           <!-- fixtures cars is wrong -->
+                            <div class="mdl-card__title">
+                                <h3 class="mdl-card__title-text" >Group 1</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">1</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
+                                        <td class="mdl-data-table__cell--non-numeric">6</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">2</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
+                                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                                        <td class="mdl-data-table__cell--non-numeric">London</td>
+                                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">4</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
+                                        <td class="mdl-data-table__cell--non-numeric">0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group1"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
 
 
                                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
@@ -107,128 +107,131 @@
 
                             </div>
                         </div>
-                    </div>
-                </td>
-                <td style="width: 10%" valign="top">
-                    <div class="middle-filler">
+        </div>
+        </td>
+        <td style="width: 10%" valign="top">
+            <div class="middle-filler">
 
-                    </div>
-                </td>
-                <td style="width: 40%" valign="top">
-                    <div class="fixtures-card-wide mdl-card mdl-shadow--8dp" v-if="show">                               <!-- IF seen here -->
-                        <div class="mdl-card__title">
-                            <h3 class="mdl-card__title-text" >Group 2</h3>
-                        </div>
-                        <!-- Group Table of Points -->
-                        <div class="mdl-card__supporting-text fixtures-table-container ">
+            </div>
+        </td>
+        <td style="width: 40%" valign="top">
+            <div class="fixtures-card-wide mdl-card mdl-shadow--8dp" v-if="show">                               <!-- IF seen here -->
+                <div class="mdl-card__title">
+                    <h3 class="mdl-card__title-text" >Group 2</h3>
+                </div>
+                <!-- Group Table of Points -->
+                <div class="mdl-card__supporting-text fixtures-table-container ">
 
-                        </div>
-                        <!-- Sub menu of Group -->
-                        <div class="mdl-card__menu">
-                            <button id="menu-group2"
-                                    class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
-                                <i class="material-icons">more_vert</i>
-                            </button>
-
-
-                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                    for="menu-group2">
-                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
-                                    <li disabled class="mdl-menu__item">Pick Group Winners</li>
-                                    <li class="mdl-menu__item">Add teams</li>
-                                </ul>
+                </div>
+                <!-- Sub menu of Group -->
+                <div class="mdl-card__menu">
+                    <button id="menu-group2"
+                            class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                        <i class="material-icons">more_vert</i>
+                    </button>
 
 
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        for="menu-group2">
+                        <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                        <li disabled class="mdl-menu__item">Pick Group Winners</li>
+                        <li class="mdl-menu__item">Add teams</li>
+                    </ul>
 
-                        </div>
-                    </div>
-                </td>
-            </tr>
+
+
+                </div>
+            </div>
+        </td>
+        </tr>
         </table>
 
         <div>
             <br>
             <button class="addGroup mdl-button mdl-js-button mdl-button--raised" v-on:click="show = !show">Add new Group</button>
+            <!-- use the modal component, pass in the prop -->
 
         </div>
 
-        <modal v-if="showModal" @close="showModal = false">             <!-- When the modal is rendered -->
+        <modal v-if="showModal" @close="showModal = false">
             <!--
               you can use custom content here to overwrite
               default content
             -->
 
-        </modal>
+        </modal>                                                          <!-- When the modal is rendered -->
+</div>
 
 
-        <!-- HTML for the modal  -->
-        <script type="text/x-template" id="modal-template">
-            <transition name="modal">
-                <div class="modal-mask">
-                    <div class="modal-wrapper">
-                        <div class="modal-container">
+<!-- HTML for the modal  -->
+<script type="text/x-template" id="modal-template">
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
 
-                            <div class="modal-header">
-                                <slot name="header">
-                                    <h2 class="mdl-card__title-text" style="color: black">Add Teams</h2>
-                                </slot>
-                            </div>
+                    <div class="modal-header">
+                        <slot name="header">
+                            <h2 class="mdl-card__title-text" style="color: black">Add Teams</h2>
+                        </slot>
+                    </div>
 
-                            <div class="modal-body">
-                                <slot name="body">
-                                    <form style="padding: 20px">
+                    <div class="modal-body">
+                        <slot name="body">
+                            <form style="padding: 20px">
 
-                                        <div class="mdl-selectfield mdl-js-selectfield">
-                                            <select class="mdl-selectfield__select" id="professsion1" name="professsion">
-                                                <option value=""></option>
-                                                <option value="option1">Team 1</option>
-                                                <option value="option2">Team 2</option>
-                                                <option value="option3">Team 3</option>
-                                                <option value="option4">Team 4</option>
-                                                <option value="option5">Team 5</option>
-                                            </select>
-                                            <label class="mdl-selectfield__label" for="professsion1"></label>
-                                        </div>
-                                    </form>
-                                </slot>
-                            </div>
+                                <div class="mdl-selectfield mdl-js-selectfield">
+                                    <select class="mdl-selectfield__select" id="professsion1" name="professsion">
+                                        <option value=""></option>
+                                        <option value="option1">Team 1</option>
+                                        <option value="option2">Team 2</option>
+                                        <option value="option3">Team 3</option>
+                                        <option value="option4">Team 4</option>
+                                        <option value="option5">Team 5</option>
+                                    </select>
+                                    <label class="mdl-selectfield__label" for="professsion1"></label>
+                                </div>
+                            </form>
+                        </slot>
+                    </div>
 
-                            <div class="modal-footer">
-                                <slot name="footer">
+                    <div class="modal-footer">
+                        <slot name="footer">
 
-                                    <button class="mdl-button mdl-js-button mdl-button--raised" @click="$emit('close')">
-                                        Close
-                                    </button>
-                                </slot>
-                            </div>
-                        </div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised" @click="$emit('close')">
+                                Close
+                            </button>
+                        </slot>
                     </div>
                 </div>
-            </transition>
-        </script>
+            </div>
+        </div>
+    </transition>
+</script>
 
 
 
-        <!-- app -->                                                                                                    <!-- outdated/ useless maybe! -->
+<!-- app -->                                                                                                    <!-- outdated/ useless maybe! -->
 
-            <script>
+<script>
 
-            // register modal component
-            Vue.component('modal', {
-                template: '#modal-template'
-            })
+    // register modal component
+    Vue.component('modal', {
+        template: '#modal-template'
+    })
 
-            // start app
-            new Vue({
-                el: '#app',
-                data: {
-                    showModal: false,
-                    show: false
-                }
+    // start app
+    new Vue({
+        el: '#app',
+        data: {
+            showModal: false,
+            show: false
+        }
 
-            })
+    })
 
-        </script>
-    </main>
+</script>
+</main>
+</div>
 </body>
 </html>
