@@ -23,22 +23,23 @@
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Main panel</a>
-            <a href="#fixed-tab-2" class="mdl-layout__tab">All Fixtures</a>
+            <a href="adminpanel.html" class="mdl-layout__tab is-active">Main panel</a>
+            <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
             <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
-            <a href="#fixed-tab-4" class="mdl-layout__tab">Playoffs</a>
+            <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
             <a href="#fixed-tab-5" class="mdl-layout__tab">Clubs</a>
             <a href="#fixed-tab-6" class="mdl-layout__tab">Teams</a>
             <a href="#fixed-tab-7" class="mdl-layout__tab">Players</a>
 
         </div>
+
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Title</span>
     </div>
     <main class="mdl-layout__content">
         <!-- Main admin panel -->
-        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+
             <div class="page-content">
                 <h3>Add player to a team:</h3>
                 <table class="mdl-data-table mdl-js-data-table Input-table">
@@ -96,8 +97,8 @@
                 <table class="mdl-data-table mdl-js-data-table Input-table">
                     <thead>
                     <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Club</th>
                         <th class="mdl-data-table__cell--non-numeric">Team</th>
+                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
                         <th class="mdl-data-table__cell--non-numeric"></th>
                     </tr>
                     </thead>
@@ -151,257 +152,8 @@
                     </tbody>
                 </table>
             </div>
-        </section>
-        <!-- All fixtures page -->
-        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-            <div class="page-content">
-                <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">
-                    <div class="mdl-card__title">
-                        <h3 class="mdl-card__title-text">Group 1</h3>
-                    </div>
-                    <div class="fixtures-table-container mdl-card__supporting-text">
-                        <table class="mdl-data-table mdl-js-data-table">
-                            <thead>
-                            <tr>
-                                <th class="mdl-data-table__cell--non-numeric">#</th>
-                                <th class="mdl-data-table__cell--non-numeric">Home</th>
-                                <th class="mdl-data-table__cell--non-numeric">Away</th>
-                                <th class="mdl-data-table__cell--non-numeric">Score</th>
-                                <th class="mdl-data-table__cell--non-numeric">Date</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">1</td>
-                                <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                <td class="mdl-data-table__cell--non-numeric">London</td>
-                                <td class="mdl-data-table__cell--non-numeric">210-150</td>
-                                <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">2</td>
-                                <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                <td class="mdl-data-table__cell--non-numeric">Manchester</td>
-                                <td class="mdl-data-table__cell--non-numeric">212-420</td>
-                                <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">3</td>
-                                <td class="mdl-data-table__cell--non-numeric">London</td>
-                                <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                                <td class="mdl-data-table__cell--non-numeric">0-0</td>
-                                <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">4</td>
-                                <td class="mdl-data-table__cell--non-numeric">Manchester</td>
-                                <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                                <td class="mdl-data-table__cell--non-numeric">0-0</td>
-                                <td class="mdl-data-table__cell--non-numeric">- -</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Group Stage -->
-        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-            <div class="page-content">
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-4">
-            <div class="page-content"><!-- Playoffs -->
-                <table>
-                    <tr>                                            <!-- Quarterfinal 1 -->
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">123</td>
-                        <td class="bb"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td class="namecell">Leicester</td>
-                        <td class="scorecell">233</td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>                                            <!-- Semifinal 1 -->
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td class="bb"></td>
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">234</td>
-                        <td class="bb"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td ></td>
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">234</td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >                                           <!-- Quarterfinal 2 -->
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">123</td>
-                        <td class="bb br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td class="namecell">Leicester</td>
-                        <td class="scorecell">233</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >                                               <!-- Grand Final -->
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td class="bb"></td>
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">123</td>
-                    </tr>
-                    <tr >
 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td class="namecell">Leicester</td>
-                        <td class="scorecell">233</td>
-                    </tr>
-                    <tr >                                               <!-- Quarterfinal 3 -->
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">123</td>
-                        <td class="bb"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td class="namecell">Leicester</td>
-                        <td class="scorecell">233</td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>                                                <!-- Semifinal 2 -->
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td class="bb"></td>
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">234</td>
-                        <td class="br bb"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td></td>
-                        <td></td>
-                        <td class="br"></td>
-                        <td ></td>
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">234</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >                                               <!-- Quarterfinal 4 -->
-                        <td class="namecell">Loughborugh</td>
-                        <td class="scorecell">123</td>
-                        <td class="bb br"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr >
-                        <td class="namecell">Leicester</td>
-                        <td class="scorecell">233</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-5">
-            <div class="page-content"><!-- Clubs -->
-
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-6">
-            <div class="page-content"><!-- Teams -->
-
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-7">
-            <div class="page-content"><!-- Players -->
-
-            </div>
-        </section>
 
     </main>
 </div>
