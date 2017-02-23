@@ -1,32 +1,201 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <!-- Include Material Design lite framework -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
-    <style>
-
-    </style>
+    <title>Lughborough Table Tennis Cup</title>
+    <link rel="stylesheet" type="text/css" href="CupPage.css">
+    <link rel="stylesheet" type="text/css" href="adminpanel.css">
 
 </head>
 <body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title" href="Index.html">Loughborough Table Tennis Cup</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
+                <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
+                <a class="mdl-navigation__link" href="">Fixtures</a>
+                <a class="mdl-navigation__link" href="">Teams</a>
+                <a class="mdl-navigation__link" href="">Login</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="NewCup.html">Cup Information</a>
+            <a class="mdl-navigation__link" href="Group1.html">Fixtures</a>
+            <a class="mdl-navigation__link" href="">Clubs</a>
+            <a class="mdl-navigation__link" href="">Teams</a>
+            <a class="mdl-navigation__link" href="">Players</a>
+            <a class="mdl-navigation__link" href="">Login</a>
+        </nav>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
+        <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
+        <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+    </div>
 
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="page-content"><!-- Main admin panel -->
+                <h3>Add player to a team:</h3>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Club</th>
+                        <th class="mdl-data-table__cell--non-numeric">Team</th>
+                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
+                        <th class="mdl-data-table__cell--non-numeric"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
+                                    <option value="option1">Club 1</option>
+                                    <option value="option2">Club 2</option>
+                                    <option value="option3">Club 3</option>
+                                    <option value="option4">Club 4</option>
+                                    <option value="option5">Club 5</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
+                                    <option value="option1">Team 1</option>
+                                    <option value="option2">Team 2</option>
+                                    <option value="option3">Team 3</option>
+                                    <option value="option4">Team 4</option>
+                                    <option value="option5">Team 5</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="sample3">
+                                    <label class="mdl-textfield__label" for="sample3">Player name...</label>
+                                </div>
+                            </form>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3>Create a team:</h3>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Club</th>
+                        <th class="mdl-data-table__cell--non-numeric">Team</th>
+                        <th class="mdl-data-table__cell--non-numeric"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
+                                    <option value="option1">Team 1</option>
+                                    <option value="option2">Team 2</option>
+                                    <option value="option3">Team 3</option>
+                                    <option value="option4">Team 4</option>
+                                    <option value="option5">Team 5</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="sample3">
+                                    <label class="mdl-textfield__label" for="sample3">Team name...</label>
+                                </div>
+                            </form>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3>Create a club:</h3>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="sample3">
+                                <label class="mdl-textfield__label" for="sample3">Club name...</label>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content"><!-- All fixtures page -->
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+            <div class="page-content"><!-- Clubs -->
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-4">
+            <div class="page-content"><!-- Teams -->
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-5">
+            <div class="page-content"><!-- Players -->
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-6">
+            <div class="page-content"><!-- Playoffs -->
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-7">
+            <div class="page-content"><!-- Group stage -->
+
+            </div>
+        </section>
 
 
-<script>
-    // register modal component
-    Vue.component('modal', {
-        template: '#modal-template'
-    })
-
-    // start app
-    new Vue({
-        el: '#app',
-        data: {
-            showModal: false
-        }
-    })
-</script>
-
-
-
+    </main>
+</div>
 </body>
 </html>

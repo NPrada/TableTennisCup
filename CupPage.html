@@ -12,31 +12,34 @@
 
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title" href="Index.html">Loughborough Table Tennis Cup</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
-                <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
-                <a class="mdl-navigation__link" href="">Fixtures</a>
-                <a class="mdl-navigation__link" href="">Teams</a>
-                <a class="mdl-navigation__link" href="">Login</a>
-            </nav>
+            <span class="mdl-layout-title">Admin Page</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#fixed-tab-1" class="mdl-layout__tab">Main panel</a>
+            <a href="#fixed-tab-2" class="mdl-layout__tab">All Fixtures</a>
+            <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
+            <a href="CupPage.html" class="mdl-layout__tab is-active">Playoffs</a>
+            <a href="#fixed-tab-5" class="mdl-layout__tab">Clubs</a>
+            <a href="#fixed-tab-6" class="mdl-layout__tab">Teams</a>
+            <a href="#fixed-tab-7" class="mdl-layout__tab">Players</a>
+
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Title</span>
+    </div>                                                                                                   <!-- FIX ME -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="NewCup.html">Cup Information</a>
-            <a class="mdl-navigation__link" href="Group1.html">Fixtures</a>
-            <a class="mdl-navigation__link" href="">Clubs</a>
+            <a class="mdl-navigation__link" href="">Cup Information</a>
+            <a class="mdl-navigation__link" href="">Fixtures</a>
             <a class="mdl-navigation__link" href="">Teams</a>
-            <a class="mdl-navigation__link" href="">Players</a>
             <a class="mdl-navigation__link" href="">Login</a>
         </nav>
     </div>

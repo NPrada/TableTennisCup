@@ -16,15 +16,26 @@
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
+                    <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
+                    <a class="mdl-navigation__link" href="">Fixtures</a>
+                    <a class="mdl-navigation__link" href="">Teams</a>
+                    <a class="mdl-navigation__link" href="">Login</a>
+                </nav>
+            </div>
+        </header>                                                                                                           <!-- FIX ME -->
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Navigation</span>
+            <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
                 <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
                 <a class="mdl-navigation__link" href="">Fixtures</a>
@@ -32,17 +43,6 @@
                 <a class="mdl-navigation__link" href="">Login</a>
             </nav>
         </div>
-    </header>                                                                                                           <!-- FIX ME -->
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Navigation</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
-            <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
-            <a class="mdl-navigation__link" href="">Fixtures</a>
-            <a class="mdl-navigation__link" href="">Teams</a>
-            <a class="mdl-navigation__link" href="">Login</a>
-        </nav>
-    </div>
 
     <main class="mdl-layout__content">
         <div id="app">
@@ -194,7 +194,7 @@
             </table>
         </div>
     </main>
-    
+
 </div>
 </body>
 </html>
