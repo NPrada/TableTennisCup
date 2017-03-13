@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91e3959e-a411-49a0-b387-0eb288068534" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TableTennisExpress/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TableTennisExpress/test2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminFixtures.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminPlayoffs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dbconnect.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Javascript/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/NewCup.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test2.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Homepage.css" afterPath="$PROJECT_DIR$/Homepage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Index.html" afterPath="$PROJECT_DIR$/Index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Matchpage.html" afterPath="$PROJECT_DIR$/Matchpage.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -47,10 +36,13 @@
       <file leaf-file-name="Matchpage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Matchpage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="123" column="50" lean-forward="true" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+            <state relative-caret-position="824">
+              <caret line="306" column="17" lean-forward="true" selection-start-line="306" selection-start-column="17" selection-end-line="306" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#td#4;n#tr#3;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#5;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#6;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#7;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -331,7 +323,7 @@
       <workItem from="1488387021763" duration="2714000" />
       <workItem from="1488721538478" duration="1389000" />
       <workItem from="1489409997595" duration="375000" />
-      <workItem from="1489437769186" duration="5156000" />
+      <workItem from="1489437769186" duration="8481000" />
     </task>
     <task id="LOCAL-00001" summary="asda">
       <created>1487780566570</created>
@@ -344,7 +336,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118728000" />
+    <option name="totallyTimeSpent" value="122053000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,10 +625,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Matchpage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="123" column="50" lean-forward="true" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+        <state relative-caret-position="824">
+          <caret line="306" column="17" lean-forward="true" selection-start-line="306" selection-start-column="17" selection-end-line="306" selection-end-column="17" />
           <folding>
             <element signature="n#style#0;n#td#4;n#tr#3;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#5;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#6;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#7;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
