@@ -222,13 +222,18 @@
                     <td id="awayscore"></td>
                 </tr>
             </table>
-            <div><p id="test">2</p></div>
         </div>
         <div id="calc">
-            <button v-on:click="addup">Add 1</button>
-            {{home}}
+            <button v-on:click="addup">Execute</button>
+
+        </div>
+        <div id="calc">
+            <button v-on:click="fetchscore">Execute</button>
+
         </div>
         <script>
+
+
 
             var tallier = new Vue({
                 el: '#calc',
@@ -280,6 +285,9 @@
                 methods: {
                     addup: function () {
 
+
+
+
                         var x =0;
                         var homescore1 = this.m1g1h + this.m1g2h + this.m1g3h + this.m1g4h + this.m2g1h + this.m2g2h + this.m2g3h + this.m2g4h;
                         var awayscore1 = this.m1g1a + this.m1g2a + this.m1g3a + this.m1g4a + this.m2g1a + this.m2g2a + this.m2g3a + this.m2g4a;
@@ -298,11 +306,36 @@
                         document.getElementById("homescore").innerHTML=this.homescore;
                         this.awayscore = awayscore1 + awayscore2;
 
-                        //YOU NEED TO SET THE HANDICAP HERE
+                        //YOU NEED TO SET THE HANDICAP HERE                                                             //YOU NEED TO SET THE HANDICAP HERE
 
                         alert('Hello ' + homescore1 + '!');
                         // `event` is the native DOM event
+                    },
 
+                    scorefetch: function (data) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                                                                                                        //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.scoreparser(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/matches", true);
+                        xhttp.send();
+
+
+                    },
+                    scoreparser: function (rawdata) {
+
+                        var data =  rawdata;
+                        var json = JSON.parse(data);                                                                    //parse json data
+                        console.log(json.id);
+
+
+                        this.m1g1a = json.id;
                     }
                 }
             })

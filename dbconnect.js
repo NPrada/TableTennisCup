@@ -20,6 +20,13 @@ connection.connect(function (error) {       //connect to database
     }
 });
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 app.get('/123', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
@@ -44,7 +51,10 @@ app.get("/matches", function (req,res) {
             //res.write('you posted:\n');
             //var x = rows;
 
-            res.send((rows[0].id).toString());
+            //res.send((rows[0].id).toString());        //this sends a 1
+            res.send(rows[0]);
+            //res.send(rows);
+
 
         }
     });
