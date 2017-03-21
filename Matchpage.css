@@ -39,3 +39,16 @@ td.center {
     width: 22px;
     height: 24px;
 }
+
+.nobg{
+    color: aqua;
+
+}
+
+.active {
+    background:#ffffff url('Images/Redbg.png') no-repeat;
+}
+
+.greentrue {
+    background:#ffffff url('Images/Greenbg.png') no-repeat;
+}
