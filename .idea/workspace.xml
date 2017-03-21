@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Matchpage.html" line="441" />
+    <bookmark url="file://$PROJECT_DIR$/Matchpage.html" line="436" />
     <bookmark url="file://$PROJECT_DIR$/Matchpage.css" line="51" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91e3959e-a411-49a0-b387-0eb288068534" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Images/Greenbg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Images/Redbg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Matchpage.css" afterPath="$PROJECT_DIR$/Matchpage.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Matchpage.html" afterPath="$PROJECT_DIR$/Matchpage.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -54,8 +50,8 @@
       <file leaf-file-name="Matchpage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Matchpage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="753">
-              <caret line="353" column="29" lean-forward="true" selection-start-line="353" selection-start-column="29" selection-end-line="353" selection-end-column="29" />
+            <state relative-caret-position="294">
+              <caret line="316" column="16" lean-forward="true" selection-start-line="316" selection-start-column="16" selection-end-line="316" selection-end-column="16" />
               <folding>
                 <element signature="n#style#0;n#td#4;n#tr#3;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#3;n#tr#4;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -211,7 +207,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1261" />
+    <option name="width" value="1063" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -398,7 +394,7 @@
       <workItem from="1490021874116" duration="9857000" />
       <workItem from="1490036325489" duration="45000" />
       <workItem from="1490045140123" duration="1227000" />
-      <workItem from="1490049905152" duration="10684000" />
+      <workItem from="1490049905152" duration="11236000" />
     </task>
     <task id="LOCAL-00001" summary="asda">
       <created>1487780566570</created>
@@ -411,7 +407,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146898000" />
+    <option name="totallyTimeSpent" value="147450000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -423,10 +419,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1261" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="1063" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14779116" sideWeight="0.49542335" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17574021" sideWeight="0.49542335" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -697,8 +693,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Matchpage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="753">
-          <caret line="353" column="29" lean-forward="true" selection-start-line="353" selection-start-column="29" selection-end-line="353" selection-end-column="29" />
+        <state relative-caret-position="294">
+          <caret line="316" column="16" lean-forward="true" selection-start-line="316" selection-start-column="16" selection-end-line="316" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#td#4;n#tr#3;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#3;n#tr#4;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
