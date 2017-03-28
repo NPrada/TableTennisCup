@@ -50,9 +50,26 @@ td.center {
 }
 
 .greentrue {
-    background:#ffffff url('Images/Greenbg.png') no-repeat;
+    background: #ffffff url('Images/Greenbg.png') no-repeat;
 }
 
-.scorestable{
-    width: 710px;
+/*.scorestable{*/
+    /*width: 710px;*/
+
+/*}*/
+.toalscorecell{
+    padding: 0;
+    background-color: white;
+    height: 50px;
 }
+.teamnamecell {
+    font-size: 16px;
+    width: 100px;
+    border-bottom: 5px solid transparent;
+}
+.setcell {
+    width: 250px;
+    border-bottom: 5px solid transparent;
+
+}
+
