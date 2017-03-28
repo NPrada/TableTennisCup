@@ -52,3 +52,7 @@ td.center {
 .greentrue {
     background:#ffffff url('Images/Greenbg.png') no-repeat;
 }
+
+.scorestable{
+    width: 710px;
+}

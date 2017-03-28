@@ -1,0 +1,23 @@
+{
+  "name": "tabletenniscupmanager",
+  "version": "1.0.0",
+  "description": "my final year project ",
+  "main": "dbconnect.js",
+  "dependencies": {
+    "node": "^0.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nimajik/TableTennisCup.git"
+  },
+  "author": "Niccolo Prada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nimajik/TableTennisCup/issues"
+  },
+  "homepage": "https://github.com/Nimajik/TableTennisCup#readme"
+}
