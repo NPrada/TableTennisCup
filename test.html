@@ -9,15 +9,18 @@
 
     <title>Lughborough Table Tennis Cup</title>
     <link rel="stylesheet" type="text/css" href="CupPage.css">
-    <link rel="stylesheet" type="text/css" href="adminpanel.css">
+    <link rel="stylesheet" type="text/css" href="Matchpage.css">
 
 </head>
 <body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title" href="Index.html">Loughborough Table Tennis Cup</span>
+            <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
@@ -26,176 +29,394 @@
                 <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
                 <a class="mdl-navigation__link" href="">Fixtures</a>
                 <a class="mdl-navigation__link" href="">Teams</a>
-                <a class="mdl-navigation__link" href="">Login</a>
+                <a class="mdl-navigation__link" href="login.html">Login</a>
             </nav>
         </div>
-    </header>
+    </header>                                                                                                           <!-- FIX ME -->
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="NewCup.html">Cup Information</a>
-            <a class="mdl-navigation__link" href="Group1.html">Fixtures</a>
-            <a class="mdl-navigation__link" href="">Clubs</a>
+            <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
+            <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
+            <a class="mdl-navigation__link" href="">Fixtures</a>
             <a class="mdl-navigation__link" href="">Teams</a>
-            <a class="mdl-navigation__link" href="">Players</a>
-            <a class="mdl-navigation__link" href="">Login</a>
+            <a class="mdl-navigation__link" href="login.html">Login</a>
         </nav>
     </div>
-    <!-- Tabs -->
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-        <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
-        <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
-        <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
-    </div>
 
-    <main class="mdl-layout__content">
-        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-            <div class="page-content"><!-- Main admin panel -->
-                <h3>Add player to a team:</h3>
-                <table class="mdl-data-table mdl-js-data-table Input-table">
-                    <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Club</th>
-                        <th class="mdl-data-table__cell--non-numeric">Team</th>
-                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
-                        <th class="mdl-data-table__cell--non-numeric"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Club 1</option>
-                                    <option value="option2">Club 2</option>
-                                    <option value="option3">Club 3</option>
-                                    <option value="option4">Club 4</option>
-                                    <option value="option5">Club 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Team 1</option>
-                                    <option value="option2">Team 2</option>
-                                    <option value="option3">Team 3</option>
-                                    <option value="option4">Team 4</option>
-                                    <option value="option5">Team 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="sample3">
-                                    <label class="mdl-textfield__label" for="sample3">Player name...</label>
-                                </div>
-                            </form>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Submit
-                            </button>
-                        </td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
+    <main class="mdl-layout__content" id="calc">
+        <div id="app">
+            <p class="date">Date</p>
+            <table >                                                                                                     <!-- This is the top table containing the team names and so on-->
+                <tr >
+                    <td class="cell-border center">Home</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cell-border center">Away</td>
+                </tr>
+                <tr>
+                    <td class="cell-border title-text">Loughboroug</td>
+                    <td class="cell-border title-text">3</td>
+                    <td class="cell-border ">VS</td>
+                    <td class="cell-border title-text">4</td>
+                    <td class="cell-border title-text">Leicester</td>
+                </tr>
+                <tr >
+                    <td class="cell-border center">
+                        Gareth <br>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cell-border center">
+                        Will <br>
+                    </td>
+                </tr>
+            </table>
+            <br> <br>
+            <!-- This is the second table containing the singles-->
+            <table class="scorestable" >
+                <!-- this just contains the singles subtitle -->
+                <tr>
+                    <td><a class="title-text">Singles:</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="title-text" align="center">Loughborough</td>
+                    <td></td>
+                    <td>Home</td>
+                    <td>Away</td>
+                </tr>
+                <tr >
+                    <td ></td>
+                    <td></td>
+                    <td align="center">  Gareth Liughing </td>
+                    <td align="center">  Riccardo boscherini</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" > Leicester</td>
+                    <td> Player 1</td>
 
-                <h3>Create a team:</h3>
-                <table class="mdl-data-table mdl-js-data-table Input-table">
-                    <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Club</th>
-                        <th class="mdl-data-table__cell--non-numeric">Team</th>
-                        <th class="mdl-data-table__cell--non-numeric"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Team 1</option>
-                                    <option value="option2">Team 2</option>
-                                    <option value="option3">Team 3</option>
-                                    <option value="option4">Team 4</option>
-                                    <option value="option5">Team 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="sample3">
-                                    <label class="mdl-textfield__label" for="sample3">Team name...</label>
-                                </div>
-                            </form>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Submit
-                            </button>
-                        </td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
+                    <!-- Match 1:  player 1 VS player 1-->
+                    <td>
 
-                <h3>Create a club:</h3>
-                <table class="mdl-data-table mdl-js-data-table Input-table">
-                    <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                <label class="mdl-textfield__label" for="sample3">Club name...</label>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Submit
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-            <div class="page-content"><!-- All fixtures page -->
+                        <table class="game-table" v-bind:class="{ active: m1g1h < m1g1a, greentrue: m1g1h > m1g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g2h < m1g2a, greentrue: m1g2h > m1g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m1g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g3h < m1g3a, greentrue: m1g3h > m1g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g4h < m1g4a, greentrue: m1g4h > m1g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g4a}}</td> <td class="e"></td></tr>
+                        </table>
 
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-            <div class="page-content"><!-- Clubs -->
+                    </td>
+                    <!-- Match 2:  player 1 VS player 2-->
+                    <td>
+                        <table class="game-table" v-bind:class="{ active: m2g1h < m2g1a, greentrue: m2g1h > m2g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m2g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g2h < m2g2a, greentrue: m2g2h > m2g2a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m2g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g3h < m2g3a, greentrue: m2g3h > m2g3a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m2g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g4h < m2g4a, greentrue: m2g4h > m2g4a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m2g4h}}</td></tr>
+                            <tr><td class="b" align="left" >{{m2g4a}}</td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 20px"></td>
+                    <td class="scorecell" id="homepart1" ></td>
+                    <td class="scorecell" id="awaypart1" ></td>
+                </tr>
+                <tr >
+                    <td>Player 2</td>
+                    <!-- Match 3:  player 2 VS player 1-->
+                    <td>
+                        <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m3g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g2h < m3g2a, greentrue: m3g2h > m3g2a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g2h}}</td></tr>
+                            <tr><td class="b" align="left" >{{m3g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g3h < m3g3a, greentrue: m3g3h > m3g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g4h < m3g4a, greentrue: m3g4h > m3g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g4a}}</td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <!-- Match 4:  player 2 VS player 2-->
+                    <td>
+                        <table class="game-table" v-bind:class="{ active: m4g1h < m4g1a, greentrue: m4g1h > m4g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g2h < m4g2a, greentrue: m4g2h > m4g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m4g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g3h < m4g3a, greentrue: m4g3h > m4g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g4h < m4g4a, greentrue: m4g4h > m4g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g4a}}</td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 20px"></td>
+                    <td class="scorecell" id="homepart2"></td>
+                    <td class="scorecell" id="awaypart2"></td>
+                </tr>
 
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-4">
-            <div class="page-content"><!-- Teams -->
+            </table>
+            <br>
+            <table class="scorestable">
+                <!-- this just contains the Doubles subtitle -->
+                <tr>
+                    <td><a class="title-text">Doubles:</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td ></td>
+                    <td></td>
+                    <td align="center">  Gareth Liughing & Riccardo boscherini </td>
+                    <td >  </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" ></td>
+                    <td> Player 1 & Player 2</td>
 
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-5">
-            <div class="page-content"><!-- Players -->
+                    <!-- Match 1:  player 1 VS player 1-->
+                    <td>
 
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-6">
-            <div class="page-content"><!-- Playoffs -->
+                        <table class="game-table" v-bind:class="{ active: m5g1h < m5g1a, greentrue: m5g1h > m5g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g2h < m5g2a, greentrue: m5g2h > m5g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m5g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g3h < m5g3a, greentrue: m5g3h > m5g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g4h < m5g4a, greentrue: m5g4h > m5g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g4a}}</td> <td class="e"></td></tr>
+                        </table>
 
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-7">
-            <div class="page-content"><!-- Group stage -->
+                    </td>
+                    <!-- Match 2:  player 2 VS player 1-->
 
-            </div>
-        </section>
+                    <td style="width: 20px"></td>
+                    <td class="scorecell" id="hdoubles"></td>
+                    <td class="scorecell" id="adoubles"></td>
+                </tr>
 
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right"><br>Handicap:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td id="hhandicap"></td>
+                    <td id="ahandicap"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right"><br>Compensation:</td>                                                <!-- Fix the styling> -->
+                    <td ></td>
+                    <td id="hcompensation"></td>
+                    <td id="acompensation"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right"><br>Total:</td>                                                <!-- Fix the styling> -->
+                    <td></td>
+                    <td id="homescore"></td>
+                    <td id="awayscore"></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div id="calc">
+            <button v-on:click="addup">Calculate Score</button>
+
+        </div>
+        <script>
+
+            var tallier = new Vue({
+                el: '#calc',
+                data: {
+
+
+
+                    redtrue: true,
+                    greentrue: true,
+
+
+                    homescore: 0,
+                    awayscore: 0,
+                    hhandicap:0,
+                    ahandicap:0,
+                    hcompensation:0,
+                    acompensation:0,
+
+                    m1g1h: 11,
+                    m1g1a: 2,
+                    m1g2h: 5,
+                    m1g2a: 3,
+                    m1g3h: 3,
+                    m1g3a: 6,
+                    m1g4h: 9,
+                    m1g4a: 3,
+
+                    m2g1h: 11,
+                    m2g1a: 2,
+                    m2g2h: 0,
+                    m2g2a: 11,
+                    m2g3h: 3,
+                    m2g3a: 1,
+                    m2g4h: 11,
+                    m2g4a: 3,
+
+                    m3g1h: 11,
+                    m3g1a: 2,
+                    m3g2h: 0,
+                    m3g2a: 11,
+                    m3g3h: 3,
+                    m3g3a: 0,
+                    m3g4h: 11,
+                    m3g4a: 3,
+
+                    m4g1h: 11,
+                    m4g1a: 2,
+                    m4g2h: 0,
+                    m4g2a: 0,
+                    m4g3h: 11,
+                    m4g3a: 0,
+                    m4g4h: 11,
+                    m4g4a: 3,
+
+                    m5g1h: 11,
+                    m5g1a: 2,
+                    m5g2h: 0,
+                    m5g2a: 0,
+                    m5g3h: 11,
+                    m5g3a: 0,
+                    m5g4h: 11,
+                    m5g4a: 3,
+
+                },
+
+                methods: {
+                    addup: function () {
+
+                        var homescore1 = this.m1g1h + this.m1g2h + this.m1g3h + this.m1g4h + this.m2g1h + this.m2g2h + this.m2g3h + this.m2g4h;
+                        var awayscore1 = this.m1g1a + this.m1g2a + this.m1g3a + this.m1g4a + this.m2g1a + this.m2g2a + this.m2g3a + this.m2g4a;
+                        var homescore2 = this.m3g1h + this.m3g2h + this.m3g3h + this.m3g4h + this.m4g1h + this.m4g2h + this.m4g3h + this.m4g4h;
+                        var awayscore2 = this.m3g1a + this.m3g2a + this.m3g3a + this.m3g4a + this.m4g1a + this.m4g2a + this.m4g3a + this.m4g4a;
+                        var hdoubles = this.m5g1h + this.m5g2h + this.m5g3h + this.m5g4h;
+                        var adoubles = this.m5g1a + this.m5g2a + this.m5g3a + this.m5g4a;
+
+                        document.getElementById("homepart1").innerHTML=homescore1;
+                        document.getElementById("awaypart1").innerHTML=awayscore1;
+                        document.getElementById("homepart2").innerHTML=homescore2;
+                        document.getElementById("awaypart2").innerHTML=awayscore2;
+                        document.getElementById("hdoubles").innerHTML=hdoubles;
+                        document.getElementById("adoubles").innerHTML=adoubles;
+
+
+                        this.homescore = homescore1 + homescore2 + hdoubles;
+                        document.getElementById("homescore").innerHTML=this.homescore;
+                        this.awayscore = awayscore1 + awayscore2 + adoubles;
+                        document.getElementById("awayscore").innerHTML=this.awayscore;
+                        //YOU NEED TO SET THE HANDICAP HERE                                                             //YOU NEED TO SET THE HANDICAP HERE
+
+                    },
+
+                    scorefetch: function (data) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.scoreparser(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/matches", true);
+                        xhttp.send();
+
+
+                    },
+                    scoreparser: function (rawdata) {
+
+                        var data =  rawdata;
+                        var json = JSON.parse(data);                                                                    //parse json data
+                        console.log(json.id);
+
+                        this.m1g1a = json.id;
+                    },
+                    colorsetter: function () {
+
+
+                    }
+                }
+            })
+
+        </script>
 
     </main>
+
 </div>
 </body>
 </html>
+

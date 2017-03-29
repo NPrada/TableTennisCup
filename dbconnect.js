@@ -28,17 +28,15 @@ app.use(function(req, res, next) {
 
 
 app.get('/123', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    //res.sendFile(path.join(__dirname + '/index.html'));
 });
-app.get('/Homepage.css', function(req, res) {
-    res.sendFile(path.join(__dirname + '/Homepage.css'));
-});
+
 
 
 app.get("/matches", function (req,res) {
     //res.sendFile(path.join(__dirname + '/test2.html'));
 
-    connection.query("SELECT * FROM mysampletable", function (error, rows, fields){
+    connection.query("SELECT * FROM matches", function (error, rows, fields){
         // callback aka when the query is done this fires
         if (!!error){
             console.log("Error in the query");
@@ -58,6 +56,31 @@ app.get("/matches", function (req,res) {
 
         }
     });
+});
+    app.get("/sets/:matchID", function (req,res) {
+        //res.sendFile(path.join(__dirname + '/test2.html'));
+        var matchID = req.params.matchID;
+        console.log(matchID);
+        connection.query("SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID, function (error, rows, fields){
+            // callback aka when the query is done this fires
+            if (!!error){
+                console.log("Error in the query");
+            } else {
+                console.log("Successful query");
+                //console.log(rows[0].name);
+                //console.log(rows[0]);
+                //console.log(rows);
+                //res.send(rows);
+                //res.write('you posted:\n');
+                //var x = rows;
+
+                //res.send((rows[0].id).toString());        //this sends a 1
+                res.send(rows);
+                //res.send(rows);
+
+
+            }
+        });
 
 });
 

@@ -291,6 +291,7 @@
         <br>
         <div id="calc">
             <button v-on:click="addup">Calculate Score</button>
+            <button v-on:click="fetchSetScore">Query</button>
 
         </div>
         <script>
@@ -299,12 +300,9 @@
                 el: '#calc',
                 data: {
 
-
-
                     redtrue: true,
                     greentrue: true,
-
-
+                    
                     homescore: 0,
                     awayscore: 0,
                     hhandicap:0,
@@ -312,41 +310,23 @@
                     hcompensation:0,
                     acompensation:0,
 
-                    m1g1h: 11,
-                    m1g1a: 2,
-                    m1g2h: 5,
-                    m1g2a: 3,
-                    m1g3h: 3,
-                    m1g3a: 6,
-                    m1g4h: 9,
-                    m1g4a: 3,
+                    m1g1h: 11,       m2g1h: 11,
+                    m1g1a: 2,        m2g1a: 2,
+                    m1g2h: 5,        m2g2h: 0,
+                    m1g2a: 3,        m2g2a: 11,
+                    m1g3h: 3,        m2g3h: 3,
+                    m1g3a: 6,        m2g3a: 1,
+                    m1g4h: 9,        m2g4h: 11,
+                    m1g4a: 3,        m2g4a: 3,
 
-                    m2g1h: 11,
-                    m2g1a: 2,
-                    m2g2h: 0,
-                    m2g2a: 11,
-                    m2g3h: 3,
-                    m2g3a: 1,
-                    m2g4h: 11,
-                    m2g4a: 3,
-
-                    m3g1h: 11,
-                    m3g1a: 2,
-                    m3g2h: 0,
-                    m3g2a: 11,
-                    m3g3h: 3,
-                    m3g3a: 0,
-                    m3g4h: 11,
-                    m3g4a: 3,
-
-                    m4g1h: 11,
-                    m4g1a: 2,
-                    m4g2h: 0,
-                    m4g2a: 0,
-                    m4g3h: 11,
-                    m4g3a: 0,
-                    m4g4h: 11,
-                    m4g4a: 3,
+                    m3g1h: 11,      m4g1h: 11,
+                    m3g1a: 2,       m4g1a: 2,
+                    m3g2h: 0,       m4g2h: 0,
+                    m3g2a: 11,      m4g2a: 0,
+                    m3g3h: 3,       m4g3h: 11,
+                    m3g3a: 0,       m4g3a: 0,
+                    m3g4h: 11,      m4g4h: 11,
+                    m3g4a: 3,       m4g4a: 3,
 
                     m5g1h: 11,
                     m5g1a: 2,
@@ -355,7 +335,7 @@
                     m5g3h: 11,
                     m5g3a: 0,
                     m5g4h: 11,
-                    m5g4a: 3,
+                    m5g4a: 3
 
                 },
 
@@ -390,7 +370,7 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                                                                                                        //here I manipulate the data received
+                                //here I manipulate the data received
                                 console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                                 tallier.scoreparser(this.responseText);
                             }
@@ -409,10 +389,68 @@
 
                         this.m1g1a = json.id;
                     },
-                    colorsetter: function () {
 
+                    fetchSetScore: function (data) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.fetchSetScoreParser(this.responseText);
+                            }
+                        };
+
+                        var matchID= 1;
+                        xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
+                        xhttp.send();
+
+                    },
+                    fetchSetScoreParser: function (rawdata) {
+
+                        var data =  rawdata;
+                        var json = JSON.parse(data);                                                                    //parse json data
+                        console.log(json[0].g2h);
+
+                        this.m1g1h = json[0].g1h;
+                        this.m1g2h = json[0].g2h;
+                        this.m1g3h = json[0].g3h;
+                        this.m1g4h = json[0].g4h;
+                        this.m1g1a = json[0].g1a;
+                        this.m1g2a = json[0].g2a;
+                        this.m1g3a = json[0].g3a;
+                        this.m1g4a = json[0].g4a;
+
+
+                        this.m2g1h = json[1].g1h;
+                        this.m2g2h = json[1].g2h;
+                        this.m2g3h = json[1].g3h;
+                        this.m2g4h = json[1].g4h;
+                        this.m2g1a = json[1].g1a;
+                        this.m2g2a = json[1].g2a;
+                        this.m2g3a = json[1].g3a;
+                        this.m2g4a = json[1].g4a;
+
+                        this.m3g1h = json[2].g1h;
+                        this.m3g2h = json[2].g2h;
+                        this.m3g3h = json[2].g3h;
+                        this.m3g4h = json[2].g4h;
+                        this.m3g1a = json[2].g1a;
+                        this.m3g2a = json[2].g2a;
+                        this.m3g3a = json[2].g3a;
+                        this.m3g4a = json[2].g4a;
+
+                        this.m4g1h = json[3].g1h;
+                        this.m4g2h = json[3].g2h;
+                        this.m4g3h = json[3].g3h;
+                        this.m4g4h = json[3].g4h;
+                        this.m4g1a = json[3].g1a;
+                        this.m4g2a = json[3].g2a;
+                        this.m4g3a = json[3].g3a;
+                        this.m4g4a = json[3].g4a;
 
                     }
+
                 }
             })
 
