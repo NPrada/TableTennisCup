@@ -60,7 +60,7 @@ app.get("/matches", function (req,res) {
     app.get("/sets/:matchID", function (req,res) {
         //res.sendFile(path.join(__dirname + '/test2.html'));
         var matchID = req.params.matchID;
-        console.log(matchID);
+        //console.log(matchID);
         connection.query("SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID, function (error, rows, fields){
             // callback aka when the query is done this fires
             if (!!error){

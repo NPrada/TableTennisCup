@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="91e3959e-a411-49a0-b387-0eb288068534" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Matchpage.html" afterPath="$PROJECT_DIR$/Matchpage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbconnect.js" afterPath="$PROJECT_DIR$/dbconnect.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,7 +29,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Matchpage.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Matchpage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Matchpage.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="759">
@@ -50,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbconnect.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dbconnect.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dbconnect.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+            <state relative-caret-position="374">
+              <caret line="62" column="10" lean-forward="false" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -152,8 +152,8 @@
         <option value="$PROJECT_DIR$/TableTennisExpress/index.html" />
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/Matchpage.css" />
-        <option value="$PROJECT_DIR$/dbconnect.js" />
         <option value="$PROJECT_DIR$/Matchpage.html" />
+        <option value="$PROJECT_DIR$/dbconnect.js" />
       </list>
     </option>
   </component>
@@ -361,7 +361,7 @@
       <workItem from="1490370874671" duration="57000" />
       <workItem from="1490547505877" duration="1441000" />
       <workItem from="1490616580655" duration="12214000" />
-      <workItem from="1490793823709" duration="1646000" />
+      <workItem from="1490793823709" duration="1885000" />
     </task>
     <task id="LOCAL-00001" summary="asda">
       <created>1487780566570</created>
@@ -374,7 +374,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164316000" />
+    <option name="totallyTimeSpent" value="164555000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -387,9 +387,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.100520834" sideWeight="0.49542335" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.100520834" sideWeight="0.49542335" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -659,14 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dbconnect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Matchpage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="759">
@@ -683,6 +675,14 @@
             <element signature="n#style#0;n#td#3;n#tr#5;n#table#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#3;n#tr#6;n#table#2;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbconnect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="62" column="10" lean-forward="false" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
