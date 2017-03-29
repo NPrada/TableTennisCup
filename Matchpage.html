@@ -292,6 +292,9 @@
         <div id="calc">
             <button v-on:click="addup">Calculate Score</button>
             <button v-on:click="fetchSetScore(1)">Query</button>
+            <button v-on:click="fetchPlayerInfo(1)">Player name</button>
+
+
 
         </div>
         <script>
@@ -382,12 +385,12 @@
 
                     },
                     scoreparser: function (rawdata) {
-
+                        //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
                         var json = JSON.parse(data);                                                                    //parse json data
-                        console.log(json.id);
+                        //console.log(json.id);
 
-                        this.m1g1a = json.id;
+                        //this.m1g1a = json.id;
                     },
 
                     fetchSetScore: function (matchID) {
@@ -397,22 +400,22 @@
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                                 //here I manipulate the data received
                                 console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                tallier.fetchSetScoreParser(this.responseText);
+                                tallier.parserSetScore(this.responseText);
                             }
                         };
 
-                        //var matchID= 1;
                         xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
                         xhttp.send();
 
                     },
-                    fetchSetScoreParser: function (rawdata) {
-
+                    parserSetScore: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
-                        var json = JSON.parse(data);                                                                    //parse json data
+                        var json = JSON.parse(data);
                         //console.log(json[0].g2h);
 
-                        this.m1g1h = json[0].g1h;
+
+                        this.m1g1h = json[0].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
                         this.m1g2h = json[0].g2h;
                         this.m1g3h = json[0].g3h;
                         this.m1g4h = json[0].g4h;
@@ -449,7 +452,32 @@
                         this.m4g3a = json[3].g3a;
                         this.m4g4a = json[3].g4a;
 
+                    },
+
+                    fetchPlayerInfo: function (playerID) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.parserPlayerInfo(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/player/"+playerID, true);
+                        xhttp.send();
+
+                    },
+
+                    parserPlayerInfo: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
+                        var data =  rawdata;
+                        var json = JSON.parse(data);
+
+                        return json;            //simply returns the json structure
                     }
+
 
                 }
             })

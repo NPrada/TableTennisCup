@@ -3,11 +3,12 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/Matchpage.css" line="51" />
     <bookmark url="file://$PROJECT_DIR$/Matchpage.html" line="260" />
-    <bookmark url="file://$PROJECT_DIR$/Matchpage.html" line="389" />
+    <bookmark url="file://$PROJECT_DIR$/Matchpage.html" line="392" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91e3959e-a411-49a0-b387-0eb288068534" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Matchpage.html" afterPath="$PROJECT_DIR$/Matchpage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbconnect.js" afterPath="$PROJECT_DIR$/dbconnect.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +32,8 @@
       <file leaf-file-name="Matchpage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Matchpage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-329">
-              <caret line="288" column="0" lean-forward="true" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
+            <state relative-caret-position="419">
+              <caret line="471" column="0" lean-forward="true" selection-start-line="471" selection-start-column="0" selection-end-line="471" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#td#4;n#tr#1;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#5;n#tr#1;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -52,8 +53,8 @@
       <file leaf-file-name="dbconnect.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbconnect.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="63" column="56" lean-forward="false" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
+            <state relative-caret-position="51">
+              <caret line="61" column="20" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -360,7 +361,7 @@
       <workItem from="1490370874671" duration="57000" />
       <workItem from="1490547505877" duration="1441000" />
       <workItem from="1490616580655" duration="12214000" />
-      <workItem from="1490793823709" duration="3398000" />
+      <workItem from="1490793823709" duration="4507000" />
     </task>
     <task id="LOCAL-00001" summary="asda">
       <created>1487780566570</created>
@@ -373,7 +374,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166068000" />
+    <option name="totallyTimeSpent" value="167177000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -655,16 +656,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dbconnect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="63" column="56" lean-forward="false" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
+        <state relative-caret-position="51">
+          <caret line="61" column="20" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Matchpage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-329">
-          <caret line="288" column="0" lean-forward="true" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
+        <state relative-caret-position="419">
+          <caret line="471" column="0" lean-forward="true" selection-start-line="471" selection-start-column="0" selection-end-line="471" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#td#4;n#tr#1;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#5;n#tr#1;n#table#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />

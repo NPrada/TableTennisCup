@@ -34,7 +34,7 @@ app.get('/123', function(req, res) {
 
 
 app.get("/matches", function (req,res) {
-    //res.sendFile(path.join(__dirname + '/test2.html'));
+
 
     connection.query("SELECT * FROM matches", function (error, rows, fields){
         // callback aka when the query is done this fires
@@ -57,33 +57,52 @@ app.get("/matches", function (req,res) {
         }
     });
 });
-    app.get("/sets/:matchID", function (req,res) {
-        //res.sendFile(path.join(__dirname + '/test2.html'));
-        var matchID = req.params.matchID;
-        //console.log(matchID);
-        connection.query("SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID, function (error, rows, fields){
-            // callback aka when the query is done this fires
-            if (!!error){
-                console.log("Error in the query");
-            } else {
-                console.log("Successful query");
-                //console.log(rows[0].name);
-                //console.log(rows[0]);
-                //console.log(rows);
-                //res.send(rows);
-                //res.write('you posted:\n');
-                //var x = rows;
+app.get("/sets/:matchID", function (req,res) {
 
-                //res.send((rows[0].id).toString());        //this sends a 1
-                res.send(rows);
-                //res.send(rows);
+    var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
+
+    connection.query("SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID, function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+        } else {
+            console.log("Successful query");
+            //console.log(rows[0].name);
+            //console.log(rows[0]);
+            //console.log(rows);
+            //res.send(rows);
+            //res.write('you posted:\n');
+            //var x = rows;
+
+            //res.send((rows[0].id).toString());        //this sends a 1
+            res.send(rows);
+            //res.send(rows);
 
 
-            }
-        });
+        }
+    });
 
 });
 
+app.get("/player/:playerID", function (req,res) {
 
+    var playerID = req.params.playerID;                                                                                  //this fetches the id passed in the endpoint call
+
+    connection.query("SELECT * FROM players GROUP BY id HAVING MAX(id) = "+playerID+" AND MIN(id) = "+playerID, function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+        } else {
+            console.log("Successful query");
+            //this get function only returns the first row that it fetches matching the citeria
+            //it should only be fetching one row of the database aniway so we only send one row for easier parsing later
+            res.send(rows[0]);
+
+
+
+        }
+    });
+
+});
 
 app.listen(3030);
