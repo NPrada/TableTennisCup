@@ -11,13 +11,21 @@ var connection = mysql.createConnection({
     password: "",
     database: "ttcupdb"
 });
-
+var port = 3030;
 connection.connect(function (error) {       //connect to database
     if (!!error){
+        console.log(error);
         console.log("Error Connecting to database");
     } else {
-        console.log("Connected");
+        console.log("Connected to port:" + port);
     }
+});
+
+//NOT JUNK and allows cors (I am allowing anything to access the server) maybe localhost instead of * will work
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 app.get("/matches", function (req,res) {
@@ -45,12 +53,31 @@ app.get("/matches", function (req,res) {
     });
 });
 
-app.get("/sets/:matchID", function (req,res) {
+app.get("/singleSets/:matchID", function (req,res) {
 
     var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
 
-    connection.query("SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, singleset.g3h, singleset.g3a, singleset.g4h, singleset.g4a " +
-        "FROM singleset INNER JOIN players p1 ON p1.id=singleset.aplayer INNER JOIN players p2 ON p2.id=singleset.hplayer WHERE singleset.matchid="+matchID, function (error, rows, fields){
+    connection.query("SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, singleset.g3h, singleset.g3a, singleset.g4h, singleset.g4a FROM singleset INNER JOIN players p1 ON p1.id=singleset.aplayer INNER JOIN players p2 ON p2.id=singleset.hplayer WHERE singleset.matchid="+matchID, function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log("Successful query");
+
+            console.log(rows);
+            res.send(rows);
+        }
+    });
+
+});
+
+app.get("/doubleSets/:matchID", function (req,res) {
+
+    var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
+
+    connection.query("SELECT doubleset.id, doubleset.matchid, p1.name AS hplayer1 , p1.handicap AS hhandicap1, p2.name AS hplayer2, p2.handicap AS hhandicap2, p3.name AS aplayer1,p3.handicap AS ahandicap1, p4.name AS aplayer2,p4.handicap AS ahandicap2, doubleset.g1h, doubleset.g1a, doubleset.g2h, doubleset.g2a, doubleset.g3h, doubleset.g3a, doubleset.g4h, doubleset.g4a FROM doubleset INNER JOIN players p1 ON p1.id=doubleset.hP1 INNER JOIN players p2 ON p2.id=doubleset.hP2 INNER JOIN players p3 ON p3.id=doubleset.aP1 INNER JOIN players p4 ON p4.id=doubleset.aP2 WHERE doubleset.matchID="+matchID, function (error, rows, fields){
 
         // callback aka when the query is done this fires
         if (!!error){
@@ -87,4 +114,4 @@ app.get("/sets/:matchID", function (req,res) {
 //
 // });
 
-app.listen(3030);
+app.listen(port);

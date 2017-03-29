@@ -219,14 +219,14 @@
                 <tr >
                     <td ></td>
                     <td></td>
-                    <td align="center" class="teamnamecell">  Gareth Liughing & Riccardo Boscherini </td>
+                    <td align="center" class="teamnamecell">  {{doublesAP1}} & {{doublesAP2}} </td>
                     <td align="center" class="teamnamecell">  </td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="teamnamecell"> </td>
-                    <td class="teamnamecell"> Robert Davis</td>
+                    <td class="teamnamecell"> {{doublesHP1}} & {{doublesHP2}}</td>
 
                     <!-- Match 1:  player 1 VS player 1-->
                     <td class="setcell">
@@ -293,7 +293,8 @@
             <button v-on:click="addup">Calculate Score</button>
             <button v-on:click="fetchSetsScore(1)">Query</button>
             <button v-on:click="fetchPlayerInfo(1)">Player name</button>
-            <button v-on:click="updatesScores">UpdateScores</button>
+            <button v-on:click="updatesSinglesScores">UpdateSinglesScores</button>
+            <button v-on:click="updateDoublesScores">UpdateDoubles</button>
 
 
 
@@ -309,8 +310,10 @@
 
                     homescore: 0,
                     awayscore: 0,
+
                     hhandicap:0,
                     ahandicap:0,
+
                     hcompensation:0,
                     acompensation:0,
 
@@ -318,6 +321,19 @@
                     singlesHP2: "NoOne",
                     singlesAP1: "NoOne",
                     singlesAP2: "NoOne",
+                    singlesHP1handicap: 0,
+                    singlesHP2handicap: 0,
+                    singlesAP1handicap: 0,
+                    singlesAP2handicap: 0,
+
+                    doublesHP1: "NoOne",
+                    doublesHP2: "NoOne",
+                    doublesAP1: "NoOne",
+                    doublesAP2: "NoOne",
+                    doublesHP1handicap: 0,
+                    doublesHP2handicap: 0,
+                    doublesAP1handicap: 0,
+                    doublesAP2handicap: 0,
 
                     m1g1h: 11,       m2g1h: 11,
                     m1g1a: 2,        m2g1a: 2,
@@ -374,38 +390,50 @@
 
                     },
 
-
-
                     //fetches the scores of all the sets
-                    fetchSetsScore: function (matchID, manipulate) {
+                    fetchSinglesSetsScore: function (matchID, manipulate) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                                 //here I manipulate the data received
                                 console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                var data = tallier.parserSetsScore(this.responseText);
+                                var data = tallier.parserSinglesSetsScore(this.responseText);
                                 console.log(data[0].g2h);
                                 manipulate(data);
                             }
                         };
 
-                        xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
+                        xhttp.open("GET", "http://localhost:3030/singleSets/"+matchID, true);
                         xhttp.send();
 
                     },
-                    updatesScores: function() {
-                        var niko = this;                //this is used to extend the scope of the vue.js data
+                    parserSinglesSetsScore: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
+                        var data =  rawdata;
+                        console.log(data[0].g2h);
+                        var json = JSON.parse(data);
+                        console.log(json[0].g2h);
+                        return json;
+
+                    },
+
+                    updatesSinglesScores: function() {
+                        var niko = this;          //change to global scope      //this is used to extend the scope of the vue.js data
 
                         function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
 
                             niko.singlesHP1 = json[0].hplayer;
+                            niko.singlesHP1handicap = json[0].hhandicap;
                             niko.singlesAP1 = json[0].aplayer;
+                            niko.singlesAP1handicap = json[0].ahandicap;
 
                             niko.singlesHP2 = json[2].hplayer;
+                            niko.singlesHP2handicap = json[2].hhandicap;
                             niko.singlesAP2 = json[1].aplayer;
+                            niko.singlesAP2handicap = json[1].ahandicap;
 
-                            niko.m1g1h = json[0].g1h;                                                                       //niko SHOULD NOT BELONG HERE
+                            niko.m1g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
                             niko.m1g2h = json[0].g2h;
                             niko.m1g3h = json[0].g3h;
                             niko.m1g4h = json[0].g4h;
@@ -442,21 +470,52 @@
                             niko.m4g4a = json[3].g4a;
                         }
 
-                        this.fetchSetsScore(1, manipulate);
+                        this.fetchSinglesSetsScore(1, manipulate);
+                    },
 
+                    fetchDoubleSetsScore: function (matchID, manipulate) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                var data = tallier.parserDoubleSetsScore(this.responseText);
+                                console.log(data[0].g2h);
+                                manipulate(data);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/doubleSets/"+matchID, true);
+                        xhttp.send();
 
                     },
-                    parserSetsScore: function (rawdata) {
+                    parserDoubleSetsScore: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
+                        console.log(data[0].g2h);
                         var json = JSON.parse(data);
                         console.log(json[0].g2h);
                         return json;
 
                     },
+                    updateDoublesScores: function() {
+                        var niko = this;
 
+                        function manipulate(json) {
+                            niko.doublesHP1 = json[0].hplayer1;
+                            niko.doublesHP1handicap = json[0].hhandicap1;
+                            niko.doublesAP1 = json[0].aplayer1;
+                            niko.doublesAP1handicap = json[0].ahandicap1;
 
+                            niko.doublesHP2 = json[0].hplayer2;
+                            niko.doublesHP2handicap = json[0].hhandicap2;
+                            niko.doublesAP2 = json[0].aplayer2;
+                            niko.doublesAP2handicap = json[0].ahandicap2;
+                        }
 
+                        this.fetchDoubleSetsScore(1, manipulate);
+                    },
                     scorefetch: function (data) {
 
                         var xhttp = new XMLHttpRequest();
@@ -479,7 +538,7 @@
                         var json = JSON.parse(data);                                                                    //parse json data
                         //console.log(json.id);
 
-                        //this.singlesHP1 = json.id;
+
                     }
 
                 }
