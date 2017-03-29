@@ -311,6 +311,10 @@
                     homescore: 0,
                     awayscore: 0,
 
+                    singlesHHandicap:0,
+                    singlesAHandicap:0,
+                    doublesHHandicap:0,
+                    doublesAHandicap:0,
                     hhandicap:0,
                     ahandicap:0,
 
@@ -381,12 +385,17 @@
                         document.getElementById("hdoubles").innerHTML=hdoubles;
                         document.getElementById("adoubles").innerHTML=adoubles;
 
+                        //handicap os set here
+                        this.hhandicap = this.singlesHHandicap +  this.doublesHHandicap;
+                        document.getElementById("hhandicap").innerHTML= this.hhandicap;
+                        this.ahandicap = this.singlesAHandicap +  this.doublesAHandicap;
+                        document.getElementById("ahandicap").innerHTML= this.ahandicap;
 
+                        //total score is calculated here
                         this.homescore = homescore1 + homescore2 + hdoubles;
-                        document.getElementById("homescore").innerHTML=this.homescore;
+                        document.getElementById("homescore").innerHTML=this.homescore + this.hhandicap;
                         this.awayscore = awayscore1 + awayscore2 + adoubles;
-                        document.getElementById("awayscore").innerHTML=this.awayscore;
-                        //YOU NEED TO SET THE HANDICAP HERE                                                             //YOU NEED TO SET THE HANDICAP HERE
+                        document.getElementById("awayscore").innerHTML=this.awayscore +this.ahandicap;
 
                     },
 
@@ -432,6 +441,9 @@
                             niko.singlesHP2handicap = json[2].hhandicap;
                             niko.singlesAP2 = json[1].aplayer;
                             niko.singlesAP2handicap = json[1].ahandicap;
+
+                            niko.singlesHHandicap = (niko.singlesHP1handicap *8) + (niko.singlesHP2handicap *8);
+                            niko.singlesAHandicap = (niko.singlesAP1handicap *8) + (niko.singlesAP2handicap*8);
 
                             niko.m1g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
                             niko.m1g2h = json[0].g2h;
@@ -512,6 +524,10 @@
                             niko.doublesHP2handicap = json[0].hhandicap2;
                             niko.doublesAP2 = json[0].aplayer2;
                             niko.doublesAP2handicap = json[0].ahandicap2;
+
+                            niko.doublesHHandicap = (niko.doublesHP1handicap + niko.doublesHP2handicap)*2;
+                            niko.doublesAHandicap = (niko.doublesAP1handicap + niko.doublesAP2handicap)*2;
+
                         }
 
                         this.fetchDoubleSetsScore(1, manipulate);
@@ -537,7 +553,6 @@
                         var data =  rawdata;
                         var json = JSON.parse(data);                                                                    //parse json data
                         //console.log(json.id);
-
 
                     }
 
