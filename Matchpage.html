@@ -16,26 +16,15 @@
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
 
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"></div>
-                <!-- Navigation. We hide it in small screens. -->
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
-                    <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
-                    <a class="mdl-navigation__link" href="">Fixtures</a>
-                    <a class="mdl-navigation__link" href="">Teams</a>
-                    <a class="mdl-navigation__link" href="login.html">Login</a>
-                </nav>
-            </div>
-        </header>                                                                                                           <!-- FIX ME -->
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Navigation</span>
-            <nav class="mdl-navigation">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
                 <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
                 <a class="mdl-navigation__link" href="">Fixtures</a>
@@ -43,6 +32,17 @@
                 <a class="mdl-navigation__link" href="login.html">Login</a>
             </nav>
         </div>
+    </header>                                                                                                           <!-- FIX ME -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Navigation</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
+            <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
+            <a class="mdl-navigation__link" href="">Fixtures</a>
+            <a class="mdl-navigation__link" href="">Teams</a>
+            <a class="mdl-navigation__link" href="login.html">Login</a>
+        </nav>
+    </div>
 
     <main class="mdl-layout__content" id="calc">
         <div id="app">
@@ -75,9 +75,9 @@
                 </tr>
             </table>
             <br> <br>
-                <!-- This is the second table containing the singles-->
+            <!-- This is the second table containing the singles-->
             <table class="scorestable" >
-                    <!-- this just contains the singles subtitle -->
+                <!-- this just contains the singles subtitle -->
                 <tr>
                     <td><a class="title-text">Singles:</a></td>
                     <td></td>
@@ -291,7 +291,7 @@
         <br>
         <div id="calc">
             <button v-on:click="addup">Calculate Score</button>
-            <button v-on:click="fetchSetScore(1)">Query</button>
+            <button v-on:click="fetchSetsScore(1)">Query</button>
             <button v-on:click="fetchPlayerInfo(1)">Player name</button>
 
 
@@ -367,7 +367,7 @@
                         //YOU NEED TO SET THE HANDICAP HERE                                                             //YOU NEED TO SET THE HANDICAP HERE
 
                     },
-
+                    //only fetches the overall score
                     scorefetch: function (data) {
 
                         var xhttp = new XMLHttpRequest();
@@ -392,15 +392,15 @@
 
                         //this.m1g1a = json.id;
                     },
-
-                    fetchSetScore: function (matchID) {
+                    //fetches the setsscore
+                    fetchSetsScore: function (matchID) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                                 //here I manipulate the data received
                                 console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                tallier.parserSetScore(this.responseText);
+                                tallier.parserSetsScore(this.responseText);
                             }
                         };
 
@@ -408,7 +408,7 @@
                         xhttp.send();
 
                     },
-                    parserSetScore: function (rawdata) {
+                    parserSetsScore: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
                         var json = JSON.parse(data);
@@ -489,4 +489,3 @@
 </div>
 </body>
 </html>
-
