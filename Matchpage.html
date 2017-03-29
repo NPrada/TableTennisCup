@@ -291,7 +291,7 @@
         <br>
         <div id="calc">
             <button v-on:click="addup">Calculate Score</button>
-            <button v-on:click="fetchSetScore">Query</button>
+            <button v-on:click="fetchSetScore(1)">Query</button>
 
         </div>
         <script>
@@ -390,7 +390,7 @@
                         this.m1g1a = json.id;
                     },
 
-                    fetchSetScore: function (data) {
+                    fetchSetScore: function (matchID) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
@@ -401,7 +401,7 @@
                             }
                         };
 
-                        var matchID= 1;
+                        //var matchID= 1;
                         xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
                         xhttp.send();
 
