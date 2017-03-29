@@ -4,7 +4,9 @@
   "description": "my final year project ",
   "main": "dbconnect.js",
   "dependencies": {
-    "node": "^0.0.0"
+    "express": "^4.15.2",
+    "node": "^0.0.0",
+    "vue": "^2.2.6"
   },
   "devDependencies": {},
   "scripts": {
