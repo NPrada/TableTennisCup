@@ -97,14 +97,14 @@
                 <tr >
                     <td ></td>
                     <td></td>
-                    <td align="center" class="teamnamecell">  Gareth Liughing </td>
-                    <td align="center" class="teamnamecell">  Riccardo boscherini</td>
+                    <td align="center" class="teamnamecell">  {{singlesAP1}} </td>
+                    <td align="center" class="teamnamecell">  {{singlesAP2}}</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="teamnamecell"> <b>Loughborough</b></td>
-                    <td class="teamnamecell"> Robert Davis</td>
+                    <td class="teamnamecell"> {{singlesHP1}}</td>
 
                     <!-- Match 1:  player 1 VS player 1-->
                     <td class="setcell">
@@ -151,7 +151,7 @@
                     <td align="center" class="totalscorecell" id="awaypart1" ></td>
                 </tr>
                 <tr >
-                    <td class="teamnamecell">Riccardo boscherini</td>
+                    <td class="teamnamecell">{{singlesHP2}}</td>
                     <!-- Match 3:  player 2 VS player 1-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
@@ -293,6 +293,7 @@
             <button v-on:click="addup">Calculate Score</button>
             <button v-on:click="fetchSetsScore(1)">Query</button>
             <button v-on:click="fetchPlayerInfo(1)">Player name</button>
+            <button v-on:click="updatesScores">UpdateScores</button>
 
 
 
@@ -312,6 +313,11 @@
                     ahandicap:0,
                     hcompensation:0,
                     acompensation:0,
+
+                    singlesHP1: "NoOne",
+                    singlesHP2: "NoOne",
+                    singlesAP1: "NoOne",
+                    singlesAP2: "NoOne",
 
                     m1g1h: 11,       m2g1h: 11,
                     m1g1a: 2,        m2g1a: 2,
@@ -367,7 +373,90 @@
                         //YOU NEED TO SET THE HANDICAP HERE                                                             //YOU NEED TO SET THE HANDICAP HERE
 
                     },
-                    //only fetches the overall score
+
+
+
+                    //fetches the scores of all the sets
+                    fetchSetsScore: function (matchID, manipulate) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                var data = tallier.parserSetsScore(this.responseText);
+                                console.log(data[0].g2h);
+                                manipulate(data);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
+                        xhttp.send();
+
+                    },
+                    updatesScores: function() {
+                        var niko = this;                //this is used to extend the scope of the vue.js data
+
+                        function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
+                            
+                            niko.singlesHP1 = json[0].hplayer;
+                            niko.singlesAP1 = json[0].aplayer;
+
+                            niko.singlesHP2 = json[2].hplayer;
+                            niko.singlesAP2 = json[1].aplayer;
+
+                            niko.m1g1h = json[0].g1h;                                                                       //niko SHOULD NOT BELONG HERE
+                            niko.m1g2h = json[0].g2h;
+                            niko.m1g3h = json[0].g3h;
+                            niko.m1g4h = json[0].g4h;
+                            niko.m1g1a = json[0].g1a;
+                            niko.m1g2a = json[0].g2a;
+                            niko.m1g3a = json[0].g3a;
+                            niko.m1g4a = json[0].g4a;
+
+                            niko.m2g1h = json[1].g1h;
+                            niko.m2g2h = json[1].g2h;
+                            niko.m2g3h = json[1].g3h;
+                            niko.m2g4h = json[1].g4h;
+                            niko.m2g1a = json[1].g1a;
+                            niko.m2g2a = json[1].g2a;
+                            niko.m2g3a = json[1].g3a;
+                            niko.m2g4a = json[1].g4a;
+
+                            niko.m3g1h = json[2].g1h;
+                            niko.m3g2h = json[2].g2h;
+                            niko.m3g3h = json[2].g3h;
+                            niko.m3g4h = json[2].g4h;
+                            niko.m3g1a = json[2].g1a;
+                            niko.m3g2a = json[2].g2a;
+                            niko.m3g3a = json[2].g3a;
+                            niko.m3g4a = json[2].g4a;
+
+                            niko.m4g1h = json[3].g1h;
+                            niko.m4g2h = json[3].g2h;
+                            niko.m4g3h = json[3].g3h;
+                            niko.m4g4h = json[3].g4h;
+                            niko.m4g1a = json[3].g1a;
+                            niko.m4g2a = json[3].g2a;
+                            niko.m4g3a = json[3].g3a;
+                            niko.m4g4a = json[3].g4a;
+                        }
+
+                        this.fetchSetsScore(1, manipulate);
+
+
+                    },
+                    parserSetsScore: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
+                        var data =  rawdata;
+                        var json = JSON.parse(data);
+                        console.log(json[0].g2h);
+                        return json;
+
+                    },
+
+
+
                     scorefetch: function (data) {
 
                         var xhttp = new XMLHttpRequest();
@@ -390,93 +479,10 @@
                         var json = JSON.parse(data);                                                                    //parse json data
                         //console.log(json.id);
 
-                        //this.m1g1a = json.id;
-                    },
-                    //fetches the setsscore
-                    fetchSetsScore: function (matchID) {
-
-                        var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
-                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                //here I manipulate the data received
-                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                tallier.parserSetsScore(this.responseText);
-                            }
-                        };
-
-                        xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
-                        xhttp.send();
-
-                    },
-                    parserSetsScore: function (rawdata) {
-                        //these two lines just parse the data so it can be accessed
-                        var data =  rawdata;
-                        var json = JSON.parse(data);
-                        //console.log(json[0].g2h);
-
-
-                        this.m1g1h = json[0].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
-                        this.m1g2h = json[0].g2h;
-                        this.m1g3h = json[0].g3h;
-                        this.m1g4h = json[0].g4h;
-                        this.m1g1a = json[0].g1a;
-                        this.m1g2a = json[0].g2a;
-                        this.m1g3a = json[0].g3a;
-                        this.m1g4a = json[0].g4a;
-
-
-                        this.m2g1h = json[1].g1h;
-                        this.m2g2h = json[1].g2h;
-                        this.m2g3h = json[1].g3h;
-                        this.m2g4h = json[1].g4h;
-                        this.m2g1a = json[1].g1a;
-                        this.m2g2a = json[1].g2a;
-                        this.m2g3a = json[1].g3a;
-                        this.m2g4a = json[1].g4a;
-
-                        this.m3g1h = json[2].g1h;
-                        this.m3g2h = json[2].g2h;
-                        this.m3g3h = json[2].g3h;
-                        this.m3g4h = json[2].g4h;
-                        this.m3g1a = json[2].g1a;
-                        this.m3g2a = json[2].g2a;
-                        this.m3g3a = json[2].g3a;
-                        this.m3g4a = json[2].g4a;
-
-                        this.m4g1h = json[3].g1h;
-                        this.m4g2h = json[3].g2h;
-                        this.m4g3h = json[3].g3h;
-                        this.m4g4h = json[3].g4h;
-                        this.m4g1a = json[3].g1a;
-                        this.m4g2a = json[3].g2a;
-                        this.m4g3a = json[3].g3a;
-                        this.m4g4a = json[3].g4a;
-
-                    },
-
-                    fetchPlayerInfo: function (playerID) {
-
-                        var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
-                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                //here I manipulate the data received
-                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                tallier.parserPlayerInfo(this.responseText);
-                            }
-                        };
-
-                        xhttp.open("GET", "http://localhost:3030/player/"+playerID, true);
-                        xhttp.send();
-
-                    },
-
-                    parserPlayerInfo: function (rawdata) {
-                        //these two lines just parse the data so it can be accessed
-                        var data =  rawdata;
-                        var json = JSON.parse(data);
-
-                        return json;            //simply returns the json structure
+                        //this.singlesHP1 = json.id;
                     }
+
+//
 
 
                 }

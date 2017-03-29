@@ -61,15 +61,22 @@ app.get("/sets/:matchID", function (req,res) {
 
     var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
 
-    connection.query("SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID, function (error, rows, fields){
+    connection.query("SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, singleset.g3h, singleset.g3a, singleset.g4h, singleset.g4a FROM singleset INNER JOIN players p1 ON p1.id=singleset.aplayer INNER JOIN players p2 ON p2.id=singleset.hplayer WHERE singleset.matchid="+matchID, function (error, rows, fields){
+
+        //SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, singleset.g3h, singleset.g3a, singleset.g4h, singleset.g4a FROM singleset
+        // INNER JOIN players p1 ON p1.id=singleset.aplayer INNER JOIN players p2 ON p2.id=singleset.hplayer WHERE singleset.id=1
+
+        //SELECT singleset.id, players.firstname FROM singleset INNER JOIN players ON players.id=singleset.aplayer WHERE singleset.id=1
+        //"SELECT * FROM singleset GROUP BY id HAVING MAX(matchid) = "+matchID+" AND MIN(matchid) = "+matchID
         // callback aka when the query is done this fires
         if (!!error){
+            console.log(error);
             console.log("Error in the query");
         } else {
             console.log("Successful query");
             //console.log(rows[0].name);
             //console.log(rows[0]);
-            //console.log(rows);
+            console.log(rows);
             //res.send(rows);
             //res.write('you posted:\n');
             //var x = rows;
