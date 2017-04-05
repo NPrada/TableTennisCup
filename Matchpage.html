@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
-    <title>Lughborough Table Tennis Cup</title>
+    <title>TT Lboro</title>
     <link rel="stylesheet" type="text/css" href="CupPage.css">
     <link rel="stylesheet" type="text/css" href="Matchpage.css">
 
@@ -76,15 +76,16 @@
             </table>
             <br> <br>
             <!-- This is the second table containing the singles-->
-            <table class="scorestable" >
+            <table class="scoresTable" >
                 <!-- this just contains the singles subtitle -->
                 <tr>
                     <td><a class="title-text">Singles:</a></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 20px"></td>
+                    <td style="width: 40px"></td>
+                    <td style="width: 40px"></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -97,14 +98,15 @@
                 <tr >
                     <td ></td>
                     <td></td>
-                    <td align="center" class="teamnamecell">  {{singlesAP1}} </td>
-                    <td align="center" class="teamnamecell">  {{singlesAP2}}</td>
+                    <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP1handicap">{{singlesAP1}}</span> </td>
+                    <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="teamnamecell"> <b>Loughborough</b></td>
-                    <td class="teamnamecell"> {{singlesHP1}}</td>
+                    <td class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesHP1handicap">{{singlesHP1}}</span></td>
 
                     <!-- Match 1:  player 1 VS player 1-->
                     <td class="setcell">
@@ -151,7 +153,7 @@
                     <td align="center" class="totalscorecell" id="awaypart1" ></td>
                 </tr>
                 <tr >
-                    <td class="teamnamecell">{{singlesHP2}}</td>
+                    <td class="teamnamecell"><span class="mdl-badge" v-bind:data-badge="singlesHP2handicap">{{singlesHP2}}</span></td>
                     <!-- Match 3:  player 2 VS player 1-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
@@ -198,59 +200,51 @@
             </table>
             <br>
 
-            <table class="scorestable" >
-                <!-- this just contains the singles subtitle -->
+            <table class="scoresTable" >
+                <!-- Doubles Table -->
                 <tr>
-                    <td><a class="title-text">Doubles:</a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colspan="2" ><a class="title-text">Doubles:</a></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 20px"></td>
+                    <td  style="width: 40px"></td>
+                    <td  style="width: 40px"></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td colspan="2" class="teamnamecell" align="center"></td>
-                    <td></td>
-                    <td align="center" style="width: 50px"></td>
-                    <td align="center" style="width: 50px"></td>
-                </tr>
-                <tr >
-                    <td ></td>
-                    <td></td>
-                    <td align="center" class="teamnamecell">  {{doublesAP1}} & {{doublesAP2}} </td>
-                    <td align="center" class="teamnamecell">  </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td rowspan="2" class="teamnamecell"> </td>
-                    <td class="teamnamecell"> {{doublesHP1}} & {{doublesHP2}}</td>
 
-                    <!-- Match 1:  player 1 VS player 1-->
+                <tr >
+                    <td colspan="2"></td>
+
+                    <td  class="teamnamecell">  <span class="mdl-badge" v-bind:data-badge="doublesAHandicap1">{{doublesAP1match1}} & {{doublesAP2match1}} </span></td>
+                    <td  class="teamnamecell">  <span class="mdl-badge" v-bind:data-badge="doublesAHandicap2">{{doublesAP1match2}} & {{doublesAP2match2}} </span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+                    <td colspan="2" style="width: 200px"> <span class="mdl-badge" v-bind:data-badge="doublesHHandicap1"> {{doublesHP1match1}} & {{doublesHP2match1}}</span></td>
+
+                    <!-- Match 5:  homedoubles 1 VS awaydeoubles set1-->
                     <td class="setcell">
 
-                        <table class="game-table" v-bind:class="{ active: m1g1h < m1g1a, greentrue: m1g1h > m1g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g1a}}</td> <td class="e"></td></tr>
+                        <table class="game-table" v-bind:class="{ active: m5g1h < m5g1a, greentrue: m5g1h > m5g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g1a}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g2h < m1g2a, greentrue: m1g2h > m1g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m1g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g2a}}</td> <td class="e"></td></tr>
+                        <table class="game-table" v-bind:class="{ active: m5g2h < m5g2a, greentrue: m5g2h > m5g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m5g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g2a}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g3h < m1g3a, greentrue: m1g3h > m1g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g3a}}</td> <td class="e"></td></tr>
+                        <table class="game-table" v-bind:class="{ active: m5g3h < m5g3a, greentrue: m5g3h > m5g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g3a}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g4h < m1g4a, greentrue: m1g4h > m1g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g4a}}</td> <td class="e"></td></tr>
+                        <table class="game-table" v-bind:class="{ active: m5g4h < m5g4a, greentrue: m5g4h > m5g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g4a}}</td> <td class="e"></td></tr>
                         </table>
-
                     </td>
-                    <!-- Match 2:  player 1 VS player 2-->
-                    <td class="setcell"></td>
+                    <td></td>
                     <td ></td>
                     <td align="center" class="totalscorecell" id="hdoubles" ></td>
                     <td align="center" class="totalscorecell" id="adoubles" ></td>
@@ -258,7 +252,37 @@
 
                 <tr>
 
-                    <td></td>
+                    <td colspan="2" style="width: 200px"> <span class="mdl-badge" v-bind:data-badge="doublesHHandicap2"> {{doublesHP1match2}} & {{doublesHP2match2}}</span></td>
+                    <td class="setcell"></td>
+                    <!-- Match 6:  homeDouble 1 VS awayDouble 2-->
+                    <td class="setcell">
+                        <table class="game-table" v-bind:class="{ active: m6g1h < m6g1a, greentrue: m6g1h > m6g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g1h}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g1a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g2h < m6g2a, greentrue: m6g2h > m6g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >{{m6g2h}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g2a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g3h < m6g3a, greentrue: m6g3h > m6g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g3h}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g3a}}</td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g4h < m6g4a, greentrue: m6g4h > m6g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g4h}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g4a}}</td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+
+                    <td ></td>
+                    <td align="center" class="totalscorecell" id="hdoubles" ></td>
+                    <td align="center" class="totalscorecell" id="adoubles" ></td>
+                </tr>
+
+                <tr>
+
+                    <td colspan="2"></td>
+
                     <td></td>
                     <td style="text-align: right">Handicap:</td>                                                    <!-- Fix the styling> -->
                     <td></td>
@@ -266,8 +290,8 @@
                     <td align="center" class="totalscorecell" id="ahandicap"></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td colspan="2"></td>
+
                     <td></td>
                     <td style="text-align: right">Compensation:</td>                                                <!-- Fix the styling> -->
                     <td ></td>
@@ -275,8 +299,8 @@
                     <td align="center" class="totalscorecell" id="acompensation"></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td colspan="2"></td>
+
                     <td></td>
                     <td style="text-align: right">Total:</td>                                                <!-- Fix the styling> -->
                     <td></td>
@@ -314,8 +338,14 @@
 
                     singlesHHandicap:0,
                     singlesAHandicap:0,
+
                     doublesHHandicap:0,
                     doublesAHandicap:0,
+                    doublesHHandicap1:0,
+                    doublesAHandicap1:0,
+                    doublesHHandicap2:0,
+                    doublesAHandicap2:0,
+
                     hhandicap:0,
                     ahandicap:0,
 
@@ -331,41 +361,56 @@
                     singlesAP1handicap: 0,
                     singlesAP2handicap: 0,
 
-                    doublesHP1: "NoOne",
-                    doublesHP2: "NoOne",
-                    doublesAP1: "NoOne",
-                    doublesAP2: "NoOne",
-                    doublesHP1handicap: 0,
-                    doublesHP2handicap: 0,
-                    doublesAP1handicap: 0,
-                    doublesAP2handicap: 0,
+                    doublesHP1match1: "NoOne",
+                    doublesHP1match2: "NoOne",
 
-                    m1g1h: 11,       m2g1h: 11,
-                    m1g1a: 2,        m2g1a: 2,
-                    m1g2h: 5,        m2g2h: 0,
-                    m1g2a: 3,        m2g2a: 11,
-                    m1g3h: 3,        m2g3h: 3,
-                    m1g3a: 6,        m2g3a: 1,
-                    m1g4h: 9,        m2g4h: 11,
-                    m1g4a: 3,        m2g4a: 3,
+                    doublesHP2match1: "NoOne",
+                    doublesHP2match2: "NoOne",
 
-                    m3g1h: 11,      m4g1h: 11,
-                    m3g1a: 2,       m4g1a: 2,
+                    doublesAP1match1: "NoOne",
+                    doublesAP1match2: "NoOne",
+
+                    doublesAP2match1: "NoOne",
+                    doublesAP2match2: "NoOne",
+
+                    doublesHP1handicapMatch1: 0, //
+                    doublesHP1handicapMatch2: 0,
+
+                    doublesHP2handicapMatch1: 0, //
+                    doublesHP2handicapMatch2: 0,
+
+                    doublesAP1handicapMatch1: 0, //
+                    doublesAP1handicapMatch2: 0,
+
+                    doublesAP2handicapMatch1: 0, //
+                    doublesAP2handicapMatch2: 0,
+
+                    m1g1h: 0,       m2g1h: 0,
+                    m1g1a: 0,       m2g1a: 0,
+                    m1g2h: 0,       m2g2h: 0,
+                    m1g2a: 0,       m2g2a: 0,
+                    m1g3h: 0,       m2g3h: 0,
+                    m1g3a: 0,       m2g3a: 0,
+                    m1g4h: 0,       m2g4h: 0,
+                    m1g4a: 0,       m2g4a: 0,
+
+                    m3g1h: 0,       m4g1h: 0,
+                    m3g1a: 0,       m4g1a: 0,
                     m3g2h: 0,       m4g2h: 0,
-                    m3g2a: 11,      m4g2a: 0,
-                    m3g3h: 3,       m4g3h: 11,
+                    m3g2a: 0,       m4g2a: 0,
+                    m3g3h: 0,       m4g3h: 0,
                     m3g3a: 0,       m4g3a: 0,
-                    m3g4h: 11,      m4g4h: 11,
-                    m3g4a: 3,       m4g4a: 3,
+                    m3g4h: 0,       m4g4h: 0,
+                    m3g4a: 0,       m4g4a: 0,
 
-                    m5g1h: 11,
-                    m5g1a: 2,
-                    m5g2h: 0,
-                    m5g2a: 0,
-                    m5g3h: 11,
-                    m5g3a: 0,
-                    m5g4h: 11,
-                    m5g4a: 3
+                    m5g1h: 0,       m6g1h: 0,
+                    m5g1a: 0,       m6g1a: 0,
+                    m5g2h: 0,       m6g2h: 0,
+                    m5g2a: 0,       m6g2a: 0,
+                    m5g3h: 0,       m6g3h: 0,
+                    m5g3a: 0,       m6g3a: 0,
+                    m5g4h: 0,       m6g4h: 0,
+                    m5g4a: 0,       m6g4a: 0
 
                 },
 
@@ -386,7 +431,7 @@
                         document.getElementById("hdoubles").innerHTML=hdoubles;
                         document.getElementById("adoubles").innerHTML=adoubles;
 
-                        //handicap os set here
+                        //handicap is set here
                         this.hhandicap = this.singlesHHandicap +  this.doublesHHandicap;
                         document.getElementById("hhandicap").innerHTML= this.hhandicap;
                         this.ahandicap = this.singlesAHandicap +  this.doublesAHandicap;
@@ -516,19 +561,51 @@
                         var niko = this;
 
                         function manipulate(json) {
-                            niko.doublesHP1 = json[0].hplayer1;
-                            niko.doublesHP1handicap = json[0].hhandicap1;
-                            niko.doublesAP1 = json[0].aplayer1;
-                            niko.doublesAP1handicap = json[0].ahandicap1;
+                            niko.doublesHP1match1 = json[0].hplayer1.charAt(0) + json[0].hplayer1.substring(json[0].hplayer1.search(" "), json[0].hplayer1.length) ;
+                            niko.doublesHP1handicapMatch1 = json[0].hhandicap1;
+                            niko.doublesHP2match1 = json[0].hplayer2.charAt(0) + json[0].hplayer2.substring(json[0].hplayer2.search(" "), json[0].hplayer2.length);
+                            niko.doublesHP2handicapMatch1 = json[0].hhandicap2;
 
-                            niko.doublesHP2 = json[0].hplayer2;
-                            niko.doublesHP2handicap = json[0].hhandicap2;
-                            niko.doublesAP2 = json[0].aplayer2;
-                            niko.doublesAP2handicap = json[0].ahandicap2;
+                            niko.doublesAP1match1 = json[0].aplayer1.charAt(0) + json[0].aplayer1.substring(json[0].aplayer1.search(" "), json[0].aplayer1.length);
+                            niko.doublesAP1handicapMatch1 = json[0].ahandicap1;
+                            niko.doublesAP2match1 = json[0].aplayer2.charAt(0) + json[0].aplayer2.substring(json[0].aplayer2.search(" "), json[0].aplayer2.length);
+                            niko.doublesAP2handicapMatch1 = json[0].ahandicap2;
 
-                            niko.doublesHHandicap = (niko.doublesHP1handicap + niko.doublesHP2handicap)*2;
-                            niko.doublesAHandicap = (niko.doublesAP1handicap + niko.doublesAP2handicap)*2;
+                            niko.doublesHP1match2 = json[1].hplayer1.charAt(0) + json[1].hplayer1.substring(json[1].hplayer1.search(" "), json[1].hplayer1.length);
+                            niko.doublesHP1handicapMatch2 = json[1].hhandicap1;
+                            niko.doublesHP2match2 = json[1].hplayer2.charAt(0) + json[1].hplayer2.substring(json[1].hplayer2.search(" "), json[1].hplayer2.length);
+                            niko.doublesHP2handicapMatch2 = json[1].hhandicap2;
 
+                            niko.doublesAP1match2 = json[1].aplayer1.charAt(0) + json[1].aplayer1.substring(json[1].aplayer1.search(" "), json[1].aplayer1.length);
+                            niko.doublesAP1handicapMatch2 = json[1].ahandicap1;
+                            niko.doublesAP2match2 = json[1].aplayer2.charAt(0) + json[1].aplayer2.substring(json[1].aplayer2.search(" "), json[1].aplayer2.length);
+                            niko.doublesAP2handicapMatch2 = json[1].ahandicap2;
+
+                            niko.doublesHHandicap1 = niko.doublesHP1handicapMatch1 + niko.doublesHP2handicapMatch1;
+                            niko.doublesHHandicap2 = niko.doublesHP1handicapMatch2 + niko.doublesHP2handicapMatch2;
+                            niko.doublesAHandicap1 = niko.doublesAP1handicapMatch1 + niko.doublesAP2handicapMatch1;
+                            niko.doublesAHandicap2 = niko.doublesAP1handicapMatch2 + niko.doublesAP2handicapMatch2;
+
+                            niko.doublesHHandicap = (niko.doublesHHandicap1)*2 + (niko.doublesHHandicap2)*2;
+                            niko.doublesAHandicap = (niko.doublesAHandicap1)*2 + (niko.doublesAHandicap2)*2;
+
+                            niko.m5g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
+                            niko.m5g2h = json[0].g2h;
+                            niko.m5g3h = json[0].g3h;
+                            niko.m5g4h = json[0].g4h;
+                            niko.m5g1a = json[0].g1a;
+                            niko.m5g2a = json[0].g2a;
+                            niko.m5g3a = json[0].g3a;
+                            niko.m5g4a = json[0].g4a;
+
+                            niko.m6g1h = json[1].g1h;                                                                   //niko SHOULD NOT BELONG HERE
+                            niko.m6g2h = json[1].g2h;
+                            niko.m6g3h = json[1].g3h;
+                            niko.m6g4h = json[1].g4h;
+                            niko.m6g1a = json[1].g1a;
+                            niko.m6g2a = json[1].g2a;
+                            niko.m6g3a = json[1].g3a;
+                            niko.m6g4a = json[1].g4a;
                         }
 
                         this.fetchDoubleSetsScore(1, manipulate);
