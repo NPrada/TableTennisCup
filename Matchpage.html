@@ -295,6 +295,7 @@
             <button v-on:click="fetchPlayerInfo(1)">Player name</button>
             <button v-on:click="updatesSinglesScores">UpdateSinglesScores</button>
             <button v-on:click="updateDoublesScores">UpdateDoubles</button>
+            <button v-on:click="scoreFetch">Matchescallback</button>
 
 
 
@@ -413,7 +414,7 @@
                             }
                         };
 
-                        xhttp.open("GET", "http://localhost:3030/singleSets/"+matchID, true);
+                        xhttp.open("GET", "http://178.62.9.140:3080/singleSets/"+matchID, true);
                         xhttp.send();
 
                     },
@@ -498,7 +499,7 @@
                             }
                         };
 
-                        xhttp.open("GET", "http://localhost:3030/doubleSets/"+matchID, true);
+                        xhttp.open("GET", "http://178.62.9.140:3080/doubleSets/"+matchID, true);
                         xhttp.send();
 
                     },
@@ -532,7 +533,7 @@
 
                         this.fetchDoubleSetsScore(1, manipulate);
                     },
-                    scorefetch: function (data) {
+                    scoreFetch: function (data) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
@@ -543,7 +544,7 @@
                             }
                         };
 
-                        xhttp.open("GET", "http://localhost:3030/matches", true);
+                        xhttp.open("GET", "http://178.62.9.140:3080/matches", true);
                         xhttp.send();
 
 

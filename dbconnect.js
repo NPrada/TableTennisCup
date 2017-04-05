@@ -6,12 +6,12 @@ var app = express();
 
 var connection = mysql.createConnection({
     //DB properies..
-    host: "localhost",
+    host: "178.62.9.140",
     user: "root",
-    password: "",
-    database: "ttcupdb"
+    password: "niccolo123456789",
+    database: "conp2"
 });
-var port = 3030;
+var port = 3080;
 connection.connect(function (error) {       //connect to database
     if (!!error){
         console.log(error);
