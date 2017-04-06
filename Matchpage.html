@@ -44,7 +44,7 @@
         </nav>
     </div>
 
-    <main class="mdl-layout__content" id="calc">
+    <main class="mdl-layout__content">
         <div id="app">
             <p class="date">{{date}}</p>
             <table >                                                                                                     <!-- This is the top table containing the team names and so on-->
@@ -316,7 +316,7 @@
         <script>
 
             var tallier = new Vue({
-                el: '#calc',
+                el: '#app',
                 data: {
 
                     redtrue: true,
@@ -344,8 +344,8 @@
                     hhandicap:0,
                     ahandicap:0,
 
-                    hcompensation:0,
-                    acompensation:0,
+                    hCompensation:0,
+                    aCompensation:0,
 
                     singlesHP1: "NoOne",
                     singlesHP2: "NoOne",
@@ -451,8 +451,7 @@
                     },
                     parserSinglesSetsScore: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
-                        var data =  rawdata;
-                        var json = JSON.parse(data);
+                        var json = JSON.parse(rawdata);
                         return json;
 
                     },
@@ -521,6 +520,30 @@
                             niko.awayScore1 = niko.m1g1a + niko.m1g2a + niko.m1g3a + niko.m1g4a + niko.m2g1a + niko.m2g2a + niko.m2g3a + niko.m2g4a;
                             niko.homeScore2 = niko.m3g1h + niko.m3g2h + niko.m3g3h + niko.m3g4h + niko.m4g1h + niko.m4g2h + niko.m4g3h + niko.m4g4h;
                             niko.awayScore2 = niko.m3g1a + niko.m3g2a + niko.m3g3a + niko.m3g4a + niko.m4g1a + niko.m4g2a + niko.m4g3a + niko.m4g4a;
+
+                            //calculate if and how much compensation is needed
+                            var handicapsArr = [
+                                [niko.singlesHP1handicap, niko.singlesAP1handicap],
+                                [niko.singlesHP1handicap, niko.singlesAP2handicap],
+                                [niko.singlesHP2handicap, niko.singlesAP1handicap],
+                                [niko.singlesHP2handicap, niko.singlesAP2handicap]
+                            ];
+                            for (var i = 0; i <4; i++){
+                                if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
+                                    niko.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
+                                }else {
+                                    if (handicapsArr[i][1] - handicapsArr[i][0]>7){
+                                        niko.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+                                    }
+                                }
+                            }
+
+
+                            //niko.singlesHP1handicap VS niko.singlesAP1handicap
+                            //niko.singlesHP1handicap VS niko.singlesAP2handicap
+
+                            //niko.singlesHP2handicap VS niko.singlesAP1handicap
+                            //niko.singlesHP2handicap VS niko.singlesAP2handicap
                             niko.updateDoublesScores(matchID);
                         }
 
@@ -544,8 +567,7 @@
                     },
                     parserDoubleSetsScore: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
-                        var data =  rawdata;
-                        var json = JSON.parse(data);
+                        var json = JSON.parse(rawdata);
                         return json;
 
                     },
@@ -606,24 +628,41 @@
                             niko.hhandicap = niko.singlesHHandicap +  niko.doublesHHandicap;
                             niko.ahandicap = niko.singlesAHandicap +  niko.doublesAHandicap;
 
+                            //compensation is added here
+                            var handicapsArr = [
+                                [niko.doublesHHandicap1, niko.doublesAHandicap1],
+                                [niko.doublesHHandicap1, niko.doublesAHandicap2],
+                                [niko.doublesHHandicap2, niko.doublesAHandicap1],
+                                [niko.doublesHHandicap2, niko.doublesAHandicap2]
+                            ];
+                            for (var i = 0; i <4; i++){
+                                if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
+                                    niko.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
+                                }else {
+                                    if (handicapsArr[i][1] - handicapsArr[i][0]>7){
+                                        niko.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+                                    }
+                                }
+                            }
                             //total score is calculated here
-                            niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap;
-                            niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles +niko.ahandicap;
+                            niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
+                            niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles +niko.ahandicap + niko.aCompensation;
+
+
                         }
 
                         this.fetchDoubleSetsScore(matchID, manipulate);
 
                     },
+
                     fetchMatchInfo: function (matchID, manipulate) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                console.log(this.responseText);    //this is the raw data received
+                                //console.log(this.responseText);    //this is the raw data received
                                 //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
-                                //var data = tallier.parseMatchInfo(this.responseText);
                                 var data = tallier.parseMatchInfo(this.responseText);
-                                //console.log(data.homeTeam);
                                 manipulate(data);
                             }
                         };
@@ -635,9 +674,7 @@
                     },
                     parseMatchInfo: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
-                        var data =  rawdata;
-                        var json = JSON.parse(data);
-                        console.log("this is the ID: "+json[0].date);
+                        var json = JSON.parse(rawdata);
                         return json;
 
 
