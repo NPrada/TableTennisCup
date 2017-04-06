@@ -64,9 +64,8 @@ app.get("/singleSets/:matchID", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log("Successful query");
-
             console.log(rows);
+            console.log("Successful query");
             res.send(rows);
         }
     });
@@ -84,9 +83,8 @@ app.get("/doubleSets/:matchID", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log("Successful query");
-
             console.log(rows);
+            console.log("Successful query");
             res.send(rows);
         }
     });
