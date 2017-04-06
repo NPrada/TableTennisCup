@@ -46,7 +46,7 @@
 
     <main class="mdl-layout__content" id="calc">
         <div id="app">
-            <p class="date">Date</p>
+            <p class="date">{{date}}</p>
             <table >                                                                                                     <!-- This is the top table containing the team names and so on-->
                 <tr >
                     <td class="cell-border center">Home</td>
@@ -56,21 +56,21 @@
                     <td class="cell-border center">Away</td>
                 </tr>
                 <tr>
-                    <td class="cell-border title-text">Loughboroug</td>
-                    <td class="cell-border title-text">3</td>
+                    <td class="cell-border title-text">{{hteam}}</td>
+                    <td class="cell-border title-text">{{hTeamTitleScore}}</td>
                     <td class="cell-border ">VS</td>
-                    <td class="cell-border title-text">4</td>
-                    <td class="cell-border title-text">Leicester</td>
+                    <td class="cell-border title-text">{{aTeamTitleScore}}</td>
+                    <td class="cell-border title-text">{{ateam}}</td>
                 </tr>
                 <tr >
                     <td class="cell-border center">
-                        Gareth <br>
+                        <!--Gareth <br>-->
                     </td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td class="cell-border center">
-                        Will <br>
+                        <!--Will <br>-->
                     </td>
                 </tr>
             </table>
@@ -322,6 +322,12 @@
                     redtrue: true,
                     greentrue: true,
 
+                    hteam : "No Team",
+                    ateam : "No Team",
+                    date : "No Date",
+                    hTeamTitleScore : 0,
+                    aTeamTitleScore : 0,
+
                     homescore: 0,
                     awayscore: 0,
 
@@ -410,22 +416,22 @@
                 },
 
                 methods: {
-                    addup: function () {
-                        this.homeScore1 = this.m1g1h + this.m1g2h + this.m1g3h + this.m1g4h + this.m2g1h + this.m2g2h + this.m2g3h + this.m2g4h;
-                        this.awayScore1 = this.m1g1a + this.m1g2a + this.m1g3a + this.m1g4a + this.m2g1a + this.m2g2a + this.m2g3a + this.m2g4a;
-                        this.homeScore2 = this.m3g1h + this.m3g2h + this.m3g3h + this.m3g4h + this.m4g1h + this.m4g2h + this.m4g3h + this.m4g4h;
-                        this.awayScore2 = this.m3g1a + this.m3g2a + this.m3g3a + this.m3g4a + this.m4g1a + this.m4g2a + this.m4g3a + this.m4g4a;
-                        this.hdoubles = this.m5g1h + this.m5g2h + this.m5g3h + this.m5g4h;
-                        this.adoubles = this.m5g1a + this.m5g2a + this.m5g3a + this.m5g4a;
-                        //alert(this.m1g1h);
-                        //total handicap is set here
-                        this.hhandicap = this.singlesHHandicap +  this.doublesHHandicap;
-                        this.ahandicap = this.singlesAHandicap +  this.doublesAHandicap;
-
-                        //total score is calculated here
-                        this.homescore = this.homeScore1 + this.homeScore2 + this.hdoubles + this.hhandicap;
-                        this.awayscore = this.awayScore1 + this.awayScore2 + this.adoubles +this.ahandicap;
-                    },
+//                    addup: function () {
+//                        this.homeScore1 = this.m1g1h + this.m1g2h + this.m1g3h + this.m1g4h + this.m2g1h + this.m2g2h + this.m2g3h + this.m2g4h;
+//                        this.awayScore1 = this.m1g1a + this.m1g2a + this.m1g3a + this.m1g4a + this.m2g1a + this.m2g2a + this.m2g3a + this.m2g4a;
+//                        this.homeScore2 = this.m3g1h + this.m3g2h + this.m3g3h + this.m3g4h + this.m4g1h + this.m4g2h + this.m4g3h + this.m4g4h;
+//                        this.awayScore2 = this.m3g1a + this.m3g2a + this.m3g3a + this.m3g4a + this.m4g1a + this.m4g2a + this.m4g3a + this.m4g4a;
+//                        this.hdoubles = this.m5g1h + this.m5g2h + this.m5g3h + this.m5g4h;
+//                        this.adoubles = this.m5g1a + this.m5g2a + this.m5g3a + this.m5g4a;
+//                        //alert(this.m1g1h);
+//                        //total handicap is set here
+//                        this.hhandicap = this.singlesHHandicap +  this.doublesHHandicap;
+//                        this.ahandicap = this.singlesAHandicap +  this.doublesAHandicap;
+//
+//                        //total score is calculated here
+//                        this.homescore = this.homeScore1 + this.homeScore2 + this.hdoubles + this.hhandicap;
+//                        this.awayscore = this.awayScore1 + this.awayScore2 + this.adoubles +this.ahandicap;
+//                    },
 
                     //fetches the scores of all the sets
                     fetchSinglesSetsScore: function (matchID, manipulate) {
@@ -433,10 +439,8 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                //here I manipulate the data received
                                 //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                                 var data = tallier.parserSinglesSetsScore(this.responseText);
-
                                 manipulate(data);
                             }
                         };
@@ -448,9 +452,7 @@
                     parserSinglesSetsScore: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
-
                         var json = JSON.parse(data);
-
                         return json;
 
                     },
@@ -461,7 +463,7 @@
                     // at the end of its manipulate function the handicaps are calculated, addedup to the score, and the
                     // score is diplayed. This is all done because to addup the handicap and to calculate the score all of the
                     // asynchrounous callbacks need to have been completed, and this method ensures just that
-                    updatesAllScores: function() {
+                    updatesAllScores: function(matchID) {
                         var niko = this;          //change to global scope      //this is used to extend the scope of the vue.js data
 
                         function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
@@ -519,14 +521,10 @@
                             niko.awayScore1 = niko.m1g1a + niko.m1g2a + niko.m1g3a + niko.m1g4a + niko.m2g1a + niko.m2g2a + niko.m2g3a + niko.m2g4a;
                             niko.homeScore2 = niko.m3g1h + niko.m3g2h + niko.m3g3h + niko.m3g4h + niko.m4g1h + niko.m4g2h + niko.m4g3h + niko.m4g4h;
                             niko.awayScore2 = niko.m3g1a + niko.m3g2a + niko.m3g3a + niko.m3g4a + niko.m4g1a + niko.m4g2a + niko.m4g3a + niko.m4g4a;
-
-                            //total handicap is set here
-
-                            console.log("singlesfunc");
-                            niko.updateDoublesScores();
+                            niko.updateDoublesScores(matchID);
                         }
 
-                        this.fetchSinglesSetsScore(1, manipulate);
+                        this.fetchSinglesSetsScore(matchID, manipulate);
                     },
 
                     fetchDoubleSetsScore: function (matchID, manipulate) {
@@ -534,7 +532,6 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                //here I manipulate the data received
                                 //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                                 var data = tallier.parserDoubleSetsScore(this.responseText);
                                 manipulate(data);
@@ -552,7 +549,7 @@
                         return json;
 
                     },
-                    updateDoublesScores: function() {
+                    updateDoublesScores: function(matchID) {
                         var niko = this;
 
                         function manipulate(json) {
@@ -612,25 +609,26 @@
                             //total score is calculated here
                             niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap;
                             niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles +niko.ahandicap;
-                            console.log("doublesfunc");
-
                         }
 
-                        this.fetchDoubleSetsScore(1, manipulate);
+                        this.fetchDoubleSetsScore(matchID, manipulate);
 
                     },
-                    fetchMatchInfo: function (data) {
+                    fetchMatchInfo: function (matchID, manipulate) {
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                //here I manipulate the data received
-                                //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
-                                tallier.parseMatchInfo(this.responseText);
+                                console.log(this.responseText);    //this is the raw data received
+                                //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                                //var data = tallier.parseMatchInfo(this.responseText);
+                                var data = tallier.parseMatchInfo(this.responseText);
+                                //console.log(data.homeTeam);
+                                manipulate(data);
                             }
                         };
 
-                        xhttp.open("GET", "http://178.62.9.140:3080/matches", true);
+                        xhttp.open("GET", "http://178.62.9.140:3080/matches/"+matchID, true);
                         xhttp.send();
 
 
@@ -638,9 +636,26 @@
                     parseMatchInfo: function (rawdata) {
                         //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
-                        var json = JSON.parse(data);                                                                    //parse json data
-                        //console.log(json.id);
-                        this.addup();
+                        var json = JSON.parse(data);
+                        console.log("this is the ID: "+json[0].date);
+                        return json;
+
+
+                    },
+
+                    updateMatchInfo: function (matchID) {
+                        var niko = this;
+                        function manipulate(json) {
+
+                            niko.hteam = json[0].homeTeam;
+                            niko.ateam = json[0].awayTeam;
+                            niko.date = json[0].date.substring(0,json[0].date.search("T"));
+
+                            niko.hTeamTitleScore = json[0].scores.substring(0 , json[0].scores.search("-"));
+                            niko.aTeamTitleScore = json[0].scores.substring(json[0].scores.search("-")+1 , json[0].scores.length);
+
+                        }
+                        this.fetchMatchInfo(matchID,manipulate);
                     }
 
                 },
@@ -654,8 +669,8 @@
 
                 },
                 mounted: function () {
-                    this.updatesAllScores();
-                    //this.addup();
+                    this.updatesAllScores(3);
+                    this.updateMatchInfo(3);
                 }
             })
 
