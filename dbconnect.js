@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 app.get("/matches/:matchID", function (req,res) {
 
-    var matchID = req.params.matchID;
+    var matchID = req.params.matchID;           //this fetches the variable value for the query
 
     connection.query("SELECT matches.date, matches.postponed, matches.scores, ht.teamName AS homeTeam, at.teamName AS awayTeam " +
         "FROM matches " +
@@ -50,7 +50,7 @@ app.get("/matches/:matchID", function (req,res) {
 
 app.get("/singleSets/:matchID", function (req,res) {
 
-    var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
+    var matchID = req.params.matchID;           //this fetches the variable value for the query
 
     connection.query("SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  " +
         "p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, " +
@@ -74,7 +74,7 @@ app.get("/singleSets/:matchID", function (req,res) {
 
 app.get("/doubleSets/:matchID", function (req,res) {
 
-    var matchID = req.params.matchID;                                                                                   //this fetches the endpoint call
+    var matchID = req.params.matchID;      //this fetches the variable value for the query
 
     connection.query("SELECT doubleset.id, doubleset.matchid, p1.name AS hplayer1 , p1.handicap AS hhandicap1, " +
         "p2.name AS hplayer2, p2.handicap AS hhandicap2, p3.name AS aplayer1,p3.handicap AS ahandicap1, " +
@@ -91,6 +91,26 @@ app.get("/doubleSets/:matchID", function (req,res) {
         } else {
             console.log(rows);
             console.log("Double sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+
+app.get("/allMatches", function (req,res) {
+
+    connection.query("SELECT matches.id, matches.date, matches.postponed, ht.teamName AS homeTeam, at.teamName AS awayTeam, matches.scores " +
+        "FROM matches " +
+        "INNER JOIN teams ht ON ht.id=matches.hteam " +
+        "INNER JOIN teams at ON at.id=matches.ateam", function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
             res.send(rows);
         }
     });

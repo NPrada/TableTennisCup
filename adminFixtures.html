@@ -11,8 +11,6 @@
     <link rel="stylesheet" type="text/css" href="CupPage.css">
     <link rel="stylesheet" type="text/css" href="NewCup.css">
 
-
-
 </head>
 <body>
 
@@ -51,8 +49,7 @@
     </div>
     </header>
 
-
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content" id="app">
 
         <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">
             <div class="mdl-card__title">
@@ -61,6 +58,7 @@
             <div class="fixtures-table-container mdl-card__supporting-text">
                 <table class="mdl-data-table mdl-js-data-table">
                     <thead>
+
                     <tr>
                         <th class="mdl-data-table__cell--non-numeric">#</th>
                         <th class="mdl-data-table__cell--non-numeric">Home</th>
@@ -71,39 +69,75 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                        <td class="mdl-data-table__cell--non-numeric">London</td>
-                        <td class="mdl-data-table__cell--non-numeric">210-150</td>
-                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                    </tr>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">2</td>
-                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                        <td class="mdl-data-table__cell--non-numeric">Manchester</td>
-                        <td class="mdl-data-table__cell--non-numeric">212-420</td>
-                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                    </tr>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">3</td>
-                        <td class="mdl-data-table__cell--non-numeric">London</td>
-                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                        <td class="mdl-data-table__cell--non-numeric">0-0</td>
-                        <td class="mdl-data-table__cell--non-numeric">15th Dec 2017</td>
-                    </tr>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">4</td>
-                        <td class="mdl-data-table__cell--non-numeric">Manchester</td>
-                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                        <td class="mdl-data-table__cell--non-numeric">0-0</td>
-                        <td class="mdl-data-table__cell--non-numeric">- -</td>
-                    </tr>
+                        <template v-for="(item,index) in matches">
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">{{index+1}}</td>
+                                <td class="mdl-data-table__cell--non-numeric">{{item.homeTeam}}</td>
+                                <td class="mdl-data-table__cell--non-numeric">{{item.awayTeam}}</td>
+                                <td class="mdl-data-table__cell--non-numeric">{{item.scores}}</td>
+                                <td class="mdl-data-table__cell--non-numeric">{{item.date}}</td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
             </div>
+            <!--<button v-on:click="getMatches">Fetch</button>-->
         </div>
+
+
     </main>
+    <script>
+        var vueApp = new Vue({
+            el: '#app',
+            data: {
+
+                matches:0
+
+            },
+
+            methods: {
+                fetchMatches: function ( manipulate) {
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var data = vueApp.parseMatchesInfo(this.responseText);
+
+                            manipulate(data);
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allMatches", true);
+                    xhttp.send();
+
+                },
+                parseMatchesInfo: function (rawdata) {
+                    //these two lines just parse the data so it can be accessed
+                    var json = JSON.parse(rawdata);
+                    return json;
+
+
+                },
+
+                getMatches: function () {
+                    var global = this;
+                    function manipulate(json) {
+                        global.matches = json;
+
+                        for (var i=0; i< global.matches.length;i++){        //this for loop is used to change the format of the date
+                            global.matches[i].date = global.matches[i].date.substring(0,global.matches[i].date.search("T"));
+                        }
+                    }
+                    this.fetchMatches(manipulate);
+                }
+            },
+            mounted: function () {
+                this.getMatches();
+
+            }
+        })
+    </script>
 </div>
 </body>
 </html>
