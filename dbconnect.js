@@ -116,6 +116,26 @@ app.get("/allMatches", function (req,res) {
     });
 
 });
+//this is used to set the date of a match
+app.post("/updateMatchDate/matchID/:matchID/newDate/:newDate", function (req,res) {
+
+    var matchID = req.params.matchID;
+    var newDate = req.params.newDate
+
+    connection.query("UPDATE conp2.matches SET date = " + newDate +" WHERE matches.id ="+matchID, function (error, rows, fields){
+        console.log("UPDATE conp2.matches SET date = " + newDate +" WHERE matches.id ="+matchID);
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
 
 // app.get("/player/:playerID", function (req,res) {
 //
