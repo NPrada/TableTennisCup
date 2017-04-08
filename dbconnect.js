@@ -137,25 +137,4 @@ app.post("/updateMatchDate/matchID/:matchID/newDate/:newDate", function (req,res
 
 });
 
-// app.get("/player/:playerID", function (req,res) {
-//
-//     var playerID = req.params.playerID;                                                                                  //this fetches the id passed in the endpoint call
-//
-//     connection.query("SELECT * FROM players GROUP BY id HAVING MAX(id) = "+playerID+" AND MIN(id) = "+playerID, function (error, rows, fields){
-//         // callback aka when the query is done this fires
-//         if (!!error){
-//             console.log("Error in the query");
-//         } else {
-//             console.log("Successful query");
-//             //this get function only returns the first row that it fetches matching the citeria
-//             //it should only be fetching one row of the database aniway so we only send one row for easier parsing later
-//             res.send(rows[0]);
-//
-//
-//
-//         }
-//     });
-//
-// });
-
 app.listen(port);
