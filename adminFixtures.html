@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(item,index) in matches">
-                            <tr>
+                            <tr v-on:click="directToMatchpage(item.id)">
                                 <td class="mdl-data-table__cell--non-numeric">{{index+1}}</td>
                                 <td class="mdl-data-table__cell--non-numeric">{{item.homeTeam}}</td>
                                 <td class="mdl-data-table__cell--non-numeric">{{item.awayTeam}}</td>
@@ -102,11 +102,23 @@
             },
 
             methods: {
+                directToMatchpage: function(matchID){
+                    //alert(matchID)
+                    localStorage.setItem("matchID",matchID);    //The match id is added to local storage so it can be accessed later
+                    //location.href('Matchpage.html');
+                    window.location.replace('Matchpage.html');
+                    //window.location.href('Matchpage.html');
+                },
+
                 test: function(date,matchid, rowNumber){
 
                     if(date.length == 10){  //this is to make sure that the  date is only worked with when it is entered valid
                         alert("hey: "+date+ "    "+matchid+ "     "+rowNumber);
-                        this.matches[rowNumber].date = date
+                        this.matches[rowNumber].date = date;
+
+
+
+
 
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run

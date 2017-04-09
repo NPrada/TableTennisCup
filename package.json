@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.15.2",
     "node": "^0.0.0",
-    "vue": "^2.2.6"
+    "vue": "^2.2.6",
+    "vue-router": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
