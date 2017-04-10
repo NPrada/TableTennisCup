@@ -36,7 +36,7 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
+            <a class="mdl-navigation__link" href="adminNewCup.html">Group stage info</a>
             <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
             <a class="mdl-navigation__link" href="">Fixtures</a>
             <a class="mdl-navigation__link" href="">Teams</a>
@@ -307,12 +307,9 @@
                     <td align="center" class="totalscorecell" id="homescore">{{homescore}}</td>
                     <td align="center" class="totalscorecell" id="awayscore">{{awayscore}}</td>
                 </tr>
-
-
             </table>
-
         </div>
-        <br>
+
         <script>
 
             var tallier = new Vue({
@@ -538,12 +535,6 @@
                                 }
                             }
 
-
-                            //niko.singlesHP1handicap VS niko.singlesAP1handicap
-                            //niko.singlesHP1handicap VS niko.singlesAP2handicap
-
-                            //niko.singlesHP2handicap VS niko.singlesAP1handicap
-                            //niko.singlesHP2handicap VS niko.singlesAP2handicap
                             niko.updateDoublesScores(matchID);
                         }
 
@@ -698,16 +689,15 @@
                 },
                 created: function () {
 
-
                 },
                 beforeMount: function () {
 
-
-
                 },
                 mounted: function () {
-                    this.updatesAllScores(3);
-                    this.updateMatchInfo(3);
+                    //alert(localStorage.getItem("matchID"));
+                    this.updatesAllScores(localStorage.getItem("matchID"));
+                    this.updateMatchInfo(localStorage.getItem("matchID"));
+
                 }
             })
 

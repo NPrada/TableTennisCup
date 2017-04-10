@@ -123,7 +123,99 @@ app.post("/updateMatchDate/matchID/:matchID/newDate/:newDate", function (req,res
     var newDate = req.params.newDate
 
     connection.query("UPDATE conp2.matches SET date = " + newDate +" WHERE matches.id ="+matchID, function (error, rows, fields){
-        console.log("UPDATE conp2.matches SET date = " + newDate +" WHERE matches.id ="+matchID);
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+
+app.post("/newClub/:clubName", function (req,res) {
+
+    var clubName = req.params.clubName;
+
+    connection.query("INSERT INTO conp2.clubs (clubName) VALUES ('"+clubName+"')", function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+//this post is used to create a new team
+app.post("/newTeam/:clubID/:teamName/:teamCaptainId/:contactEmail", function (req,res) {
+
+    var clubID          = req.params.clubID;
+    var teamName        = req.params.teamName;
+    var teamCaptainId   = req.params.teamCaptainId;
+    var email           = req.params.contactEmail;
+
+    connection.query("INSERT INTO conp2.teams (clubID,teamName,teamCaptainID,contactEmail) VALUES ('"+clubID+"', '"+teamName+"', '"+teamCaptainId+"', '"+email+"')", function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+//the next three middlewares are used to fetch all the clubs teams and players
+//fethes the entire clubs table
+app.get("/allClubs", function (req,res) {
+
+    connection.query("SELECT * FROM clubs" ,function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+//fethes the entire teams table
+app.get("/allTeams", function (req,res) {
+
+    connection.query("SELECT * FROM teams" ,function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+//fethes the entire players table
+app.get("/allPlayers", function (req,res) {
+
+    connection.query("SELECT * FROM players" ,function (error, rows, fields){
+
         // callback aka when the query is done this fires
         if (!!error){
             console.log("Error in the query");
