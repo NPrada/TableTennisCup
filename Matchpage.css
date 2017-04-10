@@ -74,12 +74,16 @@ td.center {
 
 }
 .scoresTable {
-    width: 900px;
+    width: 1000px;
     table-layout: fixed;
 }
 
 table, th, td {
     /*border: 1px solid black;*/
     font-size: 16px;
+}
+
+.form-control {
+    width: 100px;
 }
 

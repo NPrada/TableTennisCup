@@ -32,7 +32,7 @@ app.get("/matches/:matchID", function (req,res) {
 
     var matchID = req.params.matchID;           //this fetches the variable value for the query
 
-    connection.query("SELECT matches.date, matches.postponed, matches.scores, ht.teamName AS homeTeam, at.teamName AS awayTeam " +
+    connection.query("SELECT matches.date, matches.postponed, matches.scores,  matches.hteam, ht.teamName AS homeTeam, matches.ateam, at.teamName AS awayTeam " +
         "FROM matches " +
         "INNER JOIN teams ht ON ht.id=matches.hteam " +
         "INNER JOIN teams at ON at.id=matches.ateam " +
@@ -215,6 +215,26 @@ app.get("/allTeams", function (req,res) {
 app.get("/allPlayers", function (req,res) {
 
     connection.query("SELECT * FROM players" ,function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
+
+//get all the players of a certain team
+app.get("/playersOfTeam/:teamID", function (req,res) {
+
+    var teamID = req.params.teamID;
+
+    connection.query("SELECT * FROM players WHERE players.teamID="+teamID ,function (error, rows, fields){
 
         // callback aka when the query is done this fires
         if (!!error){

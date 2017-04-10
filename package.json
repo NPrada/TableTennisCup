@@ -4,8 +4,8 @@
   "description": "my final year project ",
   "main": "dbconnect.js",
   "scripts": {
-         "build": "babel src -d lib"
-     },
+    "build": "babel src -d lib"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "node": "^0.0.0",
@@ -14,9 +14,6 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1"
-  },
-  "scripts": {
-    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",

@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
@@ -44,8 +44,8 @@
         </nav>
     </div>
 
-    <main class="mdl-layout__content">
-        <div id="app">
+    <main class="mdl-layout__content" id="app">
+        <div >
             <p class="date">{{date}}</p>
             <table >                                                                                                     <!-- This is the top table containing the team names and so on-->
                 <tr >
@@ -79,7 +79,7 @@
             <table class="scoresTable" >
                 <!-- this just contains the singles subtitle -->
                 <tr>
-                    <td><a class="title-text">Singles:</a></td>
+                    <td style="width: 120px"><a class="title-text">Singles:</a></td>
                     <td></td>
                     <td style="width: 250px"></td>
                     <td style="width: 250px"></td>
@@ -95,57 +95,64 @@
                     <td align="center" style="width: 50px">Home</td>
                     <td align="center" style="width: 50px">Away</td>
                 </tr>
-                <tr >
-                    <td ></td>
+                <tr>
+                    <td>
                     <td></td>
-                    <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP1handicap">{{singlesAP1}}</span> </td>
-                    <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span></td>
+                    <td align="center" class="teamnamecell">
+                        <v-select v-model="singlesAP1" :on-change="consoleCallback" label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <td align="center" class="teamnamecell">
+                        <v-select v-model="singlesAP2" label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <!--<span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span>   shows the handicap-->
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="teamnamecell"> <b>{{hteam}}</b></td>
-                    <td class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesHP1handicap">{{singlesHP1}}</span></td>
+                    <td class="teamnamecell">
+                        <v-select v-model="singlesHP1" label="name" :options="hPlayers"></v-select>
+                    </td>
 
                     <!-- Match 1:  player 1 VS player 1-->
                     <td class="setcell">
 
                         <table class="game-table" v-bind:class="{ active: m1g1h < m1g1a, greentrue: m1g1h > m1g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m1g2h < m1g2a, greentrue: m1g2h > m1g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m1g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m1g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m1g3h < m1g3a, greentrue: m1g3h > m1g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m1g4h < m1g4a, greentrue: m1g4h > m1g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m1g4a}}</td></tr>
+                            <tr><td class="b" align="left">{{m1g4h}}</td> <td class="e"></td></tr>
                         </table>
 
                     </td>
                     <!-- Match 2:  player 1 VS player 2-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m2g1h < m2g1a, greentrue: m2g1h > m2g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m2g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m2g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m2g2h < m2g2a, greentrue: m2g2h > m2g2a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m2g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m2g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m2g3h < m2g3a, greentrue: m2g3h > m2g3a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m2g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m2g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m2g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m2g4h < m2g4a, greentrue: m2g4h > m2g4a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m2g4h}}</td></tr>
-                            <tr><td class="b" align="left" >{{m2g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m2g4a}}</td></tr>
+                            <tr><td class="b" align="left" >{{m2g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
                     <td ></td>
@@ -153,43 +160,46 @@
                     <td align="center" class="totalscorecell"  >{{awayScore1}}</td>
                 </tr>
                 <tr >
-                    <td class="teamnamecell"><span class="mdl-badge" v-bind:data-badge="singlesHP2handicap">{{singlesHP2}}</span></td>
+                    <td class="teamnamecell">
+                        <v-select v-model="singlesHP2" label="name" :options="hPlayers"></v-select>
+                        <!--<span class="mdl-badge" v-bind:data-badge="singlesHP2handicap">{{singlesHP2}}</span>   shows the handicap-->
+                    </td>
                     <!-- Match 3:  player 2 VS player 1-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m3g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m3g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m3g2h < m3g2a, greentrue: m3g2h > m3g2a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g2h}}</td></tr>
-                            <tr><td class="b" align="left" >{{m3g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m3g3h < m3g3a, greentrue: m3g3h > m3g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m3g4h < m3g4a, greentrue: m3g4h > m3g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m3g4a}}</td></tr>
+                            <tr><td class="b" align="left">{{m3g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
                     <!-- Match 4:  player 2 VS player 2-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m4g1h < m4g1a, greentrue: m4g1h > m4g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m4g2h < m4g2a, greentrue: m4g2h > m4g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m4g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m4g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m4g3h < m4g3a, greentrue: m4g3h > m4g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m4g4h < m4g4a, greentrue: m4g4h > m4g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m4g4a}}</td></tr>
+                            <tr><td class="b" align="left">{{m4g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
                     <td ></td>
@@ -228,20 +238,20 @@
                     <td class="setcell">
 
                         <table class="game-table" v-bind:class="{ active: m5g1h < m5g1a, greentrue: m5g1h > m5g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m5g2h < m5g2a, greentrue: m5g2h > m5g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m5g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m5g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m5g3h < m5g3a, greentrue: m5g3h > m5g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m5g4h < m5g4a, greentrue: m5g4h > m5g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m5g4a}}</td></tr>
+                            <tr><td class="b" align="left">{{m5g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
                     <td></td>
@@ -257,20 +267,20 @@
                     <!-- Match 6:  homeDouble 1 VS awayDouble 2-->
                     <td class="setcell">
                         <table class="game-table" v-bind:class="{ active: m6g1h < m6g1a, greentrue: m6g1h > m6g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m6g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m6g1a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g1a}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g1h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m6g2h < m6g2a, greentrue: m6g2h > m6g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m6g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m6g2a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right" >{{m6g2a}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g2h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m6g3h < m6g3a, greentrue: m6g3h > m6g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m6g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m6g3a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g3a}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g3h}}</td> <td class="e"></td></tr>
                         </table>
                         <table class="game-table" v-bind:class="{ active: m6g4h < m6g4a, greentrue: m6g4h > m6g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m6g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m6g4a}}</td> <td class="e"></td></tr>
+                            <tr><td class="e"></td><td class="t" align="right">{{m6g4a}}</td></tr>
+                            <tr><td class="b" align="left">{{m6g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
 
@@ -308,16 +318,26 @@
                     <td align="center" class="totalscorecell" id="awayscore">{{awayscore}}</td>
                 </tr>
             </table>
+
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="updatePlayerDropdowns(1,2)">
+                Submit
+            </button>
+
         </div>
-
-
     </main>
 
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+    <script src='https://unpkg.com/vue-select@latest'></script>
     <script>
+        Vue.component('v-select', VueSelect.VueSelect); //use to have dynamic drop downs
 
         var tallier = new Vue({
             el: '#app',
             data: {
+                //the full json of each query
+                matchInfo:[],    //the json of the matchinfo like the teams competing, date and score
+                hPlayers:[],     //all the home players
+                aPlayers:[],     //all the away players
 
                 redtrue: true,
                 greentrue: true,
@@ -416,6 +436,45 @@
             },
 
             methods: {
+                consoleCallback: function () {
+                    //alert("hey");
+                },
+
+                updateAwayPlayerDropdowns: function (aTeamID) {
+
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            console.log(this.responseText);
+
+                            var json = JSON.parse(this.responseText);     //parse the data recieved
+                            global.aPlayers = json;
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/playersOfTeam/"+aTeamID, true);
+                    xhttp.send();
+                },
+
+                updateHomePlayerDropdowns: function (hTeamID) {
+
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            console.log(this.responseText);
+
+                            var json = JSON.parse(this.responseText);     //parse the data recieved
+                            global.hPlayers = json;
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/playersOfTeam/"+hTeamID, true);
+                    xhttp.send();
+                },
 //                    addup: function () {
 //                        this.homeScore1 = this.m1g1h + this.m1g2h + this.m1g3h + this.m1g4h + this.m2g1h + this.m2g2h + this.m2g3h + this.m2g4h;
 //                        this.awayScore1 = this.m1g1a + this.m1g2a + this.m1g3a + this.m1g4a + this.m2g1a + this.m2g2a + this.m2g3a + this.m2g4a;
@@ -549,7 +608,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                             var data = tallier.parserDoubleSetsScore(this.responseText);
                             manipulate(data);
                         }
@@ -678,6 +737,8 @@
                     var niko = this;
                     function manipulate(json) {
 
+                        niko.matchInfo = json; //the raw jason is stored here
+
                         niko.hteam = json[0].homeTeam;
                         niko.ateam = json[0].awayTeam;
                         niko.date = json[0].date.substring(0,json[0].date.search("T"));
@@ -691,13 +752,15 @@
 
             },
             created: function () {
-
+                this.updateHomePlayerDropdowns(1);
+                this.updateAwayPlayerDropdowns(2);
             },
             beforeMount: function () {
 
             },
             mounted: function () {
                 //alert(localStorage.getItem("matchID"));
+
                 this.updatesAllScores(localStorage.getItem("matchID"));
                 this.updateMatchInfo(localStorage.getItem("matchID"));
 
