@@ -47,13 +47,13 @@
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="clubName" v-model="fullClubsSelected">
+                            <input class="mdl-textfield__input" type="text" id="clubName" v-model="newClubName">
                             <!--<input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="newDate" v-on:input="updateDate($event.target.value, item.id, index)" placeholder="YYYY-MM-DD">-->
                             <label class="mdl-textfield__label" for="clubName">Club name...</label>
                         </div>
                     </td>
                     <td class="mdl-data-table__cell--non-numeric">
-                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="newClub(fullClubsSelected)">
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="newClub(newClubName)">
                             Submit
                         </button>
                     </td>
@@ -105,7 +105,7 @@
 
             data: {
                 allClubs:[],
-                fullClubsSelected:null
+                newClubName:null
             },
 
             methods: {
