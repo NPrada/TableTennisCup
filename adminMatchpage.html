@@ -99,7 +99,7 @@
                     <td>
                     <td></td>
                     <td align="center" class="teamnamecell">
-                        <v-select v-model="singlesAP1" :on-change="consoleCallback" label="name" :options="aPlayers" ></v-select>
+                        <v-select v-model="singlesAP1" :on-change="postSinglesSets" label="name" :options="aPlayers" ></v-select>
                     </td>
                     <td align="center" class="teamnamecell">
                         <v-select v-model="singlesAP2" label="name" :options="aPlayers" ></v-select>
@@ -118,19 +118,19 @@
                     <!-- Match 1:  player 1 VS player 1-->
                     <td class="setcell">
 
-                        <table class="game-table" v-bind:class="{ active: m1g1h < m1g1a, greentrue: m1g1h > m1g1a }">
+                        <table class="game-table" v-bind:class="{ active: m1g1h > m1g1a, greentrue: m1g1h < m1g1a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m1g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m1g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g2h < m1g2a, greentrue: m1g2h > m1g2a }">
+                        <table class="game-table" v-bind:class="{ active: m1g2h > m1g2a, greentrue: m1g2h < m1g2a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m1g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m1g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g3h < m1g3a, greentrue: m1g3h > m1g3a }">
+                        <table class="game-table" v-bind:class="{ active: m1g3h > m1g3a, greentrue: m1g3h < m1g3a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m1g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m1g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m1g4h < m1g4a, greentrue: m1g4h > m1g4a }">
+                        <table class="game-table" v-bind:class="{ active: m1g4h > m1g4a, greentrue: m1g4h < m1g4a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m1g4a}}</td></tr>
                             <tr><td class="b" align="left">{{m1g4h}}</td> <td class="e"></td></tr>
                         </table>
@@ -138,19 +138,19 @@
                     </td>
                     <!-- Match 2:  player 1 VS player 2-->
                     <td class="setcell">
-                        <table class="game-table" v-bind:class="{ active: m2g1h < m2g1a, greentrue: m2g1h > m2g1a }">
+                        <table class="game-table" v-bind:class="{ active: m2g1h > m2g1a, greentrue: m2g1h < m2g1a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m2g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m2g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m2g2h < m2g2a, greentrue: m2g2h > m2g2a }">
+                        <table class="game-table" v-bind:class="{ active: m2g2h > m2g2a, greentrue: m2g2h < m2g2a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m2g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m2g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m2g3h < m2g3a, greentrue: m2g3h > m2g3a }">
+                        <table class="game-table" v-bind:class="{ active: m2g3h > m2g3a, greentrue: m2g3h < m2g3a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m2g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m2g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m2g4h < m2g4a, greentrue: m2g4h > m2g4a }">
+                        <table class="game-table" v-bind:class="{ active: m2g4h > m2g4a, greentrue: m2g4h < m2g4a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m2g4a}}</td></tr>
                             <tr><td class="b" align="left" >{{m2g4h}}</td> <td class="e"></td></tr>
                         </table>
@@ -166,38 +166,38 @@
                     </td>
                     <!-- Match 3:  player 2 VS player 1-->
                     <td class="setcell">
-                        <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
+                        <table class="game-table" v-bind:class="{ active: m3g1h > m3g1a, greentrue: m3g1h < m3g1a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m3g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m3g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m3g2h < m3g2a, greentrue: m3g2h > m3g2a }">
+                        <table class="game-table" v-bind:class="{ active: m3g2h > m3g2a, greentrue: m3g2h < m3g2a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m3g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m3g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m3g3h < m3g3a, greentrue: m3g3h > m3g3a }">
+                        <table class="game-table" v-bind:class="{ active: m3g3h > m3g3a, greentrue: m3g3h < m3g3a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m3g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m3g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m3g4h < m3g4a, greentrue: m3g4h > m3g4a }">
+                        <table class="game-table" v-bind:class="{ active: m3g4h > m3g4a, greentrue: m3g4h < m3g4a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m3g4a}}</td></tr>
                             <tr><td class="b" align="left">{{m3g4h}}</td> <td class="e"></td></tr>
                         </table>
                     </td>
                     <!-- Match 4:  player 2 VS player 2-->
                     <td class="setcell">
-                        <table class="game-table" v-bind:class="{ active: m4g1h < m4g1a, greentrue: m4g1h > m4g1a }">
+                        <table class="game-table" v-bind:class="{ active: m4g1h > m4g1a, greentrue: m4g1h < m4g1a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m4g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m4g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m4g2h < m4g2a, greentrue: m4g2h > m4g2a }">
+                        <table class="game-table" v-bind:class="{ active: m4g2h > m4g2a, greentrue: m4g2h < m4g2a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m4g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m4g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m4g3h < m4g3a, greentrue: m4g3h > m4g3a }">
+                        <table class="game-table" v-bind:class="{ active: m4g3h > m4g3a, greentrue: m4g3h < m4g3a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m4g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m4g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m4g4h < m4g4a, greentrue: m4g4h > m4g4a }">
+                        <table class="game-table" v-bind:class="{ active: m4g4h > m4g4a, greentrue: m4g4h < m4g4a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m4g4a}}</td></tr>
                             <tr><td class="b" align="left">{{m4g4h}}</td> <td class="e"></td></tr>
                         </table>
@@ -237,19 +237,19 @@
                     <!-- Match 5:  homedoubles 1 VS awaydeoubles set1-->
                     <td class="setcell">
 
-                        <table class="game-table" v-bind:class="{ active: m5g1h < m5g1a, greentrue: m5g1h > m5g1a }">
+                        <table class="game-table" v-bind:class="{ active: m5g1h > m5g1a, greentrue: m5g1h < m5g1a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m5g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m5g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m5g2h < m5g2a, greentrue: m5g2h > m5g2a }">
+                        <table class="game-table" v-bind:class="{ active: m5g2h > m5g2a, greentrue: m5g2h < m5g2a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m5g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m5g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m5g3h < m5g3a, greentrue: m5g3h > m5g3a }">
+                        <table class="game-table" v-bind:class="{ active: m5g3h > m5g3a, greentrue: m5g3h < m5g3a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m5g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m5g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m5g4h < m5g4a, greentrue: m5g4h > m5g4a }">
+                        <table class="game-table" v-bind:class="{ active: m5g4h > m5g4a, greentrue: m5g4h < m5g4a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m5g4a}}</td></tr>
                             <tr><td class="b" align="left">{{m5g4h}}</td> <td class="e"></td></tr>
                         </table>
@@ -266,19 +266,19 @@
                     <td class="setcell"></td>
                     <!-- Match 6:  homeDouble 1 VS awayDouble 2-->
                     <td class="setcell">
-                        <table class="game-table" v-bind:class="{ active: m6g1h < m6g1a, greentrue: m6g1h > m6g1a }">
+                        <table class="game-table" v-bind:class="{ active: m6g1h > m6g1a, greentrue: m6g1h < m6g1a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m6g1a}}</td></tr>
                             <tr><td class="b" align="left">{{m6g1h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m6g2h < m6g2a, greentrue: m6g2h > m6g2a }">
+                        <table class="game-table" v-bind:class="{ active: m6g2h > m6g2a, greentrue: m6g2h < m6g2a }">
                             <tr><td class="e"></td><td class="t" align="right" >{{m6g2a}}</td></tr>
                             <tr><td class="b" align="left">{{m6g2h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m6g3h < m6g3a, greentrue: m6g3h > m6g3a }">
+                        <table class="game-table" v-bind:class="{ active: m6g3h > m6g3a, greentrue: m6g3h < m6g3a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m6g3a}}</td></tr>
                             <tr><td class="b" align="left">{{m6g3h}}</td> <td class="e"></td></tr>
                         </table>
-                        <table class="game-table" v-bind:class="{ active: m6g4h < m6g4a, greentrue: m6g4h > m6g4a }">
+                        <table class="game-table" v-bind:class="{ active: m6g4h > m6g4a, greentrue: m6g4h < m6g4a }">
                             <tr><td class="e"></td><td class="t" align="right">{{m6g4a}}</td></tr>
                             <tr><td class="b" align="left">{{m6g4h}}</td> <td class="e"></td></tr>
                         </table>
@@ -436,7 +436,7 @@
             },
 
             methods: {
-                consoleCallback: function () {
+                postSinglesSets: function () {
                     //alert("hey");
                 },
 
