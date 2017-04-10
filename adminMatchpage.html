@@ -99,10 +99,10 @@
                     <td>
                     <td></td>
                     <td align="center" class="teamnamecell">
-                        <v-select v-model="singlesAP1" :on-change="postSinglesSets" label="name" :options="aPlayers" ></v-select>
+                        <v-select v-model="singlesAP1" label="name" :options="aPlayers" ></v-select>
                     </td>
                     <td align="center" class="teamnamecell">
-                        <v-select v-model="singlesAP2" label="name" :options="aPlayers" ></v-select>
+                        <v-select v-model="singlesAP2"  label="name" :options="aPlayers" ></v-select>
                     </td>
                     <!--<span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span>   shows the handicap-->
                     <td></td>
@@ -161,7 +161,7 @@
                 </tr>
                 <tr >
                     <td class="teamnamecell">
-                        <v-select v-model="singlesHP2" label="name" :options="hPlayers"></v-select>
+                        <v-select v-model="singlesHP2"  label="name" :options="hPlayers"></v-select>
                         <!--<span class="mdl-badge" v-bind:data-badge="singlesHP2handicap">{{singlesHP2}}</span>   shows the handicap-->
                     </td>
                     <!-- Match 3:  player 2 VS player 1-->
@@ -319,8 +319,8 @@
                 </tr>
             </table>
 
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="updatePlayerDropdowns(1,2)">
-                Submit
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="postSinglesSets">
+                Commit Changes
             </button>
 
         </div>
@@ -338,6 +338,20 @@
                 matchInfo:[],    //the json of the matchinfo like the teams competing, date and score
                 hPlayers:[],     //all the home players
                 aPlayers:[],     //all the away players
+
+                //the match ID
+                matchID:0,
+
+                //home player1 ID
+                hPlayer1IDsingles:null,
+                hPlayer2IDsingles:null,
+                aPlayer1IDsingles:null,
+                aPlayer2IDsingles:null,
+
+                set1ID: 0,
+                set2ID: 0,
+                set3ID: 0,
+                set4ID: 0,
 
                 redtrue: true,
                 greentrue: true,
@@ -437,8 +451,51 @@
 
             methods: {
                 postSinglesSets: function () {
-                    //alert("hey");
+                    ///updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h/:g3a/:g4h/:g4a
+                    //alert(this.set2ID);
+                    //alert(this.singlesHP1);
+                    //alert(this.hPlayers.length)
+                    //alert(this.hPlayers[0].name);
+
+                    //this for loop finds the players ID that is set on the dropdown
+                    if(typeof this.singlesHP1 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.singlesHP1){
+                                this.hPlayer1IDsingles = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.hPlayer1IDsingles = this.singlesHP1.id
+                    }
+
+                    //finds the ID of home player 2
+                    if(typeof this.singlesAP1 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.singlesAP1){
+                                this.aPlayer1IDsingles = this.aPlayers[i].id
+
+                            }
+                        }
+                    }else { //if the dropdown value was changed
+                        this.aPlayer1IDsingles = this.singlesAP1.id;
+                    }
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            //var data = vueApp.parseMatchesInfo(this.responseText);
+                            //global.refreshDropdowns();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set1ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m1g1h+"/"+this.m1g1a+"/"+this.m1g2h+"/"+this.m1g2a+"/"+this.m1g3h+"/"+this.m1g3a+"/"+this.m1g4h+"/"+this.m1g4a, true);
+                    xhttp.send();
                 },
+
 
                 updateAwayPlayerDropdowns: function (aTeamID) {
 
@@ -526,6 +583,13 @@
 
                     function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
 
+                        niko.matchID = localStorage.getItem("matchID");
+
+                        niko.set1ID =json[0].id;
+                        niko.set2ID =json[1].id;
+                        niko.set3ID =json[2].id;
+                        niko.set4ID =json[3].id;
+
                         niko.singlesHP1 = json[0].hplayer;
                         niko.singlesHP1handicap = json[0].hhandicap;
                         niko.singlesAP1 = json[0].aplayer;
@@ -608,7 +672,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                             var data = tallier.parserDoubleSetsScore(this.responseText);
                             manipulate(data);
                         }

@@ -172,23 +172,6 @@
                     xhttp.send();
                 },
 
-                createTeam: function(clubName){
-                    var global = this;
-
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
-                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            //console.log(this.responseText);
-                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
-                            //var data = vueApp.parseMatchesInfo(this.responseText);
-                            global.refreshDropdowns();
-                        }
-                    };
-
-                    xhttp.open("POST", "http://178.62.9.140:3080/", true);
-                    xhttp.send();
-                },
-
                 fetchClubs: function(){
 
                     var global = this;

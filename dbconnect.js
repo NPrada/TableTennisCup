@@ -248,5 +248,35 @@ app.get("/playersOfTeam/:teamID", function (req,res) {
     });
 
 });
+//update a whole single set row
+//         /updateSingleSet/1     /2         /3         /5   /11  /11  /3   /7   /9   /2   /8
+app.post("/updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h/:g3a/:g4h/:g4a", function (req,res) {
+
+        var setID =   req.params.setID;
+        var hplayer = req.params.hPlayerID;
+        var aplayer = req.params.aPlayerID;
+        var g1h = req.params.g1h;
+        var g1a = req.params.g1a;
+        var g2h = req.params.g2h;
+        var g2a = req.params.g2a;
+        var g3h = req.params.g3h;
+        var g3a = req.params.g3a;
+        var g4h = req.params.g4h;
+        var g4a = req.params.g4;
+        console.log("hplayer value ="+hplayer)
+        console.log("aplayer value ="+aplayer)
+    connection.query("UPDATE conp2.singleset SET hplayer = '"+hplayer+"', aplayer = '"+aplayer+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID, function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
 
 app.listen(port);
