@@ -87,3 +87,11 @@ table, th, td {
     width: 100px;
 }
 
+.scoreInputBox{
+    font-family: Roboto;
+    width: 18px;
+    margin: 0;
+    padding: 0;
+    /*border: 0;*/
+}
+

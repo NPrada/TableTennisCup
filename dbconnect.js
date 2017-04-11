@@ -261,12 +261,7 @@ app.post("/updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h
         var g3h = req.params.g3h;
         var g3a = req.params.g3a;
         var g4h = req.params.g4h;
-        var g4a = req.params.g4;
-        console.log("hplayer value ="+hplayer)
-        console.log("aplayer value ="+aplayer)
-        if (aplayer == null || aplayer == "null"){
-            console.log("hello there is an error aplayer= "+aplayer)
-        }
+        var g4a = req.params.g4a;
 
         connection.query("UPDATE conp2.singleset SET hplayer = '"+hplayer+"', aplayer = '"+aplayer+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID, function (error, rows, fields){
             // callback aka when the query is done this fires
@@ -279,9 +274,38 @@ app.post("/updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h
                 res.send(rows);
             }
         });
-
-
-
 });
+
+app.post("/updateDoubleSet/:setID/:hPlayer1ID/:hPlayer2ID/:aPlayer1ID/:aPlayer2ID/:g1h/:g1a/:g2h/:g2a/:g3h/:g3a/:g4h/:g4a", function (req,res) {
+
+    var setID =   req.params.setID;
+    var hplayer1 = req.params.hPlayer1ID;
+    var hplayer2 = req.params.hPlayer2ID;
+    var aplayer1 = req.params.aPlayer1ID;
+    var aplayer2 = req.params.aPlayer2ID;
+    var g1h = req.params.g1h;
+    var g1a = req.params.g1a;
+    var g2h = req.params.g2h;
+    var g2a = req.params.g2a;
+    var g3h = req.params.g3h;
+    var g3a = req.params.g3a;
+    var g4h = req.params.g4h;
+    var g4a = req.params.g4a;
+    //console.log("hplayer value ="+hplayer)
+
+    console.log("UPDATE conp2.doubleset SET hP1 = '"+hplayer1+"',hP2 = '"+hplayer2+"' aP1 = '"+aplayer1+"',aP2 = '"+aplayer2+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID)
+    connection.query("UPDATE conp2.doubleset SET hP1 = '"+hplayer1+"',hP2 = '"+hplayer2+"', aP1 = '"+aplayer1+"',aP2 = '"+aplayer2+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID, function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+});
+
 
 app.listen(port);
