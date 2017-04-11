@@ -16,36 +16,40 @@
 
 
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Loughborough Table Tennis Cup</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="NewCup.html">Group stage info</a>
-                <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
-                <a class="mdl-navigation__link" href="">Fixtures</a>
-                <a class="mdl-navigation__link" href="">Teams</a>
-                <a class="mdl-navigation__link" href="login.html">Login</a>
-            </nav>
+            <span class="mdl-layout-title">Admin Page</span>
         </div>
-    </header>                                                                                                           <!-- FIX ME -->
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="adminPanel.html" class="mdl-layout__tab">Main panel</a>
+            <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
+            <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
+            <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
+            <a href="adminClubs.html" class="mdl-layout__tab">Clubs</a>
+            <a href="adminTeams.html" class="mdl-layout__tab">Teams</a>
+            <a href="adminPlayers.html" class="mdl-layout__tab">Players</a>
+
+        </div>
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Navigation</span>
+        <span class="mdl-layout-title">Title</span>
+    </div>                                                                                                   <!-- FIX ME -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="adminNewCup.html">Group stage info</a>
-            <a class="mdl-navigation__link" href="CupPage.html">Playoffs info</a>
+            <a class="mdl-navigation__link" href="">Cup Information</a>
             <a class="mdl-navigation__link" href="">Fixtures</a>
             <a class="mdl-navigation__link" href="">Teams</a>
             <a class="mdl-navigation__link" href="login.html">Login</a>
         </nav>
     </div>
+    </header>
 
     <main class="mdl-layout__content" id="app">
-        <div >
+
             <p class="date"> Date:
                 <input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="date" placeholder="YYYY-MM-DD">
             </p>
@@ -77,9 +81,18 @@
                     </td>
                 </tr>
             </table>
-            <br> <br>
+
+
+
+
+        <div class="tableContainer">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" style="float: right" v-on:click="postSinglesSets">
+                Submit Changes
+            </button>
+
             <!-- This is the second table containing the singles-->
             <table class="scoresTable" >
+
                 <!-- this just contains the singles subtitle -->
                 <tr>
                     <td style="width: 120px"><a class="title-text">Singles:</a></td>
@@ -273,7 +286,6 @@
                     <td align="center" class="totalscorecell" id="homepart2">{{homeScore2}}</td>
                     <td align="center" class="totalscorecell" id="awaypart2">{{awayScore2}}</td>
                 </tr>
-
             </table>
             <br>
 
@@ -429,11 +441,6 @@
                     <td align="center" class="totalscorecell" >{{awayscore}}</td>
                 </tr>
             </table>
-
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="postSinglesSets">
-                Commit Changes
-            </button>
-
         </div>
     </main>
 
@@ -586,13 +593,13 @@
                     global.updateDate(global.date,global.matchID);
                     global.updateScore(global.matchID);
                     this.setSelectedPlayerIDs();
-                    console.log("before call" + this.aPlayer1IDsingles)
+
                     //player 1 vs player 1 is the set updated with this post
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("first post done")
+                            //console.log("first post done")
                             global.postSingleSet2();
                         }
                     };
@@ -609,7 +616,7 @@
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("second post done")
+                            //console.log("second post done")
                             global.postSingleSet3()
                         }
                     };
@@ -626,7 +633,7 @@
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("third post done")
+                            //console.log("third post done")
                             global.postSingleSet4()
                         }
                     };
@@ -641,7 +648,7 @@
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("fourth post done")
+                            //console.log("fourth post done")
                             global.postDoubleSet1();
                         }
                     };
@@ -656,7 +663,7 @@
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("first double post done")
+                            //console.log("first double post done")
                             global.postDoubleSet2();
                         }
                     };
@@ -671,7 +678,7 @@
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
                             //console.log(this.responseText);
-                            console.log("second double post done")
+                            console.log("All the post requests for the data are sent")
 
                         }
                     };
@@ -832,7 +839,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            console.log(this.responseText);
+                            //console.log(this.responseText);
 
                             var json = JSON.parse(this.responseText);     //parse the data recieved
                             global.aPlayers = json;
@@ -850,7 +857,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            console.log(this.responseText);
+                            //console.log(this.responseText);
 
                             var json = JSON.parse(this.responseText);     //parse the data recieved
                             global.hPlayers = json;
@@ -918,7 +925,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
                             var data = tallier.parserSinglesSetsScore(this.responseText);
                             manipulate(data);
                         }
@@ -1145,7 +1152,7 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                console.log(this.responseText);
+                                //console.log(this.responseText);
                                 //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
                                 //var data = tallier.parseMatchesInfo(this.responseText);
                             }
@@ -1163,7 +1170,7 @@
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                                console.log(this.responseText);
+                                //console.log(this.responseText);
                                 //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
                                 //var data = tallier.parseMatchesInfo(this.responseText);
                             }
@@ -1236,6 +1243,6 @@
         })
     </script>
 
-</div>
+</main>
 </body>
 </html>

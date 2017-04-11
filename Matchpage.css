@@ -86,7 +86,10 @@ table, th, td {
 .form-control {
     width: 100px;
 }
-
+.tableContainer {
+    width: 1010px;
+    margin:0 auto;
+}
 .scoreInputBox{
     font-family: Roboto;
     width: 18px;
