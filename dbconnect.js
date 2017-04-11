@@ -121,8 +121,27 @@ app.post("/updateMatchDate/matchID/:matchID/newDate/:newDate", function (req,res
 
     var matchID = req.params.matchID;
     var newDate = req.params.newDate
+    connection.query("UPDATE conp2.matches SET date = '" + newDate +"' WHERE matches.id ="+matchID, function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
 
-    connection.query("UPDATE conp2.matches SET date = " + newDate +" WHERE matches.id ="+matchID, function (error, rows, fields){
+});
+
+//this is used to update the match score to the correct ones after they have been entered
+app.post("/updateMatchScore/matchID/:matchID/newScore/:newScore", function (req,res) {
+
+    var matchID = req.params.matchID;
+    var newScore = req.params.newScore;
+    console.log(newScore)
+    connection.query("UPDATE conp2.matches SET scores = '" + newScore +"' WHERE matches.id ="+matchID, function (error, rows, fields){
         // callback aka when the query is done this fires
         if (!!error){
             console.log("Error in the query");
@@ -293,7 +312,7 @@ app.post("/updateDoubleSet/:setID/:hPlayer1ID/:hPlayer2ID/:aPlayer1ID/:aPlayer2I
     var g4a = req.params.g4a;
     //console.log("hplayer value ="+hplayer)
 
-    console.log("UPDATE conp2.doubleset SET hP1 = '"+hplayer1+"',hP2 = '"+hplayer2+"' aP1 = '"+aplayer1+"',aP2 = '"+aplayer2+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID)
+
     connection.query("UPDATE conp2.doubleset SET hP1 = '"+hplayer1+"',hP2 = '"+hplayer2+"', aP1 = '"+aplayer1+"',aP2 = '"+aplayer2+"', g1h = '"+g1h+"', g1a = '"+g1a+"', g2h = '"+g2h+"',g2a = '"+g2a+"',g3h = '"+g3h+"',g3a = '"+g3a+"',g4h = '"+g4h+"',g4a = '"+g4a+"' WHERE id ="+ setID, function (error, rows, fields){
         // callback aka when the query is done this fires
         if (!!error){
