@@ -451,13 +451,73 @@
 
             methods: {
                 postSinglesSets: function () {
-                    ///updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h/:g3a/:g4h/:g4a
-                    //alert(this.set2ID);
-                    //alert(this.singlesHP1);
-                    //alert(this.hPlayers.length)
-                    //alert(this.hPlayers[0].name);
+                    var global =this;
+                    this.setSelectedPlayerIDs();
+                    console.log("before call" + this.aPlayer1IDsingles)
+                    //player 1 vs player 1 is the set updated with this post
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("first post done")
+                            global.postSingleSet2();
+                        }
+                    };
 
-                    //this for loop finds the players ID that is set on the dropdown
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set1ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m1g1h+"/"+this.m1g1a+"/"+this.m1g2h+"/"+this.m1g2a+"/"+this.m1g3h+"/"+this.m1g3a+"/"+this.m1g4h+"/"+this.m1g4a, true);
+                    xhttp.send();
+                },
+                //this function updates the set between hplayer1 and aplayer2
+                postSingleSet2: function () {
+
+                    var global =this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("second post done")
+                            global.postSingleSet3()
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set2ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer2IDsingles+"/"+this.m2g1h+"/"+this.m2g1a+"/"+this.m2g2h+"/"+this.m2g2a+"/"+this.m2g3h+"/"+this.m2g3a+"/"+this.m2g4h+"/"+this.m2g4a, true);
+                    xhttp.send();
+                },
+
+                postSingleSet3: function () {
+
+                    var global =this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("third post done")
+                            global.postSingleSet4()
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set3ID+"/"+this.hPlayer2IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m3g1h+"/"+this.m3g1a+"/"+this.m3g2h+"/"+this.m3g2a+"/"+this.m3g3h+"/"+this.m3g3a+"/"+this.m3g4h+"/"+this.m3g4a, true);
+                    xhttp.send();
+                },
+
+                postSingleSet4: function () {
+                    var global =this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("fourth post done")
+
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set4ID+"/"+this.hPlayer2IDsingles+"/"+this.aPlayer2IDsingles+"/"+this.m4g1h+"/"+this.m4g1a+"/"+this.m4g2h+"/"+this.m4g2a+"/"+this.m4g3h+"/"+this.m4g3a+"/"+this.m4g4h+"/"+this.m4g4a, true);
+                    xhttp.send();
+                },
+
+                setSelectedPlayerIDs: function () {
                     if(typeof this.singlesHP1 == "string"){
                         for (var i = 0; i < this.hPlayers.length; i++){
                             // look for the entry with a matching `code` value
@@ -470,11 +530,23 @@
                     }
 
                     //finds the ID of home player 2
+                    if(typeof this.singlesHP2 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.singlesHP2){
+                                this.hPlayer2IDsingles = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.hPlayer2IDsingles = this.singlesHP2.id
+                    }
+
+                    //finds the ID of away player player 1
                     if(typeof this.singlesAP1 == "string"){
                         for (var i = 0; i < this.aPlayers.length; i++){
                             // look for the entry with a matching `code` value
                             if (this.aPlayers[i].name == this.singlesAP1){
-                                this.aPlayer1IDsingles = this.aPlayers[i].id
+                                this.aPlayer1IDsingles = this.aPlayers[i].id;
 
                             }
                         }
@@ -482,18 +554,17 @@
                         this.aPlayer1IDsingles = this.singlesAP1.id;
                     }
 
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
-                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            //console.log(this.responseText);
-                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
-                            //var data = vueApp.parseMatchesInfo(this.responseText);
-                            //global.refreshDropdowns();
+                    //finds the ID of away player 2
+                    if(typeof this.singlesAP2 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.singlesAP2){
+                                this.aPlayer2IDsingles = this.aPlayers[i].id
+                            }
                         }
-                    };
-
-                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set1ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m1g1h+"/"+this.m1g1a+"/"+this.m1g2h+"/"+this.m1g2a+"/"+this.m1g3h+"/"+this.m1g3a+"/"+this.m1g4h+"/"+this.m1g4a, true);
-                    xhttp.send();
+                    }else { //if the dropdown value was changed
+                        this.aPlayer2IDsingles = this.singlesAP2.id;
+                    }
                 },
 
 
