@@ -64,9 +64,9 @@
                 </tr>
                 <tr>
                     <td class="cell-border title-text">{{hteam}}</td>
-                    <td class="cell-border title-text">{{hTeamTitleScore}}</td>
+                    <td class="cell-border title-text">{{finalHomeScore}}</td>
                     <td class="cell-border ">VS</td>
-                    <td class="cell-border title-text">{{aTeamTitleScore}}</td>
+                    <td class="cell-border title-text">{{finalAwayScore}}</td>
                     <td class="cell-border title-text">{{ateam}}</td>
                 </tr>
                 <tr >
@@ -456,7 +456,7 @@
                     <td></td>
                     <td align="center" class="totalscorecell" >{{finalHomeScore}}</td>
                     <td></td>
-                    <td align="center" class="totalscorecell" > {{finalAwayScore}}</td>
+                    <td align="center" class="totalscorecell" >{{finalAwayScore}}</td>
                 </tr>
             </table>
         </div>
@@ -710,6 +710,7 @@
                             //console.log(this.responseText);
                             console.log("All the post requests for the data are sent")
                             location.reload();
+
                         }
                     };
 
@@ -915,36 +916,55 @@
                         this.ahandicap = +this.singlesAHandicap +  +this.doublesAHandicap;
 
                         //singles! calculate if and how much compensation is needed
+
+                        this.hCompensation = 0 //before calculating the compensation to send, we need to clear it so the end score calculated here is not double the actual compensation
+                        this.aCompensation = 0
                         var handicapsArr = [
                             [this.singlesHP1handicap, this.singlesAP1handicap],
                             [this.singlesHP1handicap, this.singlesAP2handicap],
                             [this.singlesHP2handicap, this.singlesAP1handicap],
                             [this.singlesHP2handicap, this.singlesAP2handicap]
                         ];
-                        for (var i = 0; i <4; i++){
-                            if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
-                                this.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
-                            }else {
-                                if (handicapsArr[i][1] - handicapsArr[i][0]>7){
-                                    this.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+                        for (var i = 0; i <4; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                    this.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                                }else {
+
+                                    this.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
                                 }
+
                             }
                         }
 
+                        this.doublesHHandicap1 = this.doublesHP1handicapMatch1 + this.doublesHP2handicapMatch1;
+                        this.doublesHHandicap2 = this.doublesHP1handicapMatch2 + this.doublesHP2handicapMatch2;
+                        this.doublesAHandicap1 = this.doublesAP1handicapMatch1 + this.doublesAP2handicapMatch1;
+                        this.doublesAHandicap2 = this.doublesAP1handicapMatch2 + this.doublesAP2handicapMatch2;
                         // doubles compensation is added here
                         var handicapsArr = [
-                            [this.doublesHHandicap1, this.doublesAHandicap1],
-                            [this.doublesHHandicap1, this.doublesAHandicap2],
-                            [this.doublesHHandicap2, this.doublesAHandicap1],
-                            [this.doublesHHandicap2, this.doublesAHandicap2]
+                            [this.doublesHHandicap1/2, this.doublesAHandicap1/2],
+                            [this.doublesHHandicap2/2, this.doublesAHandicap2/2]
+
                         ];
-                        for (var i = 0; i <4; i++){
-                            if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
-                                this.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
-                            }else {
-                                if (handicapsArr[i][1] - handicapsArr[i][0]>7){
-                                    this.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+                        //alert(this.doublesHHandicap1/2+"  "+ this.doublesAHandicap1/2)
+                        for (var i = 0; i <2; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //if home is the stronger team
+
+                                    this.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+
+                                }else {
+
+                                    //alert(this.aCompensation)
+                                    this.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
+                                    //alert(this.aCompensation)
                                 }
+
                             }
                         }
 
@@ -953,10 +973,10 @@
                         this.awayscore = this.awayScore1 + this.awayScore2 + this.adoubles ;
 
                         //total score after handicap and compensation
-                        alert(this.hCompensation)
+                        //alert("compensation sent: "+this.aCompensation)
                         this.finalHomeScore = this.homeScore1 + this.homeScore2 + this.hdoubles + this.hhandicap + this.hCompensation;
                         this.finalAwayScore = this.awayScore1 + this.awayScore2 + this.adoubles + this.ahandicap + this.aCompensation;
-                        alert(this.finalHomeScore+"-"+this.finalAwayScore)
+                        //alert(this.finalHomeScore+"-"+this.finalAwayScore)
                     },
 
                 //fetches the scores of all the sets
@@ -1061,16 +1081,20 @@
                             [niko.singlesHP2handicap, niko.singlesAP1handicap],
                             [niko.singlesHP2handicap, niko.singlesAP2handicap]
                         ];
-                        for (var i = 0; i <4; i++){
-                            if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
-                                niko.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
-                            }else {
-                                if (handicapsArr[i][1] - handicapsArr[i][0]>7){
-                                    niko.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+                        for (var i = 0; i <4; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                    niko.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                                }else {
+
+                                    niko.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
                                 }
+
                             }
                         }
-
                         niko.updateDoublesScores(matchID);
                     }
 
@@ -1126,14 +1150,6 @@
                         niko.doublesAP2match2 = json[1].aplayer2;
                         niko.doublesAP2handicapMatch2 = json[1].ahandicap2;
 
-                        niko.doublesHHandicap1 = niko.doublesHP1handicapMatch1 + niko.doublesHP2handicapMatch1;
-                        niko.doublesHHandicap2 = niko.doublesHP1handicapMatch2 + niko.doublesHP2handicapMatch2;
-                        niko.doublesAHandicap1 = niko.doublesAP1handicapMatch1 + niko.doublesAP2handicapMatch1;
-                        niko.doublesAHandicap2 = niko.doublesAP1handicapMatch2 + niko.doublesAP2handicapMatch2;
-
-                        niko.doublesHHandicap = (niko.doublesHHandicap1)*2 + (niko.doublesHHandicap2)*2;
-                        niko.doublesAHandicap = (niko.doublesAHandicap1)*2 + (niko.doublesAHandicap2)*2;
-
                         niko.m5g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
                         niko.m5g2h = json[0].g2h;
                         niko.m5g3h = json[0].g3h;
@@ -1159,26 +1175,46 @@
                         niko.adoublesMatch2 = niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
                         niko.hdoubles = niko.hdoublesMatch1 + niko.hdoublesMatch2;
                         niko.adoubles = niko.adoublesMatch1 + niko.adoublesMatch2;
-                            //total handicap is set here
+
+                        //doubles handicaps are set here
+                        niko.doublesHHandicap1 = niko.doublesHP1handicapMatch1 + niko.doublesHP2handicapMatch1;
+                        niko.doublesHHandicap2 = niko.doublesHP1handicapMatch2 + niko.doublesHP2handicapMatch2;
+                        niko.doublesAHandicap1 = niko.doublesAP1handicapMatch1 + niko.doublesAP2handicapMatch1;
+                        niko.doublesAHandicap2 = niko.doublesAP1handicapMatch2 + niko.doublesAP2handicapMatch2;
+
+                        niko.doublesHHandicap = (niko.doublesHHandicap1)*2 + (niko.doublesHHandicap2)*2;
+                        niko.doublesAHandicap = (niko.doublesAHandicap1)*2 + (niko.doublesAHandicap2)*2;
+
+                        //total handicap is set here
                         niko.hhandicap = niko.singlesHHandicap +  niko.doublesHHandicap;
                         niko.ahandicap = niko.singlesAHandicap +  niko.doublesAHandicap;
 
-                        //compensation is added here
+                        //doubles compensation is added here
                         var handicapsArr = [
-                            [niko.doublesHHandicap1, niko.doublesAHandicap1],
-                            [niko.doublesHHandicap1, niko.doublesAHandicap2],
-                            [niko.doublesHHandicap2, niko.doublesAHandicap1],
-                            [niko.doublesHHandicap2, niko.doublesAHandicap2]
+                            [niko.doublesHHandicap1/2, niko.doublesAHandicap1/2],
+                            [niko.doublesHHandicap1/2, niko.doublesAHandicap2/2]
                         ];
-                        for (var i = 0; i <4; i++){
-                            if (handicapsArr[i][0] - handicapsArr[i][1] >7 ){
-                                niko.hCompensation += (handicapsArr[0][1] - handicapsArr[0][0] - 7)*4; //compensation is added for the home team
-                            }else {
-                                if (handicapsArr[i][1] - handicapsArr[i][0]>7){
-                                    niko.aCompensation += (handicapsArr[0][0] - handicapsArr[0][1] - 7)*4; //compensation is added for the home team
+
+                       //this will calulate the doubles compensation
+                        for (var i = 0; i <2; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                    niko.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                                }else {
+
+                                    niko.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
                                 }
+
                             }
                         }
+
+
+
+
+
                         //total score before handicap and compensation
                         niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles ;
                         niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles ;
@@ -1213,7 +1249,7 @@
 
                 //this updates the score, remember it must be called after the addup function because it sets the full home score and away score
                 updateScore: function(matchid){
-                        alert(this.finalHomeScore+"-"+this.finalAwayScore);
+
                         var score = this.finalHomeScore+"-"+this.finalAwayScore;
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
@@ -1286,6 +1322,14 @@
 
                 this.updatesAllScores(localStorage.getItem("matchID"));
                 this.updateMatchInfo(localStorage.getItem("matchID"));
+                this.addup();
+//                this.updateDate(this.date,this.matchID);
+                var global = this
+                setTimeout(function (){
+
+                    global.updateScore(global.matchID);
+                }, 1000); // How long do you want the delay to be (in milliseconds)?
+
 
             }
         })
