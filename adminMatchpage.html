@@ -54,7 +54,7 @@
                 <input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="date" placeholder="YYYY-MM-DD">
             </p>
 
-            <table >                                                                                                     <!-- This is the top table containing the team names and so on-->
+            <table>                                                                                                     <!-- This is the top table containing the team names and so on-->
                 <tr >
                     <td class="cell-border center">Home</td>
                     <td></td>
@@ -101,6 +101,7 @@
                     <td style="width: 250px"></td>
                     <td style="width: 20px"></td>
                     <td style="width: 40px"></td>
+                    <td style="width: 10px"></td>
                     <td style="width: 40px"></td>
                 </tr>
                 <tr>
@@ -109,6 +110,7 @@
                     <td colspan="2" class="teamnamecell" align="center"><b>{{ateam}}</b></td>
                     <td></td>
                     <td align="center" style="width: 50px">Home</td>
+                    <td></td>
                     <td align="center" style="width: 50px">Away</td>
                 </tr>
                 <tr>
@@ -121,6 +123,7 @@
                         <v-select v-model="singlesAP2"  label="name" :options="aPlayers" ></v-select>
                     </td>
                     <!--<span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span>   shows the handicap-->
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -205,6 +208,7 @@
                     </td>
                     <td ></td>
                     <td align="center" class="totalscorecell"  >{{homeScore1}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell"  >{{awayScore1}}</td>
                 </tr>
                 <tr >
@@ -284,6 +288,7 @@
                     </td>
                     <td ></td>
                     <td align="center" class="totalscorecell" id="homepart2">{{homeScore2}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" id="awaypart2">{{awayScore2}}</td>
                 </tr>
             </table>
@@ -297,6 +302,7 @@
                     <td style="width: 250px"></td>
                     <td style="width: 20px"></td>
                     <td  style="width: 40px"></td>
+                    <td style="width: 10px"></td>
                     <td  style="width: 40px"></td>
                 </tr>
 
@@ -311,6 +317,7 @@
                         <v-select  v-model="doublesAP1match2"  label="name" :options="aPlayers" ></v-select>
                         <v-select  v-model="doublesAP2match2"  label="name" :options="aPlayers" ></v-select>
                     </td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -360,8 +367,9 @@
                     </td>
                     <td></td>
                     <td ></td>
-                    <td align="center" class="totalscorecell"  >-</td>
-                    <td align="center" class="totalscorecell"  >-</td>
+                    <td align="center" class="totalscorecell">{{hdoublesMatch1}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell">{{adoublesMatch1}}</td>
                 </tr>
 
                 <tr>
@@ -408,18 +416,26 @@
                     </td>
 
                     <td ></td>
-                    <td align="center" class="totalscorecell"  >{{hdoubles}}</td>
-                    <td align="center" class="totalscorecell"  >{{adoubles}}</td>
+                    <td align="center" class="totalscorecell"  >{{hdoublesMatch2}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell"  >{{adoublesMatch2}}</td>
                 </tr>
-
                 <tr>
-
                     <td colspan="2"></td>
-
+                    <td></td>
+                    <td style="text-align: right">Total Score:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{homescore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{awayscore}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
                     <td></td>
                     <td style="text-align: right">Handicap:</td>                                                    <!-- Fix the styling> -->
                     <td></td>
                     <td align="center" class="totalscorecell" >{{hhandicap}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" >{{ahandicap}}</td>
                 </tr>
                 <tr>
@@ -429,16 +445,18 @@
                     <td style="text-align: right">Compensation:</td>                                                <!-- Fix the styling> -->
                     <td ></td>
                     <td align="center" class="totalscorecell" >{{hCompensation}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" >{{aCompensation}}</td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
 
                     <td></td>
-                    <td style="text-align: right">Total:</td>                                                <!-- Fix the styling> -->
+                    <td style="text-align: right">Final Score:</td>                                                <!-- Fix the styling> -->
                     <td></td>
-                    <td align="center" class="totalscorecell" >{{homescore}}</td>
-                    <td align="center" class="totalscorecell" >{{awayscore}}</td>
+                    <td align="center" class="totalscorecell" >{{finalHomeScore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" > {{finalAwayScore}}</td>
                 </tr>
             </table>
         </div>
@@ -453,7 +471,7 @@
             el: '#app',
             data: {
 
-                x:null,
+                x:null, //this is for testing purposes
 
                 //the full json of each query
                 matchInfo:[],    //the json of the matchinfo like the teams competing, date and score
@@ -498,8 +516,12 @@
                 hTeamTitleScore : 0,
                 aTeamTitleScore : 0,
 
+                //the scores before hanidap and compensation appied
                 homescore: 0,
                 awayscore: 0,
+                //the scores after hanidap and compensation appied
+                finalHomeScore:0,
+                finalAwayScore:0,
 
                 singlesHHandicap:0,
                 singlesAHandicap:0,
@@ -581,11 +603,19 @@
                 homeScore2:0,
                 awayScore1:0,
                 awayScore2:0,
+
+                hdoublesMatch1:0,
+                hdoublesMatch2:0,
+                adoublesMatch1:0,
+                adoublesMatch2:0,
+
+                //not sure if these are needed
                 hdoubles:0,
                 adoubles:0
             },
 
             methods: {
+                //this function starts a chain of functions that post any data that could have been changed back into the database
                 postSinglesSets: function () {
                     var global =this;
 
@@ -873,8 +903,12 @@
                         this.awayScore1 = +this.m1g1a + +this.m1g2a + +this.m1g3a + +this.m1g4a + +this.m2g1a + +this.m2g2a + +this.m2g3a + +this.m2g4a;
                         this.homeScore2 = +this.m3g1h + +this.m3g2h + +this.m3g3h + +this.m3g4h + +this.m4g1h + +this.m4g2h + +this.m4g3h + +this.m4g4h;
                         this.awayScore2 = +this.m3g1a + +this.m3g2a + +this.m3g3a + +this.m3g4a + +this.m4g1a + +this.m4g2a + +this.m4g3a + +this.m4g4a;
-                        this.hdoubles =   +this.m5g1h + +this.m5g2h + +this.m5g3h + +this.m5g4h + +this.m6g1h + +this.m6g2h + +this.m6g3h + +this.m6g4h;
-                        this.adoubles =   +this.m5g1a + +this.m5g2a + +this.m5g3a + +this.m5g4a + +this.m6g1a + +this.m6g2a + +this.m6g3a + +this.m6g4a;
+                        this.hdoublesMatch1 =   +this.m5g1h + +this.m5g2h + +this.m5g3h + +this.m5g4h;
+                        this.hdoublesMatch2 =   +this.m6g1h + +this.m6g2h + +this.m6g3h + +this.m6g4h;
+                        this.adoublesMatch1 =   +this.m5g1a + +this.m5g2a + +this.m5g3a + +this.m5g4a;
+                        this.adoublesMatch2 =   +this.m6g1a + +this.m6g2a + +this.m6g3a + +this.m6g4a;
+                        this.hdoubles =  this.hdoublesMatch1 + +this.hdoublesMatch2;
+                        this.adoubles =  this.adoublesMatch1 + +this.adoublesMatch2;
                         //alert(this.m1g1h);
                         //total handicap is set here
                         this.hhandicap = +this.singlesHHandicap +  +this.doublesHHandicap;
@@ -914,9 +948,15 @@
                             }
                         }
 
-                        //total score is calculated here
-                        this.homescore = +this.homeScore1 + +this.homeScore2 + +this.hdoubles + +this.hhandicap;
-                        this.awayscore = +this.awayScore1 + +this.awayScore2 + +this.adoubles + +this.ahandicap;
+                        //total score before handicap and compensation
+                        this.homescore = this.homeScore1 + this.homeScore2 + this.hdoubles ;
+                        this.awayscore = this.awayScore1 + this.awayScore2 + this.adoubles ;
+
+                        //total score after handicap and compensation
+                        alert(this.hCompensation)
+                        this.finalHomeScore = this.homeScore1 + this.homeScore2 + this.hdoubles + this.hhandicap + this.hCompensation;
+                        this.finalAwayScore = this.awayScore1 + this.awayScore2 + this.adoubles + this.ahandicap + this.aCompensation;
+                        alert(this.finalHomeScore+"-"+this.finalAwayScore)
                     },
 
                 //fetches the scores of all the sets
@@ -1112,10 +1152,14 @@
                         niko.m6g3a = json[1].g3a;
                         niko.m6g4a = json[1].g4a;
 
-                        niko.hdoubles = niko.m5g1h + niko.m5g2h + niko.m5g3h + niko.m5g4h + niko.m6g1h + niko.m6g2h + niko.m6g3h + niko.m6g4h;
-                        niko.adoubles = niko.m5g1a + niko.m5g2a + niko.m5g3a + niko.m5g4a + niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
-
-                        //total handicap is set here
+                        //the doubles score are assigned here
+                        niko.hdoublesMatch1 = niko.m5g1h + niko.m5g2h + niko.m5g3h + niko.m5g4h ;
+                        niko.hdoublesMatch2 = niko.m6g1h + niko.m6g2h + niko.m6g3h + niko.m6g4h;
+                        niko.adoublesMatch1 = niko.m5g1a + niko.m5g2a + niko.m5g3a + niko.m5g4a ;
+                        niko.adoublesMatch2 = niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
+                        niko.hdoubles = niko.hdoublesMatch1 + niko.hdoublesMatch2;
+                        niko.adoubles = niko.adoublesMatch1 + niko.adoublesMatch2;
+                            //total handicap is set here
                         niko.hhandicap = niko.singlesHHandicap +  niko.doublesHHandicap;
                         niko.ahandicap = niko.singlesAHandicap +  niko.doublesAHandicap;
 
@@ -1135,9 +1179,13 @@
                                 }
                             }
                         }
-                        //total score is calculated here
-                        niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
-                        niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles +niko.ahandicap + niko.aCompensation;
+                        //total score before handicap and compensation
+                        niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles ;
+                        niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles ;
+
+                        //total score after handicap and compensation
+                        niko.finalHomeScore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
+                        niko.finalAwayScore = niko.awayScore1 + niko.awayScore2 + niko.adoubles + niko.ahandicap + niko.aCompensation;
 
 
                     }
@@ -1165,8 +1213,8 @@
 
                 //this updates the score, remember it must be called after the addup function because it sets the full home score and away score
                 updateScore: function(matchid){
-
-                        var score = this.homescore+"-"+this.awayscore;
+                        alert(this.finalHomeScore+"-"+this.finalAwayScore);
+                        var score = this.finalHomeScore+"-"+this.finalAwayScore;
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                             if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {

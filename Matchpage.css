@@ -79,8 +79,8 @@ td.center {
 }
 
 table, th, td {
-    /*border: 1px solid black;*/
     font-size: 16px;
+    /*border: 1px solid black;*/
 }
 
 .form-control {
@@ -89,12 +89,12 @@ table, th, td {
 .tableContainer {
     width: 1010px;
     margin:0 auto;
+
 }
 .scoreInputBox{
     font-family: Roboto;
     width: 18px;
     margin: 0;
     padding: 0;
-    /*border: 0;*/
 }
 

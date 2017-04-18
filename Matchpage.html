@@ -85,6 +85,7 @@
                     <td style="width: 250px"></td>
                     <td style="width: 20px"></td>
                     <td style="width: 40px"></td>
+                    <td style="width: 10px"></td>
                     <td style="width: 40px"></td>
                 </tr>
                 <tr>
@@ -93,6 +94,7 @@
                     <td colspan="2" class="teamnamecell" align="center"><b>{{ateam}}</b></td>
                     <td></td>
                     <td align="center" style="width: 50px">Home</td>
+                    <td></td>
                     <td align="center" style="width: 50px">Away</td>
                 </tr>
                 <tr >
@@ -100,6 +102,7 @@
                     <td></td>
                     <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP1handicap">{{singlesAP1}}</span> </td>
                     <td align="center" class="teamnamecell"> <span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -150,6 +153,7 @@
                     </td>
                     <td ></td>
                     <td align="center" class="totalscorecell"  >{{homeScore1}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell"  >{{awayScore1}}</td>
                 </tr>
                 <tr >
@@ -194,6 +198,7 @@
                     </td>
                     <td ></td>
                     <td align="center" class="totalscorecell" id="homepart2">{{homeScore2}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" id="awaypart2">{{awayScore2}}</td>
                 </tr>
 
@@ -208,6 +213,7 @@
                     <td style="width: 250px"></td>
                     <td style="width: 20px"></td>
                     <td  style="width: 40px"></td>
+                    <td style="width: 10px"></td>
                     <td  style="width: 40px"></td>
                 </tr>
 
@@ -216,6 +222,7 @@
 
                     <td  class="teamnamecell">  <span class="mdl-badge" v-bind:data-badge="doublesAHandicap1">{{doublesAP1match1}} & {{doublesAP2match1}} </span></td>
                     <td  class="teamnamecell">  <span class="mdl-badge" v-bind:data-badge="doublesAHandicap2">{{doublesAP1match2}} & {{doublesAP2match2}} </span></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -246,8 +253,9 @@
                     </td>
                     <td></td>
                     <td ></td>
-                    <td align="center" class="totalscorecell"  >-</td>
-                    <td align="center" class="totalscorecell"  >-</td>
+                    <td align="center" class="totalscorecell"  >{{hdoublesMatch1}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell"  >{{adoublesMatch1}}</td>
                 </tr>
 
                 <tr>
@@ -275,18 +283,26 @@
                     </td>
 
                     <td ></td>
-                    <td align="center" class="totalscorecell"  >{{hdoubles}}</td>
-                    <td align="center" class="totalscorecell"  >{{adoubles}}</td>
+                    <td align="center" class="totalscorecell"  >{{hdoublesMatch2}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell"  >{{adoublesMatch2}}</td>
                 </tr>
-
                 <tr>
-
                     <td colspan="2"></td>
-
+                    <td></td>
+                    <td style="text-align: right">Total Score:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{homescore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{awayscore}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
                     <td></td>
                     <td style="text-align: right">Handicap:</td>                                                    <!-- Fix the styling> -->
                     <td></td>
                     <td align="center" class="totalscorecell" >{{hhandicap}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" >{{ahandicap}}</td>
                 </tr>
                 <tr>
@@ -296,16 +312,18 @@
                     <td style="text-align: right">Compensation:</td>                                                <!-- Fix the styling> -->
                     <td ></td>
                     <td align="center" class="totalscorecell" >{{hCompensation}}</td>
+                    <td></td>
                     <td align="center" class="totalscorecell" >{{aCompensation}}</td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
 
                     <td></td>
-                    <td style="text-align: right">Total:</td>                                                <!-- Fix the styling> -->
+                    <td style="text-align: right">Final Score:</td>                                                <!-- Fix the styling> -->
                     <td></td>
-                    <td align="center" class="totalscorecell" >{{homescore}}</td>
-                    <td align="center" class="totalscorecell" >{{awayscore}}</td>
+                    <td align="center" class="totalscorecell" >{{finalHomeScore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{finalAwayScore}}</td>
                 </tr>
             </table>
         </div>
@@ -328,8 +346,12 @@
                 hTeamTitleScore : 0,
                 aTeamTitleScore : 0,
 
+                //the scores before hanidap and compensation appied
                 homescore: 0,
                 awayscore: 0,
+                //the scores after hanidap and compensation appied
+                finalHomeScore:0,
+                finalAwayScore:0,
 
                 singlesHHandicap:0,
                 singlesAHandicap:0,
@@ -411,6 +433,11 @@
                 homeScore2:0,
                 awayScore1:0,
                 awayScore2:0,
+
+                hdoublesMatch1:0,
+                hdoublesMatch2:0,
+                adoublesMatch1:0,
+                adoublesMatch2:0,
                 hdoubles:0,
                 adoubles:0
             },
@@ -615,8 +642,13 @@
                         niko.m6g3a = json[1].g3a;
                         niko.m6g4a = json[1].g4a;
 
-                        niko.hdoubles = niko.m5g1h + niko.m5g2h + niko.m5g3h + niko.m5g4h + niko.m6g1h + niko.m6g2h + niko.m6g3h + niko.m6g4h;
-                        niko.adoubles = niko.m5g1a + niko.m5g2a + niko.m5g3a + niko.m5g4a + niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
+                        //the doubles score are assigned here
+                        niko.hdoublesMatch1 = niko.m5g1h + niko.m5g2h + niko.m5g3h + niko.m5g4h ;
+                        niko.hdoublesMatch2 = niko.m6g1h + niko.m6g2h + niko.m6g3h + niko.m6g4h;
+                        niko.adoublesMatch1 = niko.m5g1a + niko.m5g2a + niko.m5g3a + niko.m5g4a ;
+                        niko.adoublesMatch2 = niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
+                        niko.hdoubles = niko.hdoublesMatch1 + niko.hdoublesMatch2;
+                        niko.adoubles = niko.adoublesMatch1 + niko.adoublesMatch2;
 
                         //total handicap is set here
                         niko.hhandicap = niko.singlesHHandicap +  niko.doublesHHandicap;
@@ -638,9 +670,13 @@
                                 }
                             }
                         }
-                        //total score is calculated here
-                        niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
-                        niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles +niko.ahandicap + niko.aCompensation;
+                        //total score before handicap and compensation
+                        niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles ;
+                        niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles ;
+
+                        //total score after handicap and compensation
+                        niko.finalHomeScore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
+                        niko.finalAwayScore = niko.awayScore1 + niko.awayScore2 + niko.adoubles + niko.ahandicap + niko.aCompensation;
 
 
                     }
