@@ -37,111 +37,83 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Title</span>
     </div>
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content" id="app">
         <!-- Main admin panel -->
 
             <div class="page-content">
-                <h3>Add player to a team:</h3>
-                <table class="mdl-data-table mdl-js-data-table Input-table">
-                    <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Club</th>
-                        <th class="mdl-data-table__cell--non-numeric">Team</th>
-                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
-                        <th class="mdl-data-table__cell--non-numeric"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Club 1</option>
-                                    <option value="option2">Club 2</option>
-                                    <option value="option3">Club 3</option>
-                                    <option value="option4">Club 4</option>
-                                    <option value="option5">Club 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Team 1</option>
-                                    <option value="option2">Team 2</option>
-                                    <option value="option3">Team 3</option>
-                                    <option value="option4">Team 4</option>
-                                    <option value="option5">Team 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="sample3">
-                                    <label class="mdl-textfield__label" for="sample3">Player name...</label>
-                                </div>
-                            </form>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Submit
-                            </button>
-                        </td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <h3>Create a team:</h3>
-                <table class="mdl-data-table mdl-js-data-table Input-table">
-                    <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Team</th>
-                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
-                        <th class="mdl-data-table__cell--non-numeric"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select data-dropdown" id="professsion1" name="professsion">
-                                    <option value="option1">Team 1</option>
-                                    <option value="option2">Team 2</option>
-                                    <option value="option3">Team 3</option>
-                                    <option value="option4">Team 4</option>
-                                    <option value="option5">Team 5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="sample3">
-                                    <label class="mdl-textfield__label" for="sample3">Team name...</label>
-                                </div>
-                            </form>
-                        </td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Submit
-                            </button>
-                        </td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
-
                 <h3>Create a club:</h3>
                 <table class="mdl-data-table mdl-js-data-table Input-table">
                     <tbody>
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                <label class="mdl-textfield__label" for="sample3">Club name...</label>
+                                <input class="mdl-textfield__input" type="text" id="clubName" v-model="fullClubsSelected">
+                                <!--<input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="newDate" v-on:input="updateDate($event.target.value, item.id, index)" placeholder="YYYY-MM-DD">-->
+                                <label class="mdl-textfield__label" for="clubName">Club name...</label>
                             </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="newClub(fullClubsSelected)">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+
+                <h3>Create a team:</h3>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Part of Club</th>
+                        <th class="mdl-data-table__cell--non-numeric">Team Name</th>
+                        <th class="mdl-data-table__cell--non-numeric"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <div class="mdl-selectfield mdl-js-selectfield">
+                                    <v-select label="clubName" :options="fullClubs"></v-select>
+                                </div>
+                            </td>
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <form action="#">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="sample3">
+                                        <label class="mdl-textfield__label" for="sample3">Team name...</label>
+                                    </div>
+                                </form>
+                            </td>
+                            <td class="mdl-data-table__cell--non-numeric">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Team Captain</th>
+                        <th class="mdl-data-table__cell--non-numeric">Contact Email</th>
+                        <th class="mdl-data-table__cell--non-numeric"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <v-select label="name" :options="fullPlayers"></v-select>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="contactEmail">
+                                    <label class="mdl-textfield__label" for="contactEmail">Contact Email...</label>
+                                </div>
+                            </form>
                         </td>
                         <td class="mdl-data-table__cell--non-numeric">
                             <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -151,11 +123,195 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <h3>Add player to a team:</h3>
+                <table class="mdl-data-table mdl-js-data-table Input-table">
+                    <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Team</th>
+                        <th class="mdl-data-table__cell--non-numeric">Player name</th>
+                        <th class="mdl-data-table__cell--non-numeric"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <v-select v-model="fullTeamsSelected" label="teamName" :options="fullTeams"></v-select>
+                            </div>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 150px">
+                                    <v-select v-model="fullPlayersSelected" label="name" :options="fullPlayers" ></v-select>
+                                    {{fullPlayersSelected}}
+                                </div>
+                            </form>
+                        </td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="addPlayerToTeam()">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-
-
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="test">
+            Submit
+        </button>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="refreshDropdowns">
+            Submit
+        </button>
     </main>
+
+    <script src='https://unpkg.com/vue@latest'></script>
+    <script src='https://unpkg.com/vue-select@latest'></script>
+
+    <script>
+        Vue.component('v-select', VueSelect.VueSelect)
+
+        var vueApp = new Vue ({
+            el: '#app',
+
+            data: {
+
+                fullClubs:[],
+                fullClubsSelected:null,
+
+                fullTeams:[],
+                fullTeamsSelected:null,
+
+                fullPlayers:[],
+                fullPlayersSelected:null,
+            },
+
+            methods: {
+                test: function () {
+                    var global = this;
+                    console.log(this.fullPlayersSelected.id)
+                    console.log(global.fullPlayersSelected.id)
+
+
+                },
+                //adds a new club to the database
+                newClub: function(clubName){
+                    var global = this;
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                console.log(this.responseText);
+                                global.refreshDropdowns();
+                            }
+                        };
+
+                        xhttp.open("POST", "http://178.62.9.140:3080/newClub/"+clubName, true);
+                        xhttp.send();
+                },
+
+//
+                    addPlayerToTeam: function(){
+                        var global = this;
+                        console.log(this.fullPlayersSelected.id)
+                        console.log(global.fullPlayersSelected.id)
+
+                        console.log(this.fullTeamsSelected.id)
+                        console.log(global.fullTeamsSelected.id)
+                },
+
+                createTeam: function(clubName){
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            //var data = vueApp.parseMatchesInfo(this.responseText);
+                            global.refreshDropdowns();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/", true);
+                    xhttp.send();
+                },
+
+                fetchClubs: function(){
+
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var rawdata = this.responseText;
+                            var json = JSON.parse(rawdata); //parses the query result
+
+                            global.fullClubs = json;        //stores the entire json structure that was returned
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allClubs", true);
+                    xhttp.send();
+                },
+
+                fetchTeams: function () {
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var rawdata = this.responseText;
+                            var json = JSON.parse(rawdata); //parses the query result
+
+                            global.fullTeams = json;        //stores the entire json structure that was returned
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allTeams", true);
+                    xhttp.send();
+                },
+
+                fetchPlayers: function () {
+                    var global = this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var rawdata = this.responseText;
+                            var json = JSON.parse(rawdata); //parses the query result
+
+                            global.fullPlayers = json;        //stores the entire json structure that was returned
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allPlayers", true);
+                    xhttp.send();
+                },
+
+                refreshDropdowns: function(){
+                    this.fetchClubs();
+                    this.fetchTeams();
+                    this.fetchPlayers();
+                    location.reload();
+                }
+
+            },
+            mounted: function () {
+                this.fetchClubs();
+                this.fetchTeams();
+                this.fetchPlayers();
+
+            }
+
+        })
+    </script>
 </div>
 </body>
 </html>

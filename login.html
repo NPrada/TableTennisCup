@@ -44,30 +44,75 @@
         </nav>
     </div>
 
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content" id="app">
        <div style="width:300px; margin:0 auto;">
            <h3 align="center">Login</h3>
 
            <form action="#" >
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                   <input class="mdl-textfield__input" type="text" id="username">
+                   <input class="mdl-textfield__input" type="text" id="username" v-model="username">
                    <label class="mdl-textfield__label" for="username">Username...</label>
                </div>
                <br>
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                   <input class="mdl-textfield__input" type="text" id="password">
+                   <input class="mdl-textfield__input" type="password" id="password" v-model="password">
                    <label class="mdl-textfield__label" for="password">Password...</label>
                </div>
            </form>
 
-           <a href="adminpanel.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">                             <!-- button -->
+           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" style="float: right" v-on:click="sendLoginInfo">
                Login
-           </a>
+           </button>
+           <p style="color: red" v-if="seen">The username or password is wrong</p>
        </div>
 
 
     </main>
+    <script>
 
+        var tallier = new Vue({
+            el: '#app',
+            data: {
+                username:"admin",
+                password:"",
+                seen: false
+
+            },
+
+            methods: {
+                sendLoginInfo: function () {
+
+                    var global =this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //alert(this.responseText);
+                            if (this.responseText == "true"){
+                                window.location.href = "http://178.62.9.140/adminFixtures.html";
+                            }else {
+                                global.seen = true
+                            }
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/login/"+global.username+"/"+global.password, true);
+                    xhttp.send();
+                },
+
+            },
+            created: function () {
+
+            },
+            beforeMount: function () {
+
+            },
+            mounted: function () {
+
+
+            }
+        })
+    </script>
 </div>
 </body>
 </html>

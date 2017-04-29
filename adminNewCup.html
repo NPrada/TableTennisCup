@@ -32,7 +32,7 @@
             <a href="NewCup.html" class="mdl-layout__tab is-active" >Group stage</a>
             <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
             <a href="#fixed-tab-5" class="mdl-layout__tab">Clubs</a>
-            <a href="#fixed-tab-6" class="mdl-layout__tab">Teams</a>
+            <a href="adminTeams.html" class="mdl-layout__tab">Teams</a>
             <a href="#fixed-tab-7" class="mdl-layout__tab">Players</a>
 
         </div>
@@ -51,15 +51,42 @@
     </div>
     </header>
 
-
-    <main class="mdl-layout__content">
+<div style="width: 100%; height: 100%">
+    <main style="width:80%; margin-right: 10%;margin-left: 10%" class="mdl-layout__content">
         <div id="app">
+            <h3>The cup has just started please set up the groups</h3>
+            <table style="width: 100%">
+                <tr>
+                    <td>Add team:   </td>
+                    <td colspan="2">
+                        <div class="mdl-selectfield mdl-js-selectfield">
+                            <v-select v-model="teamselected" label="teamName" :options="teams" ></v-select>
+                        </div>
+                    </td>
+                    <td style="width: 10px"></td>
+                    <td>
+                        Group Number:
+                    </td>
+                    <td>
+                        <div class="mdl-selectfield mdl-js-selectfield">
+                            <v-select v-model="groupselected" :options="['1','2','3','4','5','6','7','8']" ></v-select>
+                        </div>
+                    </td>
+                    <td style="width: 10px"></td>
+                    <td>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="addTeamToGroup(groupselected,teamselected.id)">
+                            Submit
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <br>
             <table class="layout-Table">
                 <tr>
-                    <td style="width: 40%" valign="top">
-                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">                                           <!-- fixtures cars is wrong -->
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
                             <div class="mdl-card__title">
-                                <h3 class="mdl-card__title-text" >Group 1</h3>
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 1</h3>
                             </div>
                             <!-- Group Table of Points -->
                             <div class="mdl-card__supporting-text fixtures-table-container ">
@@ -69,30 +96,22 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">1</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                        <td class="mdl-data-table__cell--non-numeric">6</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">2</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Leicester</td>
-                                        <td class="mdl-data-table__cell--non-numeric">3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">3</td>
-                                        <td class="mdl-data-table__cell--non-numeric">London</td>
-                                        <td class="mdl-data-table__cell--non-numeric">3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">4</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Loughborough</td>
-                                        <td class="mdl-data-table__cell--non-numeric">0</td>
-                                    </tr>
-                                    </tbody>
+                                    <template v-for="(item,index) in group1Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
                                 </table>
                             </div>
                             <!-- Sub menu of Group -->
@@ -101,143 +120,621 @@
                                         class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
                                     <i class="material-icons">more_vert</i>
                                 </button>
-
-
                                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                                     for="menu-group1">
                                     <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
-                                    <li disabled class="mdl-menu__item">Pick Group Winners</li>
-                                    <li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
                                 </ul>
-
-
                             </div>
                         </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 2</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group2Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group2"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group2">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 3</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group3Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group3"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group3">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td style="height: 30px"></td></tr>
+                <tr>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 4</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group4Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group4"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group4">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 5</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group5Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group5"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group5">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 6</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group6Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group6"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group6">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td style="height: 30px"></td></tr>
+                <tr>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 7</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group7Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group7"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group7">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 8</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group8Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group8"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group8">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 5%" valign="top">
+                        <div class="middle-filler"></div>
+                    </td>
+                    <td v-if="false" style="width: 30%" valign="top">
+                        <div class="fixtures-card-wide mdl-card mdl-shadow--8dp">     <!-- fixtures card csss should be group card -->
+                            <div class="mdl-card__title">
+                                <h3 style="font-size: 18px !important;" class="mdl-card__title-text" >Group 6</h3>
+                            </div>
+                            <!-- Group Table of Points -->
+                            <div class="mdl-card__supporting-text fixtures-table-container ">
+                                <table class="mdl-data-table mdl-js-data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">#</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Points</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <template v-for="(item,index) in group6Info">
+                                        <tr style="cursor: pointer">
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{index+1}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
+                                            <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
+                                            <td>
+                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                            <!-- Sub menu of Group -->
+                            <div class="mdl-card__menu">
+                                <button id="menu-group6"
+                                        class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="menu-group6">
+                                    <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
+                                    <!--<li disabled class="mdl-menu__item">Pick Group Winners</li>-->
+                                    <!--<li class="mdl-menu__item" id="show-modal" @click="showModal = true">Add teams</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        </td>
-        <td style="width: 10%" valign="top">
-            <div class="middle-filler">
-
-            </div>
-        </td>
-        <td style="width: 40%" valign="top">
-            <div class="fixtures-card-wide mdl-card mdl-shadow--8dp" v-if="show">                               <!-- IF seen here -->
-                <div class="mdl-card__title">
-                    <h3 class="mdl-card__title-text" >Group 2</h3>
-                </div>
-                <!-- Group Table of Points -->
-                <div class="mdl-card__supporting-text fixtures-table-container ">
-
-                </div>
-                <!-- Sub menu of Group -->
-                <div class="mdl-card__menu">
-                    <button id="menu-group2"
-                            class="mdl-button mdl-js-button mdl-button--icon" style="float: right;">
-                        <i class="material-icons">more_vert</i>
-                    </button>
-
-
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="menu-group2">
-                        <li class="mdl-menu__item" href="Group1.html"><a href="Group1.html" style="text-decoration: none;color: inherit">Edit Fixtures</a> </li>     <!-- FIX ME styling is bad and cant click the whole box color is slightly different -->
-                        <li disabled class="mdl-menu__item">Pick Group Winners</li>
-                        <li class="mdl-menu__item">Add teams</li>
-                    </ul>
-
-
-
-                </div>
-            </div>
-        </td>
-        </tr>
-        </table>
-
-        <div>
-            <br>
-            <button class="addGroup mdl-button mdl-js-button mdl-button--raised" v-on:click="show = !show">Add new Group</button>
-            <!-- use the modal component, pass in the prop -->
-
-        </div>
-
-        <modal v-if="showModal" @close="showModal = false">
-            <!--
-              you can use custom content here to overwrite
-              default content
-            -->
-
-        </modal>                                                          <!-- When the modal is rendered -->
+    </main>
 </div>
 
-
-<!-- HTML for the modal  -->
-<script type="text/x-template" id="modal-template">
-    <transition name="modal">
-        <div class="modal-mask">
-            <div class="modal-wrapper">
-                <div class="modal-container">
-
-                    <div class="modal-header">
-                        <slot name="header">
-                            <h2 class="mdl-card__title-text" style="color: black">Add Teams</h2>
-                        </slot>
-                    </div>
-
-                    <div class="modal-body">
-                        <slot name="body">
-                            <form style="padding: 20px">
-
-                                <div class="mdl-selectfield mdl-js-selectfield">
-                                    <select class="mdl-selectfield__select" id="professsion1" name="professsion">
-                                        <option value=""></option>
-                                        <option value="option1">Team 1</option>
-                                        <option value="option2">Team 2</option>
-                                        <option value="option3">Team 3</option>
-                                        <option value="option4">Team 4</option>
-                                        <option value="option5">Team 5</option>
-                                    </select>
-                                    <label class="mdl-selectfield__label" for="professsion1"></label>
-                                </div>
-                            </form>
-                        </slot>
-                    </div>
-
-                    <div class="modal-footer">
-                        <slot name="footer">
-
-                            <button class="mdl-button mdl-js-button mdl-button--raised" @click="$emit('close')">
-                                Close
-                            </button>
-                        </slot>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </transition>
-</script>
-
-
-
-<!-- app -->                                                                                                    <!-- outdated/ useless maybe! -->
-
+<script src='https://unpkg.com/vue-select@latest'></script>
 <script>
 
-    // register modal component
-    Vue.component('modal', {
-        template: '#modal-template'
-    })
+    Vue.component('v-select', VueSelect.VueSelect);
 
     // start app
     new Vue({
         el: '#app',
         data: {
             showModal: false,
-            show: false
+            show: false,
+            //teams:"hahah",
+            teams:[],
+            //teamsFull: [],
+            teamselected: null,
+            groupselected:null,
+
+
+            allTeamsSelected:null,
+
+            group1Info:"error",
+            group2Info:"error",
+            group3Info:"error",
+            group4Info:"error",
+            group5Info:"error",
+            group6Info:"error",
+            group7Info:"error",
+            group8Info:"error",
+
+            selected: "hhss",
+
+            sortedTeams:[],
+            x: 0,
+
+
+            groupNumbers: ["1","2"]
+
+        },
+
+        methods: {
+            fetchTeams: function () {
+                var global = this;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log(this.responseText);
+                        //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                        var rawdata = this.responseText;
+                        var json = JSON.parse(rawdata); //parses the query result
+
+                        global.teams = json;        //stores the entire json structure that was returned
+                        global.teamsFull = json;
+                    }
+                };
+
+                xhttp.open("GET", "http://178.62.9.140:3080/2playerTeams", true);
+                xhttp.send();
+            },
+
+            addTeamToGroup: function (groupNum,teamID) {   //adds a team to a group
+                //console.log(groupNum,teamID)
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+
+                        location.reload();
+                    }
+                };
+
+                xhttp.open("POST", "http://178.62.9.140:3080/addTeamToGroup/"+groupNum+"/"+teamID, true);
+                xhttp.send();
+            },
+
+            removeFromGroup: function (teamID) { //removes the a team from the groupstage
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+
+                        location.reload();
+                    }
+                };
+
+                xhttp.open("POST", "http://178.62.9.140:3080/removeFromGroup/"+teamID, true);
+                xhttp.send();
+            },
+            fetchGroupInfo: function (groupNum) {
+                var global = this;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log(this.responseText);
+
+                        var rawdata = this.responseText;
+                        var json = JSON.parse(rawdata); //parses the query result
+                        switch (groupNum) {
+                            case 1:global.group1Info = json;break;
+                            case 2:global.group2Info = json;break;
+                            case 3:global.group3Info = json;break;
+                            case 4:global.group4Info = json;break;
+                            case 5:global.group5Info = json;break;
+                            case 6:global.group6Info = json;break;
+                            case 7:global.group7Info = json;break;
+                            case 8:global.group8Info = json;
+                        }
+                    }
+                };
+                xhttp.open("GET", "http://178.62.9.140:3080/groupInfo/"+groupNum, true);
+                xhttp.send();
+            },
+            updateDropdown: function () { //this function removes the teams that have already been assigned to a group
+
+                var i = 0;
+
+                for (var g1=0;g1<this.group1Info.length;g1++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group1Info[g1].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+
+                for (var g2=0;g2<this.group2Info.length;g2++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group2Info[g2].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+
+                for (var g3=0;g3<this.group3Info.length;g3++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group3Info[g3].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+                for (var g4=0;g4<this.group4Info.length;g4++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group4Info[g4].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+                for (var g5=0;g5<this.group5Info.length;g5++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group5Info[g5].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+                for (var g6=0;g6<this.group6Info.length;g6++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group6Info[g6].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+
+                for (var g7=0;g7<this.group7Info.length;g7++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group7Info[g7].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+                for (var g8=0;g8<this.group8Info.length;g8++){
+                    for(i=0;i<this.teams.length;i++){
+                        if (this.teams[i].id == this.group8Info[g8].teamID){
+                            this.teams.splice(i,1)  //removes the team from the array
+                            i=0;
+                        }
+                    }
+                }
+            }
+        },
+        created: function () {
+
+            this.fetchGroupInfo(1);
+            this.fetchGroupInfo(2);
+            this.fetchGroupInfo(3);
+            this.fetchGroupInfo(4);
+            this.fetchGroupInfo(5);
+            this.fetchGroupInfo(6);
+            this.fetchGroupInfo(7);
+            this.fetchGroupInfo(8);
+
+            //console.log(this.group1Info);
+            this.fetchTeams();
+
+        },
+        mounted: function () {
+                var global= this;
+            setTimeout(function() { global.updateDropdown(); }, 1000);
         }
 
     })
-
 </script>
-</main>
 </div>
 </body>
 </html>

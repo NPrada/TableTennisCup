@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "my final year project ",
   "main": "dbconnect.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "node": "^0.0.0",
-    "vue": "^2.2.6"
+    "password-hash": "^1.2.2",
+    "vue": "^2.2.6",
+    "vue-select": "^2.2.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "babel-cli": "^6.24.1"
   },
   "repository": {
     "type": "git",

@@ -32,7 +32,7 @@
                 <a class="mdl-navigation__link" href="login.html">Login</a>
             </nav>
         </div>
-    </header>                                                                                                           <!-- FIX ME -->
+    </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
@@ -89,116 +89,75 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td colspan="2" class="title-text" align="center">Loughborough</td>
+                    <td colspan="2" class="teamnamecell" align="center"><b>Loughborough</b></td>
                     <td></td>
-                    <td>Home</td>
-                    <td>Away</td>
+                    <td align="center" style="width: 50px">Home</td>
+                    <td align="center" style="width: 50px">Away</td>
                 </tr>
                 <tr >
                     <td ></td>
                     <td></td>
-                    <td align="center">  Gareth Liughing </td>
-                    <td align="center">  Riccardo boscherini</td>
+                    <td align="center" class="teamnamecell">  Gareth Liughing </td>
+                    <td align="center" class="teamnamecell">  Riccardo boscherini</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" > Leicester</td>
-                    <td> Player 1</td>
+                    <td rowspan="2" class="teamnamecell"> <b>Loughborough</b></td>
+                    <td class="teamnamecell"> Robert Davis</td>
 
                     <!-- Match 1:  player 1 VS player 1-->
-                    <td>
-
-                        <table class="game-table" v-bind:class="{ active: m1g1h < m1g1a, greentrue: m1g1h > m1g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g1a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m1g2h < m1g2a, greentrue: m1g2h > m1g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m1g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g2a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m1g3h < m1g3a, greentrue: m1g3h > m1g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g3a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m1g4h < m1g4a, greentrue: m1g4h > m1g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m1g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m1g4a}}</td> <td class="e"></td></tr>
-                        </table>
-
+                    <td class="setcell">
+                        <template v-for="(score, index) in set1[0].home">
+                            <table class="game-table" v-bind:class="{ active: set1[0].home[index] < set1[1].away[index], greentrue: set1[0].home[index] > set1[1].away[index] }">
+                                <tr><td class="e"></td><td class="t" align="right">{{set1[0].home[index]}}</td></tr>
+                                <tr><td class="b" align="left">{{set1[1].away[index]}}</td> <td class="e"></td></tr>
+                            </table>
+                        </template>
                     </td>
                     <!-- Match 2:  player 1 VS player 2-->
-                    <td>
-                        <table class="game-table" v-bind:class="{ active: m2g1h < m2g1a, greentrue: m2g1h > m2g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m2g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g1a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m2g2h < m2g2a, greentrue: m2g2h > m2g2a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m2g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g2a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m2g3h < m2g3a, greentrue: m2g3h > m2g3a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m2g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m2g3a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m2g4h < m2g4a, greentrue: m2g4h > m2g4a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m2g4h}}</td></tr>
-                            <tr><td class="b" align="left" >{{m2g4a}}</td> <td class="e"></td></tr>
-                        </table>
+                    <td class="setcell">
+                        <template v-for="(score, index) in set2[0].home">
+                            <table class="game-table" v-bind:class="{ active: set2[0].home[index] < set2[1].away[index], greentrue: set2[0].home[index] > set2[1].away[index] }">
+                                <tr><td class="e"></td><td class="t" align="right">{{set2[0].home[index]}}</td></tr>
+                                <tr><td class="b" align="left">{{set2[1].away[index]}}</td> <td class="e"></td></tr>
+                            </table>
+                        </template>
                     </td>
-                    <td style="width: 20px"></td>
-                    <td class="scorecell" id="homepart1" ></td>
-                    <td class="scorecell" id="awaypart1" ></td>
+                    <td ></td>
+                    <td align="center" class="totalscorecell" id="homepart1" ></td>
+                    <td align="center" class="totalscorecell" id="awaypart1" ></td>
                 </tr>
                 <tr >
-                    <td>Player 2</td>
+                    <td class="teamnamecell">Riccardo boscherini</td>
                     <!-- Match 3:  player 2 VS player 1-->
-                    <td>
-                        <table class="game-table" v-bind:class="{ active: m3g1h < m3g1a, greentrue: m3g1h > m3g1a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m3g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g1a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m3g2h < m3g2a, greentrue: m3g2h > m3g2a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g2h}}</td></tr>
-                            <tr><td class="b" align="left" >{{m3g2a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m3g3h < m3g3a, greentrue: m3g3h > m3g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g3a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m3g4h < m3g4a, greentrue: m3g4h > m3g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m3g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m3g4a}}</td> <td class="e"></td></tr>
-                        </table>
+                    <td class="setcell">
+                        <template v-for="(score, index) in set3[0].home">
+                            <table class="game-table" v-bind:class="{ active: set3[0].home[index] < set3[1].away[index], greentrue: set3[0].home[index] > set3[1].away[index] }">
+                                <tr><td class="e"></td><td class="t" align="right">{{set3[0].home[index]}}</td></tr>
+                                <tr><td class="b" align="left">{{set3[1].away[index]}}</td> <td class="e"></td></tr>
+                            </table>
+                        </template>
                     </td>
                     <!-- Match 4:  player 2 VS player 2-->
-                    <td>
-                        <table class="game-table" v-bind:class="{ active: m4g1h < m4g1a, greentrue: m4g1h > m4g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g1a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m4g2h < m4g2a, greentrue: m4g2h > m4g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m4g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g2a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m4g3h < m4g3a, greentrue: m4g3h > m4g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g3a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m4g4h < m4g4a, greentrue: m4g4h > m4g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m4g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m4g4a}}</td> <td class="e"></td></tr>
-                        </table>
+                    <td class="setcell">
+                        <template v-for="(score, index) in set4[0].home">
+                            <table class="game-table" v-bind:class="{ active: set4[0].home[index] < set4[1].away[index], greentrue: set4[0].home[index] > set4[1].away[index] }">
+                                <tr><td class="e"></td><td class="t" align="right">{{set4[0].home[index]}}</td></tr>
+                                <tr><td class="b" align="left">{{set4[1].away[index]}}</td> <td class="e"></td></tr>
+                            </table>
+                        </template>
                     </td>
-                    <td style="width: 20px"></td>
-                    <td class="scorecell" id="homepart2"></td>
-                    <td class="scorecell" id="awaypart2"></td>
+                    <td ></td>
+                    <td align="center" class="totalscorecell" id="homepart2"></td>
+                    <td align="center" class="totalscorecell" id="awaypart2"></td>
                 </tr>
 
             </table>
             <br>
-            <table class="scorestable">
-                <!-- this just contains the Doubles subtitle -->
+
+            <table class="scorestable" >
+                <!-- this just contains the singles subtitle -->
                 <tr>
                     <td><a class="title-text">Doubles:</a></td>
                     <td></td>
@@ -210,83 +169,78 @@
                 <tr>
                     <td></td>
                     <td></td>
+                    <td colspan="2" class="teamnamecell" align="center"></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td align="center" style="width: 50px"></td>
+                    <td align="center" style="width: 50px"></td>
                 </tr>
-                <tr>
+                <tr >
                     <td ></td>
                     <td></td>
-                    <td align="center">  Gareth Liughing & Riccardo boscherini </td>
-                    <td >  </td>
+                    <td align="center" class="teamnamecell">  Gareth Liughing & Riccardo Boscherini </td>
+                    <td align="center" class="teamnamecell">  </td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" ></td>
-                    <td> Player 1 & Player 2</td>
+                    <td rowspan="2" class="teamnamecell"> </td>
+                    <td class="teamnamecell"> Robert Davis</td>
 
-                    <!-- Match 1:  player 1 VS player 1-->
-                    <td>
-
-                        <table class="game-table" v-bind:class="{ active: m5g1h < m5g1a, greentrue: m5g1h > m5g1a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g1h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g1a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m5g2h < m5g2a, greentrue: m5g2h > m5g2a }">
-                            <tr><td class="e"></td><td class="t" align="right" >{{m5g2h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g2a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m5g3h < m5g3a, greentrue: m5g3h > m5g3a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g3h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g3a}}</td> <td class="e"></td></tr>
-                        </table>
-                        <table class="game-table" v-bind:class="{ active: m5g4h < m5g4a, greentrue: m5g4h > m5g4a }">
-                            <tr><td class="e"></td><td class="t" align="right">{{m5g4h}}</td></tr>
-                            <tr><td class="b" align="left">{{m5g4a}}</td> <td class="e"></td></tr>
-                        </table>
-
+                    <!-- doubles Match 5:  player 1 VS player 1-->
+                    <td class="setcell">
+                        <template v-for="(score, index) in set5[0].home">
+                            <table class="game-table" v-bind:class="{ active: set5[0].home[index] < set5[1].away[index], greentrue: set5[0].home[index] > set5[1].away[index] }">
+                                <tr><td class="e"></td><td class="t" align="right">{{set5[0].home[index]}}</td></tr>
+                                <tr><td class="b" align="left">{{set5[1].away[index]}}</td> <td class="e"></td></tr>
+                            </table>
+                        </template>
                     </td>
-                    <!-- Match 2:  player 2 VS player 1-->
-
-                    <td style="width: 20px"></td>
-                    <td class="scorecell" id="hdoubles"></td>
-                    <td class="scorecell" id="adoubles"></td>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: right"><br>Handicap:</td>                                                    <!-- Fix the styling> -->
-                    <td></td>
-                    <td id="hhandicap"></td>
-                    <td id="ahandicap"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: right"><br>Compensation:</td>                                                <!-- Fix the styling> -->
+                    <!-- Match 2:  player 1 VS player 2-->
+                    <td class="setcell"></td>
                     <td ></td>
-                    <td id="hcompensation"></td>
-                    <td id="acompensation"></td>
+                    <td align="center" class="totalscorecell" id="hdoubles" ></td>
+                    <td align="center" class="totalscorecell" id="adoubles" ></td>
+                </tr>
+
+                <tr>
+
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right">Handicap:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" id="hhandicap"></td>
+                    <td align="center" class="totalscorecell" id="ahandicap"></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="text-align: right"><br>Total:</td>                                                <!-- Fix the styling> -->
-                    <td></td>
-                    <td id="homescore"></td>
-                    <td id="awayscore"></td>
+                    <td style="text-align: right">Compensation:</td>                                                <!-- Fix the styling> -->
+                    <td ></td>
+                    <td align="center" class="totalscorecell" id="hcompensation"></td>
+                    <td align="center" class="totalscorecell" id="acompensation"></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right">Total:</td>                                                <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" id="homescore"></td>
+                    <td align="center" class="totalscorecell" id="awayscore"></td>
+                </tr>
+
+
             </table>
+
         </div>
         <br>
         <div id="calc">
             <button v-on:click="addup">Calculate Score</button>
+            <button v-on:click="fetchSetScore(1)">Query</button>
+            <button v-on:click="fetchPlayerInfo(1)">Player name</button>
+
+
 
         </div>
         <script>
@@ -295,11 +249,8 @@
                 el: '#calc',
                 data: {
 
-
-
                     redtrue: true,
                     greentrue: true,
-
 
                     homescore: 0,
                     awayscore: 0,
@@ -308,50 +259,30 @@
                     hcompensation:0,
                     acompensation:0,
 
-                    m1g1h: 11,
-                    m1g1a: 2,
-                    m1g2h: 5,
-                    m1g2a: 3,
-                    m1g3h: 3,
-                    m1g3a: 6,
-                    m1g4h: 9,
-                    m1g4a: 3,
+                    set1: [                     //set1[0].home[0]
+                        { home: [5,2,3,4]},
+                        { away: [2,2,4,5]}
+                    ],
 
-                    m2g1h: 11,
-                    m2g1a: 2,
-                    m2g2h: 0,
-                    m2g2a: 11,
-                    m2g3h: 3,
-                    m2g3a: 1,
-                    m2g4h: 11,
-                    m2g4a: 3,
+                    set2: [                     //set2[0].home[0]
+                        { home: [1,2,3,4]},
+                        { away: [2,3,4,5] }
+                    ],
 
-                    m3g1h: 11,
-                    m3g1a: 2,
-                    m3g2h: 0,
-                    m3g2a: 11,
-                    m3g3h: 3,
-                    m3g3a: 0,
-                    m3g4h: 11,
-                    m3g4a: 3,
+                    set3: [                     //set2[0].home[0]
+                        { home: [1,2,3,4]},
+                        { away: [2,3,4,5] }
+                    ],
 
-                    m4g1h: 11,
-                    m4g1a: 2,
-                    m4g2h: 0,
-                    m4g2a: 0,
-                    m4g3h: 11,
-                    m4g3a: 0,
-                    m4g4h: 11,
-                    m4g4a: 3,
+                    set4: [                     //set2[0].home[0]
+                        { home: [1,2,3,4]},
+                        { away: [2,3,4,5] }
+                    ],
 
-                    m5g1h: 11,
-                    m5g1a: 2,
-                    m5g2h: 0,
-                    m5g2a: 0,
-                    m5g3h: 11,
-                    m5g3a: 0,
-                    m5g4h: 11,
-                    m5g4a: 3,
+                    set5: [                     //doubles set
+                        { home: [1,2,3,4]},
+                        { away: [2,3,4,5] }
+                    ]
 
                 },
 
@@ -398,17 +329,107 @@
 
                     },
                     scoreparser: function (rawdata) {
-
+                        //these two lines just parse the data so it can be accessed
                         var data =  rawdata;
                         var json = JSON.parse(data);                                                                    //parse json data
-                        console.log(json.id);
+                        //console.log(json.id);
 
-                        this.m1g1a = json.id;
+                        //this.m1g1a = json.id;
                     },
-                    colorsetter: function () {
 
+                    fetchSetScore: function (matchID) {
 
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.parserSetScore(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/sets/"+matchID, true);
+                        xhttp.send();
+
+                    },
+                    parserSetScore: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
+                        var data =  rawdata;
+                        var json = JSON.parse(data);
+                        console.log(json[0].g1h);
+
+                        this.set1[0].home[0] = json[0].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
+//                        set1[0].home[1] = json[0].g2h;
+//                        set1[0].home[2] = json[0].g3h;
+//                        set1[0].home[3] = json[0].g4h;
+//                        set1[1].away[0] = json[0].g1a;
+//                        set1[1].away[1] = json[0].g2a;
+//                        set1[1].away[2] = json[0].g3a;
+//                        set1[1].away[3] = json[0].g4a;
+//
+//                        set2[0].home[0] = json[1].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
+//                        set2[0].home[1] = json[1].g2h;
+//                        set2[0].home[2] = json[1].g3h;
+//                        set2[0].home[3] = json[1].g4h;
+//                        set2[1].away[0] = json[1].g1a;
+//                        set2[1].away[1] = json[1].g2a;
+//                        set2[1].away[2] = json[1].g3a;
+//                        set2[1].away[3] = json[1].g4a;
+//
+//                        set3[0].home[0] = json[2].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
+//                        set3[0].home[1] = json[2].g2h;
+//                        set3[0].home[2] = json[2].g3h;
+//                        set3[0].home[3] = json[2].g4h;
+//                        set3[1].away[0] = json[2].g1a;
+//                        set3[1].away[1] = json[2].g2a;
+//                        set3[1].away[2] = json[2].g3a;
+//                        set3[1].away[3] = json[2].g4a;
+//
+//                        set4[0].home[0] = json[3].g1h;                                                                       //THIS SHOULD NOT BELONG HERE
+//                        set4[0].home[1] = json[3].g2h;
+//                        set4[0].home[2] = json[3].g3h;
+//                        set4[0].home[3] = json[3].g4h;
+//                        set4[1].away[0] = json[3].g1a;
+//                        set4[1].away[1] = json[3].g2a;
+//                        set4[1].away[2] = json[3].g3a;
+//                        set4[1].away[3] = json[3].g4a;
+
+//                        this.m4g1h = json[3].g1h;
+//                        this.m4g2h = json[3].g2h;
+//                        this.m4g3h = json[3].g3h;
+//                        this.m4g4h = json[3].g4h;
+//                        this.m4g1a = json[3].g1a;
+//                        this.m4g2a = json[3].g2a;
+//                        this.m4g3a = json[3].g3a;
+//                        this.m4g4a = json[3].g4a;
+
+                    },
+
+                    fetchPlayerInfo: function (playerID) {
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //here I manipulate the data received
+                                console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                                tallier.parserPlayerInfo(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "http://localhost:3030/player/"+playerID, true);
+                        xhttp.send();
+
+                    },
+
+                    parserPlayerInfo: function (rawdata) {
+                        //these two lines just parse the data so it can be accessed
+                        var data =  rawdata;
+                        var json = JSON.parse(data);
+
+                        return json;            //simply returns the json structure
                     }
+
+
                 }
             })
 

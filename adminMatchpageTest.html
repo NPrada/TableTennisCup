@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Material Design lite framework -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <title>TT Lboro</title>
+    <link rel="stylesheet" type="text/css" href="CupPage.css">
+    <link rel="stylesheet" type="text/css" href="Matchpage.css">
+
+</head>
+<body>
+
+
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Admin Page</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="adminPanel.html" class="mdl-layout__tab">Main panel</a>
+            <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
+            <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
+            <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
+            <a href="adminClubs.html" class="mdl-layout__tab">Clubs</a>
+            <a href="adminTeams.html" class="mdl-layout__tab">Teams</a>
+            <a href="adminPlayers.html" class="mdl-layout__tab">Players</a>
+
+        </div>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+        </div>                                                                                                   <!-- FIX ME -->
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Cup Information</a>
+                <a class="mdl-navigation__link" href="">Fixtures</a>
+                <a class="mdl-navigation__link" href="">Teams</a>
+                <a class="mdl-navigation__link" href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mdl-layout__content" id="app">
+
+        <p class="date"> Date:
+            <input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="date" placeholder="YYYY-MM-DD">
+        </p>
+
+        <table>                                                                                                     <!-- This is the top table containing the team names and so on-->
+            <tr >
+                <td class="cell-border center">Home</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="cell-border center">Away</td>
+            </tr>
+            <tr>
+                <td class="cell-border title-text">{{hteam}}</td>
+                <td class="cell-border title-text">{{finalHomeScore}}</td>
+                <td class="cell-border ">VS</td>
+                <td class="cell-border title-text">{{finalAwayScore}}</td>
+                <td class="cell-border title-text">{{ateam}}</td>
+            </tr>
+            <tr >
+                <td class="cell-border center">
+                    <!--Gareth <br>-->
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="cell-border center">
+                    <!--Will <br>-->
+                </td>
+            </tr>
+        </table>
+
+
+
+
+        <div class="tableContainer">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" style="float: right" v-on:click="postSinglesSets">
+                Submit Changes
+            </button>
+
+            <!-- This is the second table containing the singles-->
+            <table class="scoresTable" >
+
+                <!-- this just contains the singles subtitle -->
+                <tr>
+                    <td style="width: 120px"><a class="title-text">Singles:</a></td>
+                    <td></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 20px"></td>
+                    <td style="width: 40px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 40px"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="teamnamecell" align="center"><b>{{ateam}}</b></td>
+                    <td></td>
+                    <td align="center" style="width: 50px">Home</td>
+                    <td></td>
+                    <td align="center" style="width: 50px">Away</td>
+                </tr>
+                <tr>
+                    <td>
+                    <td></td>
+                    <td align="center" class="teamnamecell">
+                        <v-select v-model="singlesAP1" label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <td align="center" class="teamnamecell">
+                        <v-select v-model="singlesAP2"  label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <!--<span class="mdl-badge" v-bind:data-badge="singlesAP2handicap">{{singlesAP2}}</span>   shows the handicap-->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="teamnamecell"> <b>{{hteam}}</b></td>
+                    <td class="teamnamecell">
+                        <v-select v-model="singlesHP1" label="name" :options="hPlayers"></v-select>
+                    </td>
+
+                    <!-- Match 1:  player 1 VS player 1-->
+                    <td class="setcell">
+
+                        <table class="game-table" v-bind:class="{ active: m1g1h > m1g1a, greentrue: m1g1h < m1g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m1g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m1g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g2h > m1g2a, greentrue: m1g2h < m1g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m1g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m1g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g3h > m1g3a, greentrue: m1g3h < m1g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m1g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m1g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m1g4h > m1g4a, greentrue: m1g4h < m1g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m1g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m1g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+
+                    </td>
+                    <!-- Match 2:  player 1 VS player 2-->
+                    <td class="setcell">
+                        <table class="game-table" v-bind:class="{ active: m2g1h > m2g1a, greentrue: m2g1h < m2g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m2g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m2g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g2h > m2g2a, greentrue: m2g2h < m2g2a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m2g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m2g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g3h > m2g3a, greentrue: m2g3h < m2g3a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m2g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m2g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m2g4h > m2g4a, greentrue: m2g4h < m2g4a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m2g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left" >
+                                <input v-model="m2g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <td ></td>
+                    <td align="center" class="totalscorecell"  >{{homeScore1}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell"  >{{awayScore1}}</td>
+                </tr>
+                <tr >
+                    <td class="teamnamecell">
+                        <v-select v-model="singlesHP2"  label="name" :options="hPlayers"></v-select>
+                        <!--<span class="mdl-badge" v-bind:data-badge="singlesHP2handicap">{{singlesHP2}}</span>   shows the handicap-->
+                    </td>
+                    <!-- Match 3:  player 2 VS player 1-->
+                    <td class="setcell">
+                        <table class="game-table" v-bind:class="{ active: m3g1h > m3g1a, greentrue: m3g1h < m3g1a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m3g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m3g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g2h > m3g2a, greentrue: m3g2h < m3g2a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m3g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m3g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g3h > m3g3a, greentrue: m3g3h < m3g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m3g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m3g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m3g4h > m3g4a, greentrue: m3g4h < m3g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m3g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m3g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <!-- Match 4:  player 2 VS player 2-->
+                    <td class="setcell">
+                        <table class="game-table" v-bind:class="{ active: m4g1h > m4g1a, greentrue: m4g1h < m4g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m4g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m4g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g2h > m4g2a, greentrue: m4g2h < m4g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m4g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m4g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g3h > m4g3a, greentrue: m4g3h < m4g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m4g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m4g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m4g4h > m4g4a, greentrue: m4g4h < m4g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m4g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m4g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <td ></td>
+                    <td align="center" class="totalscorecell" id="homepart2">{{homeScore2}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" id="awaypart2">{{awayScore2}}</td>
+                </tr>
+            </table>
+            <br>
+
+            <table class="scoresTable" >
+                <!-- Doubles Table -->
+                <tr>
+                    <td colspan="2" ><a class="title-text">Doubles:</a></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 250px"></td>
+                    <td style="width: 20px"></td>
+                    <td  style="width: 40px"></td>
+                    <td style="width: 10px"></td>
+                    <td  style="width: 40px"></td>
+                </tr>
+
+                <tr >
+                    <td colspan="2"></td>
+
+                    <td  class="teamnamecell">
+                        <v-select  v-model="doublesAP1match1"  label="name" :options="aPlayers" ></v-select>
+                        <v-select  v-model="doublesAP2match1"  label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <td  class="teamnamecell">
+                        <v-select  v-model="doublesAP1match2"  label="name" :options="aPlayers" ></v-select>
+                        <v-select  v-model="doublesAP2match2"  label="name" :options="aPlayers" ></v-select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+                    <td colspan="2" style="width: 200px">
+                        <v-select  v-model="doublesHP1match1"  label="name" :options="hPlayers" ></v-select>
+                        <v-select  v-model="doublesHP2match1"  label="name" :options="hPlayers" ></v-select>
+                    </td>
+
+                    <!-- Match 5:  homedoubles 1 VS awaydeoubles set1-->
+                    <td class="setcell">
+
+                        <table class="game-table" v-bind:class="{ active: m5g1h > m5g1a, greentrue: m5g1h < m5g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m5g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m5g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g2h > m5g2a, greentrue: m5g2h < m5g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m5g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m5g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g3h > m5g3a, greentrue: m5g3h < m5g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m5g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m5g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m5g4h > m5g4a, greentrue: m5g4h < m5g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m5g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m5g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+                    <td></td>
+                    <td ></td>
+                    <td align="center" class="totalscorecell">{{hdoublesMatch1}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell">{{adoublesMatch1}}</td>
+                </tr>
+
+                <tr>
+
+                    <td colspan="2" style="width: 200px">
+                        <v-select  v-model="doublesHP1match2"  label="name" :options="hPlayers" ></v-select>
+                        <v-select  v-model="doublesHP2match2"  label="name" :options="hPlayers" ></v-select>
+                    </td>
+                    <td class="setcell"></td>
+                    <!-- Match 6:  homeDouble 1 VS awayDouble 2-->
+                    <td class="setcell">
+                        <table class="game-table" v-bind:class="{ active: m6g1h > m6g1a, greentrue: m6g1h < m6g1a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m6g1a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m6g1h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g2h > m6g2a, greentrue: m6g2h < m6g2a }">
+                            <tr><td class="e"></td><td class="t" align="right" >
+                                <input v-model="m6g2a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m6g2h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g3h > m6g3a, greentrue: m6g3h < m6g3a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m6g3a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m6g3h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                        <table class="game-table" v-bind:class="{ active: m6g4h > m6g4a, greentrue: m6g4h < m6g4a }">
+                            <tr><td class="e"></td><td class="t" align="right">
+                                <input v-model="m6g4a" class="scoreInputBox">
+                            </td></tr>
+                            <tr><td class="b" align="left">
+                                <input v-model="m6g4h" class="scoreInputBox">
+                            </td> <td class="e"></td></tr>
+                        </table>
+                    </td>
+
+                    <td ></td>
+                    <td align="center" class="totalscorecell"  >{{hdoublesMatch2}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell"  >{{adoublesMatch2}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td style="text-align: right">Total Score:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{homescore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{awayscore}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td style="text-align: right">Handicap:</td>                                                    <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{hhandicap}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{ahandicap}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+
+                    <td></td>
+                    <td style="text-align: right">Compensation:</td>                                                <!-- Fix the styling> -->
+                    <td ></td>
+                    <td align="center" class="totalscorecell" >{{hCompensation}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{aCompensation}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+
+                    <td></td>
+                    <td style="text-align: right">Final Score:</td>                                                <!-- Fix the styling> -->
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{finalHomeScore}}</td>
+                    <td></td>
+                    <td align="center" class="totalscorecell" >{{finalAwayScore}}</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+    <script src='https://unpkg.com/vue-select@latest'></script>
+    <script>
+        Vue.component('v-select', VueSelect.VueSelect); //use to have dynamic drop downs
+
+        var tallier = new Vue({
+            el: '#app',
+            data: {
+
+                x:null, //this is for testing purposes
+
+                //the full json of each query
+                matchInfo:[],    //the json of the matchinfo like the teams competing, date and score
+                hPlayers:[],     //all the home players
+                aPlayers:[],     //all the away players
+
+                //the match ID
+                matchID:0,
+
+                //home player1 ID
+                hPlayer1IDsingles:null,
+                hPlayer2IDsingles:null,
+                aPlayer1IDsingles:null,
+                aPlayer2IDsingles:null,
+
+                doublesHP1match1ID: null,
+                doublesHP2match1ID: null,
+
+                doublesHP1match2ID: null,
+                doublesHP2match2ID: null,
+
+                doublesAP1match1ID: null,
+                doublesAP2match1ID: null,
+
+                doublesAP1match2ID: null,
+                doublesAP2match2ID: null,
+
+                set1ID: 0,
+                set2ID: 0,
+                set3ID: 0,
+                set4ID: 0,
+
+                doubleSet1ID:null,
+                doubleSet2ID:null,
+
+                redtrue: true,
+                greentrue: true,
+
+                hteam : "No Team",
+                ateam : "No Team",
+                date : "No Date",
+                hTeamTitleScore : 0,
+                aTeamTitleScore : 0,
+
+                //the scores before hanidap and compensation appied
+                homescore: 0,
+                awayscore: 0,
+                //the scores after hanidap and compensation appied
+                finalHomeScore:0,
+                finalAwayScore:0,
+
+                singlesHHandicap:0,
+                singlesAHandicap:0,
+
+                doublesHHandicap:0,
+                doublesAHandicap:0,
+                doublesHHandicap1:0,
+                doublesAHandicap1:0,
+                doublesHHandicap2:0,
+                doublesAHandicap2:0,
+
+                hhandicap:0,
+                ahandicap:0,
+
+                hCompensation:0,
+                aCompensation:0,
+
+                singlesHP1: "NoOne",
+                singlesHP2: "NoOne",
+                singlesAP1: "NoOne",
+                singlesAP2: "NoOne",
+                singlesHP1handicap: 0,
+                singlesHP2handicap: 0,
+                singlesAP1handicap: 0,
+                singlesAP2handicap: 0,
+
+                doublesHP1match1: "NoOne",
+                doublesHP2match1: "NoOne",
+
+                doublesHP1match2: "NoOne",
+                doublesHP2match2: "NoOne",
+
+                doublesAP1match1: "NoOne",
+                doublesAP2match1: "NoOne",
+
+                doublesAP1match2: "NoOne",
+                doublesAP2match2: "NoOne",
+
+                doublesHP1handicapMatch1: 0, //
+                doublesHP1handicapMatch2: 0,
+
+                doublesHP2handicapMatch1: 0, //
+                doublesHP2handicapMatch2: 0,
+
+                doublesAP1handicapMatch1: 0, //
+                doublesAP1handicapMatch2: 0,
+
+                doublesAP2handicapMatch1: 0, //
+                doublesAP2handicapMatch2: 0,
+
+                m1g1h: 0,       m2g1h: 0,
+                m1g1a: 0,       m2g1a: 0,
+                m1g2h: 0,       m2g2h: 0,
+                m1g2a: 0,       m2g2a: 0,
+                m1g3h: 0,       m2g3h: 0,
+                m1g3a: 0,       m2g3a: 0,
+                m1g4h: 0,       m2g4h: 0,
+                m1g4a: 0,       m2g4a: 0,
+
+                m3g1h: 0,       m4g1h: 0,
+                m3g1a: 0,       m4g1a: 0,
+                m3g2h: 0,       m4g2h: 0,
+                m3g2a: 0,       m4g2a: 0,
+                m3g3h: 0,       m4g3h: 0,
+                m3g3a: 0,       m4g3a: 0,
+                m3g4h: 0,       m4g4h: 0,
+                m3g4a: 0,       m4g4a: 0,
+
+                m5g1h: 0,       m6g1h: 0,
+                m5g1a: 0,       m6g1a: 0,
+                m5g2h: 0,       m6g2h: 0,
+                m5g2a: 0,       m6g2a: 0,
+                m5g3h: 0,       m6g3h: 0,
+                m5g3a: 0,       m6g3a: 0,
+                m5g4h: 0,       m6g4h: 0,
+                m5g4a: 0,       m6g4a: 0,
+
+                homeScore1:0,
+                homeScore2:0,
+                awayScore1:0,
+                awayScore2:0,
+
+                hdoublesMatch1:0,
+                hdoublesMatch2:0,
+                adoublesMatch1:0,
+                adoublesMatch2:0,
+
+                //not sure if these are needed
+                hdoubles:0,
+                adoubles:0
+            },
+
+            methods: {
+                //this function starts a chain of functions that post any data that could have been changed back into the database
+                postSinglesSets: function () {
+                    var global =this;
+
+                    global.addup();
+                    global.updateDate(global.date,global.matchID);
+                    global.updateScore(global.matchID);
+                    this.setSelectedPlayerIDs();
+
+                    //player 1 vs player 1 is the set updated with this post
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //console.log("first post done")
+                            global.postSingleSet2();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set1ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m1g1h+"/"+this.m1g1a+"/"+this.m1g2h+"/"+this.m1g2a+"/"+this.m1g3h+"/"+this.m1g3a+"/"+this.m1g4h+"/"+this.m1g4a, true);
+                    xhttp.send();
+                },
+                //this function updates the set between hplayer1 and aplayer2
+                postSingleSet2: function () {
+
+                    var global =this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //console.log("second post done")
+                            global.postSingleSet3()
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set2ID+"/"+this.hPlayer1IDsingles+"/"+this.aPlayer2IDsingles+"/"+this.m2g1h+"/"+this.m2g1a+"/"+this.m2g2h+"/"+this.m2g2a+"/"+this.m2g3h+"/"+this.m2g3a+"/"+this.m2g4h+"/"+this.m2g4a, true);
+                    xhttp.send();
+                },
+
+                postSingleSet3: function () {
+
+                    var global =this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //console.log("third post done")
+                            global.postSingleSet4()
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set3ID+"/"+this.hPlayer2IDsingles+"/"+this.aPlayer1IDsingles+"/"+this.m3g1h+"/"+this.m3g1a+"/"+this.m3g2h+"/"+this.m3g2a+"/"+this.m3g3h+"/"+this.m3g3a+"/"+this.m3g4h+"/"+this.m3g4a, true);
+                    xhttp.send();
+                },
+
+                postSingleSet4: function () {
+                    var global =this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //console.log("fourth post done")
+                            global.postDoubleSet1();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateSingleSet/"+this.set4ID+"/"+this.hPlayer2IDsingles+"/"+this.aPlayer2IDsingles+"/"+this.m4g1h+"/"+this.m4g1a+"/"+this.m4g2h+"/"+this.m4g2a+"/"+this.m4g3h+"/"+this.m4g3a+"/"+this.m4g4h+"/"+this.m4g4a, true);
+                    xhttp.send();
+                },
+
+                postDoubleSet1: function () {
+                    var global =this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //console.log("first double post done")
+                            global.postDoubleSet2();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateDoubleSet/"+this.doubleSet1ID+"/"+this.doublesHP1match1ID+"/"+this.doublesHP2match1ID+"/"+this.doublesAP1match1ID+"/"+this.doublesAP2match1ID+"/"+this.m5g1h+"/"+this.m5g1a+"/"+this.m5g2h+"/"+this.m5g2a+"/"+this.m5g3h+"/"+this.m5g3a+"/"+this.m5g4h+"/"+this.m5g4a, true);
+                    xhttp.send();
+                },
+
+                postDoubleSet2: function () {
+                    var global =this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("All the post requests for the data are sent")
+                            location.reload();
+
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateDoubleSet/"+this.doubleSet2ID+"/"+this.doublesHP1match2ID+"/"+this.doublesHP2match2ID+"/"+this.doublesAP1match2ID+"/"+this.doublesAP2match2ID+"/"+this.m6g1h+"/"+this.m6g1a+"/"+this.m6g2h+"/"+this.m6g2a+"/"+this.m6g3h+"/"+this.m6g3a+"/"+this.m6g4h+"/"+this.m6g4a, true);
+                    xhttp.send();
+                },
+
+                setSelectedPlayerIDs: function () {
+                    if(typeof this.singlesHP1 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.singlesHP1){
+                                this.hPlayer1IDsingles = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.hPlayer1IDsingles = this.singlesHP1.id
+                    }
+
+                    //finds the ID of home player 2
+                    if(typeof this.singlesHP2 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.singlesHP2){
+                                this.hPlayer2IDsingles = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.hPlayer2IDsingles = this.singlesHP2.id
+                    }
+
+                    //finds the ID of away player player 1
+                    if(typeof this.singlesAP1 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.singlesAP1){
+                                this.aPlayer1IDsingles = this.aPlayers[i].id;
+
+                            }
+                        }
+                    }else { //if the dropdown value was changed
+                        this.aPlayer1IDsingles = this.singlesAP1.id;
+                    }
+
+                    //finds the ID of away player 2
+                    if(typeof this.singlesAP2 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.singlesAP2){
+                                this.aPlayer2IDsingles = this.aPlayers[i].id
+                            }
+                        }
+                    }else { //if the dropdown value was changed
+                        this.aPlayer2IDsingles = this.singlesAP2.id;
+                    }
+
+                    //next the 4 IDs of the HOOME doubles players are calculated
+                    if(typeof this.doublesHP1match1 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.doublesHP1match1){
+                                this.doublesHP1match1ID = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesHP1match1ID = this.doublesHP1match1.id
+                    }
+
+                    if(typeof this.doublesHP2match1 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.doublesHP2match1){
+                                this.doublesHP2match1ID = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesHP2match1ID = this.doublesHP2match1.id
+                    }
+
+                    if(typeof this.doublesHP1match2 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.doublesHP1match2){
+                                this.doublesHP1match2ID = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesHP1match2ID = this.doublesHP1match2.id
+                    }
+
+                    if(typeof this.doublesHP2match2 == "string"){
+                        for (var i = 0; i < this.hPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.hPlayers[i].name == this.doublesHP2match2){
+                                this.doublesHP2match2ID = this.hPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesHP2match2ID = this.doublesHP2match2.id
+                    }
+
+
+                    //next the 4 IDs of the AWAY doubles players are calculated
+                    if(typeof this.doublesAP1match1 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.doublesAP1match1){
+                                this.doublesAP1match1ID = this.aPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesAP1match1ID = this.doublesAP1match1.id
+                    }
+
+                    if(typeof this.doublesAP2match1 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.doublesAP2match1){
+                                this.doublesAP2match1ID = this.aPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesAP2match1ID = this.doublesAP2match1.id
+                    }
+
+                    //next the IDs of the doubles players are calculated
+                    if(typeof this.doublesAP1match2 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.doublesAP1match2){
+                                this.doublesAP1match2ID = this.aPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesAP1match2ID = this.doublesAP1match2.id
+                    }
+
+                    //next the IDs of the doubles players are calculated
+                    if(typeof this.doublesAP2match2 == "string"){
+                        for (var i = 0; i < this.aPlayers.length; i++){
+                            // look for the entry with a matching `code` value
+                            if (this.aPlayers[i].name == this.doublesAP2match2){
+                                this.doublesAP2match2ID = this.aPlayers[i].id;
+                            }
+                        }
+                    }else {
+                        this.doublesAP2match2ID = this.doublesAP2match2.id
+                    }
+
+                },
+
+
+                updateAwayPlayerDropdowns: function (aTeamID) {
+
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+
+                            var json = JSON.parse(this.responseText);     //parse the data recieved
+                            global.aPlayers = json;
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/playersOfTeam/"+aTeamID, true);
+                    xhttp.send();
+                },
+
+                updateHomePlayerDropdowns: function (hTeamID) {
+
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+
+                            var json = JSON.parse(this.responseText);     //parse the data recieved
+                            global.hPlayers = json;
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/playersOfTeam/"+hTeamID, true);
+                    xhttp.send();
+                },
+                addup: function () {
+
+                    this.homeScore1 = +this.m1g1h + +this.m1g2h + +this.m1g3h + +this.m1g4h + +this.m2g1h + +this.m2g2h + +this.m2g3h + +this.m2g4h;
+                    this.awayScore1 = +this.m1g1a + +this.m1g2a + +this.m1g3a + +this.m1g4a + +this.m2g1a + +this.m2g2a + +this.m2g3a + +this.m2g4a;
+                    this.homeScore2 = +this.m3g1h + +this.m3g2h + +this.m3g3h + +this.m3g4h + +this.m4g1h + +this.m4g2h + +this.m4g3h + +this.m4g4h;
+                    this.awayScore2 = +this.m3g1a + +this.m3g2a + +this.m3g3a + +this.m3g4a + +this.m4g1a + +this.m4g2a + +this.m4g3a + +this.m4g4a;
+                    this.hdoublesMatch1 =   +this.m5g1h + +this.m5g2h + +this.m5g3h + +this.m5g4h;
+                    this.hdoublesMatch2 =   +this.m6g1h + +this.m6g2h + +this.m6g3h + +this.m6g4h;
+                    this.adoublesMatch1 =   +this.m5g1a + +this.m5g2a + +this.m5g3a + +this.m5g4a;
+                    this.adoublesMatch2 =   +this.m6g1a + +this.m6g2a + +this.m6g3a + +this.m6g4a;
+                    this.hdoubles =  this.hdoublesMatch1 + +this.hdoublesMatch2;
+                    this.adoubles =  this.adoublesMatch1 + +this.adoublesMatch2;
+                    //alert(this.m1g1h);
+                    //total handicap is set here
+                    this.hhandicap = +this.singlesHHandicap +  +this.doublesHHandicap;
+                    this.ahandicap = +this.singlesAHandicap +  +this.doublesAHandicap;
+
+                    //singles! calculate if and how much compensation is needed
+
+                    this.hCompensation = 0 //before calculating the compensation to send, we need to clear it so the end score calculated here is not double the actual compensation
+                    this.aCompensation = 0
+                    var handicapsArr = [
+                        [this.singlesHP1handicap, this.singlesAP1handicap],
+                        [this.singlesHP1handicap, this.singlesAP2handicap],
+                        [this.singlesHP2handicap, this.singlesAP1handicap],
+                        [this.singlesHP2handicap, this.singlesAP2handicap]
+                    ];
+                    for (var i = 0; i <4; i++){ //this just loops through 4 times (the number of matches)
+                        if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                            if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                this.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                            }else {
+
+                                this.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
+                            }
+
+                        }
+                    }
+
+                    this.doublesHHandicap1 = this.doublesHP1handicapMatch1 + this.doublesHP2handicapMatch1;
+                    this.doublesHHandicap2 = this.doublesHP1handicapMatch2 + this.doublesHP2handicapMatch2;
+                    this.doublesAHandicap1 = this.doublesAP1handicapMatch1 + this.doublesAP2handicapMatch1;
+                    this.doublesAHandicap2 = this.doublesAP1handicapMatch2 + this.doublesAP2handicapMatch2;
+                    // doubles compensation is added here
+                    var handicapsArr = [
+                        [this.doublesHHandicap1/2, this.doublesAHandicap1/2],
+                        [this.doublesHHandicap2/2, this.doublesAHandicap2/2]
+
+                    ];
+                    //alert(this.doublesHHandicap1/2+"  "+ this.doublesAHandicap1/2)
+                    for (var i = 0; i <2; i++){ //this just loops through 4 times (the number of matches)
+                        if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+                            if (handicapsArr[i][1] > handicapsArr[i][0]){    //if home is the stronger team
+
+                                this.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+
+                            }else {
+
+                                //alert(this.aCompensation)
+                                this.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
+                                //alert(this.aCompensation)
+                            }
+
+                        }
+                    }
+
+                    //total score before handicap and compensation
+                    this.homescore = this.homeScore1 + this.homeScore2 + this.hdoubles ;
+                    this.awayscore = this.awayScore1 + this.awayScore2 + this.adoubles ;
+
+                    //total score after handicap and compensation
+                    //alert("compensation sent: "+this.aCompensation)
+                    this.finalHomeScore = this.homeScore1 + this.homeScore2 + this.hdoubles + this.hhandicap + this.hCompensation;
+                    this.finalAwayScore = this.awayScore1 + this.awayScore2 + this.adoubles + this.ahandicap + this.aCompensation;
+                    //alert(this.finalHomeScore+"-"+this.finalAwayScore)
+                },
+
+                //fetches the scores of all the sets
+                fetchSinglesSetsScore: function (matchID, manipulate) {
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            var data = tallier.parserSinglesSetsScore(this.responseText);
+                            manipulate(data);
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/singleSets/"+matchID, true);
+                    xhttp.send();
+
+                },
+                parserSinglesSetsScore: function (rawdata) {
+                    //these two lines just parse the data so it can be accessed
+                    var json = JSON.parse(rawdata);
+                    return json;
+
+                },
+                // this a function that fills out all the details of all the scores, names, and handicaps of all the sets
+                // played in this match  first it calls fetchSinglesSetsScore(1, manipulate);
+                // Once asynchronous callback is done the manipulate dunction is run, when that is done the
+                // updateDoublesScores function is called which works in a similar way, the only difference is that
+                // at the end of its manipulate function the handicaps are calculated, addedup to the score, and the
+                // score is diplayed. This is all done because to addup the handicap and to calculate the score all of the
+                // asynchrounous callbacks need to have been completed, and this method ensures just that
+                updatesAllScores: function(matchID) {
+                    var niko = this;          //change to global scope      //this is used to extend the scope of the vue.js data
+
+                    function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
+
+                        niko.matchID = localStorage.getItem("matchID");
+
+                        niko.set1ID =json[0].id;
+                        niko.set2ID =json[1].id;
+                        niko.set3ID =json[2].id;
+                        niko.set4ID =json[3].id;
+
+                        niko.singlesHP1 = json[0].hplayer;
+                        niko.singlesHP1handicap = json[0].hhandicap;
+                        niko.singlesAP1 = json[0].aplayer;
+                        niko.singlesAP1handicap = json[0].ahandicap;
+
+                        niko.singlesHP2 = json[2].hplayer;
+                        niko.singlesHP2handicap = json[2].hhandicap;
+                        niko.singlesAP2 = json[1].aplayer;
+                        niko.singlesAP2handicap = json[1].ahandicap;
+
+                        niko.singlesHHandicap = (niko.singlesHP1handicap *8) + (niko.singlesHP2handicap *8);
+                        niko.singlesAHandicap = (niko.singlesAP1handicap *8) + (niko.singlesAP2handicap*8);
+
+                        niko.m1g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
+                        niko.m1g2h = json[0].g2h;
+                        niko.m1g3h = json[0].g3h;
+                        niko.m1g4h = json[0].g4h;
+                        niko.m1g1a = json[0].g1a;
+                        niko.m1g2a = json[0].g2a;
+                        niko.m1g3a = json[0].g3a;
+                        niko.m1g4a = json[0].g4a;
+
+                        niko.m2g1h = json[1].g1h;
+                        niko.m2g2h = json[1].g2h;
+                        niko.m2g3h = json[1].g3h;
+                        niko.m2g4h = json[1].g4h;
+                        niko.m2g1a = json[1].g1a;
+                        niko.m2g2a = json[1].g2a;
+                        niko.m2g3a = json[1].g3a;
+                        niko.m2g4a = json[1].g4a;
+
+                        niko.m3g1h = json[2].g1h;
+                        niko.m3g2h = json[2].g2h;
+                        niko.m3g3h = json[2].g3h;
+                        niko.m3g4h = json[2].g4h;
+                        niko.m3g1a = json[2].g1a;
+                        niko.m3g2a = json[2].g2a;
+                        niko.m3g3a = json[2].g3a;
+                        niko.m3g4a = json[2].g4a;
+
+                        niko.m4g1h = json[3].g1h;
+                        niko.m4g2h = json[3].g2h;
+                        niko.m4g3h = json[3].g3h;
+                        niko.m4g4h = json[3].g4h;
+                        niko.m4g1a = json[3].g1a;
+                        niko.m4g2a = json[3].g2a;
+                        niko.m4g3a = json[3].g3a;
+                        niko.m4g4a = json[3].g4a;
+
+                        niko.homeScore1 = niko.m1g1h + niko.m1g2h + niko.m1g3h + niko.m1g4h + niko.m2g1h + niko.m2g2h + niko.m2g3h + niko.m2g4h;
+                        niko.awayScore1 = niko.m1g1a + niko.m1g2a + niko.m1g3a + niko.m1g4a + niko.m2g1a + niko.m2g2a + niko.m2g3a + niko.m2g4a;
+                        niko.homeScore2 = niko.m3g1h + niko.m3g2h + niko.m3g3h + niko.m3g4h + niko.m4g1h + niko.m4g2h + niko.m4g3h + niko.m4g4h;
+                        niko.awayScore2 = niko.m3g1a + niko.m3g2a + niko.m3g3a + niko.m3g4a + niko.m4g1a + niko.m4g2a + niko.m4g3a + niko.m4g4a;
+
+                        //calculate if and how much compensation is needed
+                        var handicapsArr = [
+                            [niko.singlesHP1handicap, niko.singlesAP1handicap],
+                            [niko.singlesHP1handicap, niko.singlesAP2handicap],
+                            [niko.singlesHP2handicap, niko.singlesAP1handicap],
+                            [niko.singlesHP2handicap, niko.singlesAP2handicap]
+                        ];
+                        for (var i = 0; i <4; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                    niko.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                                }else {
+
+                                    niko.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
+                                }
+
+                            }
+                        }
+                        niko.updateDoublesScores(matchID);
+                    }
+
+                    this.fetchSinglesSetsScore(matchID, manipulate);
+                },
+
+                fetchDoubleSetsScore: function (matchID, manipulate) {
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            var data = tallier.parserDoubleSetsScore(this.responseText);
+                            manipulate(data);
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/doubleSets/"+matchID, true);
+                    xhttp.send();
+
+                },
+                parserDoubleSetsScore: function (rawdata) {
+                    //these two lines just parse the data so it can be accessed
+                    var json = JSON.parse(rawdata);
+                    return json;
+
+                },
+                updateDoublesScores: function(matchID) {
+                    var niko = this;
+
+                    function manipulate(json) {
+
+                        niko.doubleSet1ID =json[0].id;
+                        niko.doubleSet2ID =json[1].id;
+
+                        niko.doublesHP1match1 = json[0].hplayer1
+                        niko.doublesHP1handicapMatch1 = json[0].hhandicap1;
+                        niko.doublesHP2match1 = json[0].hplayer2;
+                        niko.doublesHP2handicapMatch1 = json[0].hhandicap2;
+
+                        niko.doublesAP1match1 = json[0].aplayer1;
+                        niko.doublesAP1handicapMatch1 = json[0].ahandicap1;
+                        niko.doublesAP2match1 = json[0].aplayer2;
+                        niko.doublesAP2handicapMatch1 = json[0].ahandicap2;
+
+                        niko.doublesHP1match2 = json[1].hplayer1;
+                        niko.doublesHP1handicapMatch2 = json[1].hhandicap1;
+                        niko.doublesHP2match2 = json[1].hplayer2;
+                        niko.doublesHP2handicapMatch2 = json[1].hhandicap2;
+
+                        niko.doublesAP1match2 = json[1].aplayer1;
+                        niko.doublesAP1handicapMatch2 = json[1].ahandicap1;
+                        niko.doublesAP2match2 = json[1].aplayer2;
+                        niko.doublesAP2handicapMatch2 = json[1].ahandicap2;
+
+                        niko.m5g1h = json[0].g1h;                                                                   //niko SHOULD NOT BELONG HERE
+                        niko.m5g2h = json[0].g2h;
+                        niko.m5g3h = json[0].g3h;
+                        niko.m5g4h = json[0].g4h;
+                        niko.m5g1a = json[0].g1a;
+                        niko.m5g2a = json[0].g2a;
+                        niko.m5g3a = json[0].g3a;
+                        niko.m5g4a = json[0].g4a;
+
+                        niko.m6g1h = json[1].g1h;                                                                   //niko SHOULD NOT BELONG HERE
+                        niko.m6g2h = json[1].g2h;
+                        niko.m6g3h = json[1].g3h;
+                        niko.m6g4h = json[1].g4h;
+                        niko.m6g1a = json[1].g1a;
+                        niko.m6g2a = json[1].g2a;
+                        niko.m6g3a = json[1].g3a;
+                        niko.m6g4a = json[1].g4a;
+
+                        //the doubles score are assigned here
+                        niko.hdoublesMatch1 = niko.m5g1h + niko.m5g2h + niko.m5g3h + niko.m5g4h ;
+                        niko.hdoublesMatch2 = niko.m6g1h + niko.m6g2h + niko.m6g3h + niko.m6g4h;
+                        niko.adoublesMatch1 = niko.m5g1a + niko.m5g2a + niko.m5g3a + niko.m5g4a ;
+                        niko.adoublesMatch2 = niko.m6g1a + niko.m6g2a + niko.m6g3a + niko.m6g4a;
+                        niko.hdoubles = niko.hdoublesMatch1 + niko.hdoublesMatch2;
+                        niko.adoubles = niko.adoublesMatch1 + niko.adoublesMatch2;
+
+                        //doubles handicaps are set here
+                        niko.doublesHHandicap1 = niko.doublesHP1handicapMatch1 + niko.doublesHP2handicapMatch1;
+                        niko.doublesHHandicap2 = niko.doublesHP1handicapMatch2 + niko.doublesHP2handicapMatch2;
+                        niko.doublesAHandicap1 = niko.doublesAP1handicapMatch1 + niko.doublesAP2handicapMatch1;
+                        niko.doublesAHandicap2 = niko.doublesAP1handicapMatch2 + niko.doublesAP2handicapMatch2;
+
+                        niko.doublesHHandicap = (niko.doublesHHandicap1)*2 + (niko.doublesHHandicap2)*2;
+                        niko.doublesAHandicap = (niko.doublesAHandicap1)*2 + (niko.doublesAHandicap2)*2;
+
+                        //total handicap is set here
+                        niko.hhandicap = niko.singlesHHandicap +  niko.doublesHHandicap;
+                        niko.ahandicap = niko.singlesAHandicap +  niko.doublesAHandicap;
+
+                        //doubles compensation is added here
+                        var handicapsArr = [
+                            [niko.doublesHHandicap1/2, niko.doublesAHandicap1/2],
+                            [niko.doublesHHandicap1/2, niko.doublesAHandicap2/2]
+                        ];
+
+                        //this will calulate the doubles compensation
+                        for (var i = 0; i <2; i++){ //this just loops through 4 times (the number of matches)
+                            if (Math.abs(handicapsArr[i][0] - handicapsArr[i][1]) >7 ){ //if the difference is bigger than 7
+
+                                if (handicapsArr[i][1] > handicapsArr[i][0]){    //check which player is smaller and do the appropriate function
+
+                                    niko.hCompensation += (handicapsArr[i][1] - handicapsArr[i][0] - 7)*4
+
+                                }else {
+
+                                    niko.aCompensation += (handicapsArr[i][0] - handicapsArr[i][1] - 7)*4
+                                }
+
+                            }
+                        }
+
+
+
+
+
+                        //total score before handicap and compensation
+                        niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles ;
+                        niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles ;
+
+                        //total score after handicap and compensation
+                        niko.finalHomeScore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles + niko.hhandicap + niko.hCompensation;
+                        niko.finalAwayScore = niko.awayScore1 + niko.awayScore2 + niko.adoubles + niko.ahandicap + niko.aCompensation;
+
+
+                    }
+
+                    this.fetchDoubleSetsScore(matchID, manipulate);
+
+                },
+
+                updateDate: function(date,matchid, rowNumber){
+
+                    if(date.length == 10){  //this is to make sure that the  date is only worked with when it is entered valid
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                            if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                                //console.log(this.responseText);
+                                //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                                //var data = tallier.parseMatchesInfo(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("POST", "http://178.62.9.140:3080/updateMatchDate/matchID/"+matchid+"/newDate/"+date, true);
+                        xhttp.send();
+                    }
+                },
+
+                //this updates the score, remember it must be called after the addup function because it sets the full home score and away score
+                updateScore: function(matchid){
+
+                    var score = this.finalHomeScore+"-"+this.finalAwayScore;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            //var data = tallier.parseMatchesInfo(this.responseText);
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updateMatchScore/matchID/"+matchid+"/newScore/"+score, true);
+                    xhttp.send();
+
+                },
+
+                fetchMatchInfo: function (matchID, manipulate) {
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);    //this is the raw data received
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var data = tallier.parseMatchInfo(this.responseText);
+                            manipulate(data);
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/matches/"+matchID, true);
+                    xhttp.send();
+
+
+                },
+                parseMatchInfo: function (rawdata) {
+                    //these two lines just parse the data so it can be accessed
+                    var json = JSON.parse(rawdata);
+                    return json;
+
+
+                },
+                //posts the new inputted date to the database
+
+
+                updateMatchInfo: function (matchID) {
+                    var niko = this;
+                    function manipulate(json) {
+
+                        niko.matchInfo = json; //the raw jason is stored here
+
+                        niko.hteam = json[0].homeTeam;
+                        niko.ateam = json[0].awayTeam;
+                        niko.date = json[0].date.substring(0,json[0].date.search("T"));
+
+                        niko.hTeamTitleScore = json[0].scores.substring(0 , json[0].scores.search("-"));
+                        niko.aTeamTitleScore = json[0].scores.substring(json[0].scores.search("-")+1 , json[0].scores.length);
+
+                    }
+                    this.fetchMatchInfo(matchID,manipulate);
+                }
+
+            },
+            created: function () {
+                this.updateHomePlayerDropdowns(1);
+                this.updateAwayPlayerDropdowns(2);
+            },
+            beforeMount: function () {
+
+            },
+            mounted: function () {
+                //alert(localStorage.getItem("matchID"));
+
+                this.updatesAllScores(localStorage.getItem("matchID"));
+                this.updateMatchInfo(localStorage.getItem("matchID"));
+                this.addup();
+//                this.updateDate(this.date,this.matchID);
+                var global = this
+                setTimeout(function (){
+
+                    global.updateScore(global.matchID);
+                }, 1000); // How long do you want the delay to be (in milliseconds)?
+
+
+            }
+        })
+    </script>
+
+    </main>
+</body>
+</html>
