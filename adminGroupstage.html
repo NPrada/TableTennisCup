@@ -10,7 +10,7 @@
     <title>Lughborough Table Tennis Cup</title>
     <link rel="stylesheet" type="text/css" href="CupPage.css">
     <link rel="stylesheet" type="text/css" href="NewCup.css">
-
+    <link rel="stylesheet" type="text/css" href="checkbox.css">
 
 
 </head>
@@ -29,11 +29,11 @@
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="adminpanel.html" class="mdl-layout__tab">Main panel</a>
             <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
-            <a href="NewCup.html" class="mdl-layout__tab is-active" >Group stage</a>
-            <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
-            <a href="#fixed-tab-5" class="mdl-layout__tab">Clubs</a>
+            <a href="adminGroupstage.html" class="mdl-layout__tab is-active" >Group stage</a>
+            <a href="adminPlayoffs.html" class="mdl-layout__tab">Playoffs</a>
+            <a href="adminClubs.html" class="mdl-layout__tab">Clubs</a>
             <a href="adminTeams.html" class="mdl-layout__tab">Teams</a>
-            <a href="#fixed-tab-7" class="mdl-layout__tab">Players</a>
+            <a href="adminPlayers.html" class="mdl-layout__tab">Players</a>
 
         </div>
     </header>
@@ -52,49 +52,24 @@
     </header>
 
 <div style="width: 100%; height: 100%">
-    <main style="width:80%; margin-right: 10%;margin-left: 10%" class="mdl-layout__content">
+    <main style="width:80%; margin-right: 10%;margin-left: 10%" >
         <div id="app">
             <table>
                 <tr>
                     <td>
-                        <h3>The cup has not started please set up the groups</h3>
+                        <h4>If the group stage matches have been completed please select the teams to go on to the playoffs</h4>
                     </td>
-                    <td style="width: 500px"></td>
+                    <td style="width: 350px"></td>
                     <td>
-                        <button style="width: 110px" id="show-modal" @click="errorChecks" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
-                            Start Cup
-                        </button>
-                    </td>
-                </tr>
-            </table>
-
-            <br><br>
-            <table style="width: 100%">
-                <tr>
-                    <td>Add team:   </td>
-                    <td colspan="2">
-                        <div class="mdl-selectfield mdl-js-selectfield">
-                            <v-select v-model="teamselected" label="teamName" :options="teams" ></v-select>
-                        </div>
-                    </td>
-                    <td style="width: 10px"></td>
-                    <td>
-                        Group Number:
-                    </td>
-                    <td>
-                        <div class="mdl-selectfield mdl-js-selectfield">
-                            <v-select v-model="groupselected" :options="['1','2','3','4','5','6','7','8']" ></v-select>
-                        </div>
-                    </td>
-                    <td style="width: 10px"></td>
-                    <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button mdl-js-ripple-effect" v-on:click="addTeamToGroup(groupselected,teamselected.id)">
-                            Submit
+                        <button style="width: 180px" id="show-modal" @click="errorChecks" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
+                            Start Knock Out
                         </button>
                     </td>
                 </tr>
             </table>
             <br>
+
+
             <table class="layout-Table">
                 <tr>
                     <td style="width: 30%" valign="top">
@@ -110,7 +85,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -120,9 +95,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -159,7 +137,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -169,9 +147,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -208,7 +189,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -218,9 +199,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -257,7 +241,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -267,9 +251,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -306,7 +293,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -316,9 +303,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -355,7 +345,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -365,9 +355,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -404,7 +397,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -414,9 +407,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -453,7 +449,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -463,9 +459,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -502,7 +501,7 @@
                                         <th class="mdl-data-table__cell--non-numeric">#</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Points</th>
-                                        <th></th>
+                                        <th class="mdl-data-table__cell--non-numeric">Winner</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -512,9 +511,12 @@
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.teamName}}</td>
                                             <td class="mdl-data-table__cell--non-numeric" v-on:click="directToMatchpage(item.id)">{{item.points}}</td>
                                             <td>
-                                                <button v-on:click="removeFromGroup(item.teamID)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" >
-                                                    <i class="material-icons">delete</i>
-                                                </button>
+                                                <div class="rkmd-checkbox checkbox-ripple">  <!--start of checkbox-->
+                                                    <label class="input-checkbox checkbox-lightBlue">
+                                                        <input type="checkbox"  v-on:click="selectedTeams(item.teamID)">
+                                                        <span class="checkbox"></span>
+                                                    </label>
+                                                </div><!-- @end Checkbox-1 -->
                                             </td>
                                         </tr>
                                     </template>
@@ -542,7 +544,7 @@
                   you can use custom content here to overwrite
                   default content
                 -->
-                <h3 slot="header">Are you sure you want to start the cup with these groups?</h3>
+                <h3 slot="header">Are you sure you want to start the Knock Out stage with these teams?</h3>
             </modal>
         </div>
     </main>
@@ -591,7 +593,7 @@
         {
             someChildMethod: function () {
                 //var data = 'test';
-                this.$parent.startcup(); // How do I call a parent method?
+                this.$parent.startKnockOut(); // How do I call a parent method?
             }
         }
     });
@@ -628,19 +630,50 @@
             x: 0,
 
 
-            groupNumbers: ["1","2"]
+            groupNumbers: ["1","2"],
 
+
+            playoffTeams: []
         },
 
         methods: {
+            startKnockOut: function () {
+                var teamArr = this.playoffTeams;
+                //alert(teamArr[1])
+                this.generateMatch(teamArr[0],teamArr[1],"quarterFinal1");
+                this.generateMatch(teamArr[2],teamArr[3],"quarterFinal2");
+                this.generateMatch(teamArr[4],teamArr[5],"quarterFinal3");
+                this.generateMatch(teamArr[6],teamArr[7],"quarterFinal4");
+                this.generateMatch(0,0,"semiFinal1");
+                this.generateMatch(0,0,"semiFinal2");
+
+                this.generateMatch(0,0,"final");
+            },
+            selectedTeams: function (teamID) {
+                //console.log(teamID)
+                var found = true;
+                for(var i=0;i<this.playoffTeams.length;i++){ //checks if the team is already present
+                    if(this.playoffTeams[i] ==teamID){
+                        found = false;
+                        this.playoffTeams.splice(i,1);
+                        break;
+                    }
+                }
+                if(found){ //if the team was not already present
+                    this.playoffTeams.push(teamID);
+                }
+            },
             redirect: function (groupNum) {
 
                 localStorage.setItem("group",groupNum);
                 window.location.href = "http://178.62.9.140/adminGroup.html";
 
             },
-            errorChecks: function () {
-
+            errorChecks: function () { //this is not really needed
+                if(this.playoffTeams.length !=8){
+                    alert("error you have not selected 8 teams")
+                    return
+                }
                 if(this.group1Info.length <3 && this.group1Info.length !=0){
                     alert("error some groups have less than 3 teams")
                     return
@@ -749,7 +782,10 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                     if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                        console.log(hTeamID+" VS "+ aTeamID+ "  created!")
+                        console.log(gametype +"   "+hTeamID+" VS "+ aTeamID+ "  created!")
+                        if(gametype== "final"){ //final is the last gametype called so that is when the next page can be started
+                            window.location.href = "http://178.62.9.140/adminPlayoffs.html";
+                        }
                     }
                 };
                 xhttp.open("POST", "http://178.62.9.140:3080/makeMatch/"+hTeamID+"/"+aTeamID+"/"+gametype, true);

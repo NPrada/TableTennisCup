@@ -36,9 +36,11 @@ table {
     background-color: cornflowerblue;
     height: 30px;
     width: 120px;
+    cursor:pointer;
 }
 .scorecell{
     background-color: lightcoral;
     height: 30px;
     width: 40px;
+    cursor:pointer;
 }

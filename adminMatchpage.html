@@ -1270,7 +1270,7 @@
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            //console.log(this.responseText);    //this is the raw data received
+                            console.log(this.responseText);    //this is the raw data received
                             //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
                             var data = tallier.parseMatchInfo(this.responseText);
                             manipulate(data);
@@ -1297,7 +1297,7 @@
                     function manipulate(json) {
 
                         niko.matchInfo = json; //the raw jason is stored here
-
+                        console.log(json[0].hteam)
                         niko.hteam = json[0].homeTeam;
                         niko.ateam = json[0].awayTeam;
                         niko.date = json[0].date.substring(0,json[0].date.search("T"));
@@ -1305,14 +1305,16 @@
                         niko.hTeamTitleScore = json[0].scores.substring(0 , json[0].scores.search("-"));
                         niko.aTeamTitleScore = json[0].scores.substring(json[0].scores.search("-")+1 , json[0].scores.length);
 
+                        niko.updateHomePlayerDropdowns(json[0].hteam);
+                        niko.updateAwayPlayerDropdowns(json[0].ateam);
+
                     }
                     this.fetchMatchInfo(matchID,manipulate);
                 }
 
             },
             created: function () {
-                this.updateHomePlayerDropdowns(1);
-                this.updateAwayPlayerDropdowns(2);
+
             },
             beforeMount: function () {
 

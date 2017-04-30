@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Include Material Design lite framework -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -23,11 +23,11 @@
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="adminpanel.html" class="mdl-layout__tab">Main panel</a>
             <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
-            <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
-            <a href="CupPage.html" class="mdl-layout__tab is-active">Playoffs</a>
-            <a href="#fixed-tab-5" class="mdl-layout__tab">Clubs</a>
-            <a href="#fixed-tab-6" class="mdl-layout__tab">Teams</a>
-            <a href="#fixed-tab-7" class="mdl-layout__tab">Players</a>
+            <a href="adminGroupstage.html" class="mdl-layout__tab is-active" >Group stage</a>
+            <a href="adminPlayoffs.html" class="mdl-layout__tab">Playoffs</a>
+            <a href="adminClubs.html" class="mdl-layout__tab">Clubs</a>
+            <a href="adminTeams.html" class="mdl-layout__tab">Teams</a>
+            <a href="adminPlayers.html" class="mdl-layout__tab">Players</a>
 
         </div>
     </header>
@@ -44,12 +44,12 @@
         </nav>
     </div>
     </header>
-    <main class="mdl-layout__content">
-
+    <main class="mdl-layout__content" id="app">
+      <br><br>
         <table>
             <tr>                                            <!-- Quarterfinal 1 -->
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">123</td>
+                <td v-on:click="redirect(quarterFinal1[0].id)" class="namecell">{{quarterFinal1[0].homeTeam}}</td>
+                <td v-on:click="redirect(quarterFinal1[0].id)" class="scorecell">{{this.score(quarterFinal1[0].scores,"h")}}</td>
                 <td class="bb"></td>
                 <td></td>
                 <td></td>
@@ -59,9 +59,9 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr >
-                <td class="namecell">Leicester</td>
-                <td class="scorecell">233</td>
+            <tr>
+                <td v-on:click="redirect(quarterFinal1[0].id)" class="namecell">{{quarterFinal1[0].awayTeam}}</td>
+                <td v-on:click="redirect(quarterFinal1[0].id)" class="scorecell">{{this.score(quarterFinal1[0].scores,"a")}}</td>
                 <td class="br"></td>
                 <td></td>
                 <td></td>
@@ -76,8 +76,8 @@
                 <td></td>
                 <td class="br"></td>
                 <td class="bb"></td>
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">234</td>
+                <td v-on:click="redirect(semiFinal1[0].id)" class="namecell">{{semiFinal1[0].homeTeam}}</td>
+                <td v-on:click="redirect(semiFinal1[0].id)" class="scorecell">{{this.score(semiFinal1[0].scores,"h")}}</td>
                 <td class="bb"></td>
                 <td></td>
                 <td></td>
@@ -88,16 +88,16 @@
                 <td></td>
                 <td class="br"></td>
                 <td ></td>
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">234</td>
+                <td v-on:click="redirect(semiFinal1[0].id)" class="namecell">{{semiFinal1[0].awayTeam}}</td>
+                <td v-on:click="redirect(semiFinal1[0].id)" class="scorecell">{{this.score(semiFinal1[0].scores,"a")}}</td>
                 <td class="br"></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr >                                           <!-- Quarterfinal 2 -->
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">123</td>
+                <td v-on:click="redirect(quarterFinal2[0].id)" class="namecell">{{quarterFinal2[0].homeTeam}}</td>
+                <td v-on:click="redirect(quarterFinal2[0].id)" class="scorecell">{{this.score(quarterFinal2[0].scores,"h")}}</td>
                 <td class="bb br"></td>
                 <td></td>
                 <td></td>
@@ -108,8 +108,8 @@
                 <td></td>
             </tr>
             <tr >
-                <td class="namecell">Leicester</td>
-                <td class="scorecell">233</td>
+                <td v-on:click="redirect(quarterFinal2[0].id)" class="namecell">{{quarterFinal2[0].awayTeam}}</td>
+                <td v-on:click="redirect(quarterFinal2[0].id)" class="scorecell">{{this.score(quarterFinal2[0].scores,"a")}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -128,8 +128,8 @@
                 <td></td>
                 <td class="br"></td>
                 <td class="bb"></td>
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">123</td>
+                <td v-on:click="redirect(final[0].id)" class="namecell">{{final[0].homeTeam}}</td>
+                <td v-on:click="redirect(final[0].id)" class="scorecell">{{this.score(final[0].scores,"h")}}</td>
             </tr>
             <tr >
 
@@ -141,12 +141,12 @@
                 <td></td>
                 <td class="br"></td>
                 <td></td>
-                <td class="namecell">Leicester</td>
-                <td class="scorecell">233</td>
+                <td v-on:click="redirect(final[0].id)" class="namecell">{{final[0].awayTeam}}</td>
+                <td v-on:click="redirect(final[0].id)" class="scorecell">{{this.score(final[0].scores,"a")}}</td>
             </tr>
             <tr >                                               <!-- Quarterfinal 3 -->
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">123</td>
+                <td v-on:click="redirect(quarterFinal3[0].id)" class="namecell">{{quarterFinal3[0].homeTeam}}</td>
+                <td v-on:click="redirect(quarterFinal3[0].id)" class="scorecell">{{this.score(quarterFinal3[0].scores,"h")}}</td>
                 <td class="bb"></td>
                 <td></td>
                 <td></td>
@@ -157,8 +157,8 @@
                 <td></td>
             </tr>
             <tr >
-                <td class="namecell">Leicester</td>
-                <td class="scorecell">233</td>
+                <td v-on:click="redirect(quarterFinal3[0].id)" class="namecell">{{quarterFinal3[0].awayTeam}}</td>
+                <td v-on:click="redirect(quarterFinal3[0].id)" class="scorecell">{{this.score(quarterFinal3[0].scores,"a")}}</td>
                 <td class="br"></td>
                 <td></td>
                 <td></td>
@@ -173,8 +173,8 @@
                 <td></td>
                 <td class="br"></td>
                 <td class="bb"></td>
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">234</td>
+                <td v-on:click="redirect(semiFinal2[0].id)" class="namecell">{{semiFinal2[0].homeTeam}}</td>
+                <td v-on:click="redirect(semiFinal2[0].id)" class="scorecell">{{this.score(semiFinal2[0].scores,"h")}}</td>
                 <td class="br bb"></td>
                 <td></td>
                 <td></td>
@@ -185,16 +185,16 @@
                 <td></td>
                 <td class="br"></td>
                 <td ></td>
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">234</td>
+                <td v-on:click="redirect(semiFinal2[0].id)" class="namecell">{{semiFinal2[0].awayTeam}}</td>
+                <td v-on:click="redirect(semiFinal2[0].id)" class="scorecell">{{this.score(semiFinal2[0].scores,"a")}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr >                                               <!-- Quarterfinal 4 -->
-                <td class="namecell">Loughborugh</td>
-                <td class="scorecell">123</td>
+                <td v-on:click="redirect(quarterFinal4[0].id)" class="namecell">{{quarterFinal4[0].homeTeam}}</td>
+                <td v-on:click="redirect(quarterFinal4[0].id)" class="scorecell">{{this.score(quarterFinal1[0].scores,"h")}}</td>
                 <td class="bb br"></td>
                 <td></td>
                 <td></td>
@@ -205,8 +205,8 @@
                 <td></td>
             </tr>
             <tr >
-                <td class="namecell">Leicester</td>
-                <td class="scorecell">233</td>
+                <td v-on:click="redirect(quarterFinal4[0].id)" class="namecell">{{quarterFinal4[0].awayTeam}}</td>
+                <td v-on:click="redirect(quarterFinal4[0].id)" class="scorecell">{{this.score(quarterFinal1[0].scores,"a")}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -220,5 +220,97 @@
 
     </main>
 </div>
+<script src='https://unpkg.com/vue-select@latest'></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>  <!-- include vue.js -->
+<script>
+    //Vue.component('v-select', VueSelect.VueSelect);
+
+    // start app
+    new Vue({
+        el: '#app',
+        data: {
+
+            quarterFinal1:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            quarterFinal2:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            quarterFinal3:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            quarterFinal4:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            semiFinal1:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            semiFinal2:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+            final:[{"id":"0","date":"0000-00-00","postponed":"0000-00-00","homeTeam":"NoTeam","awayTeam":"NoTeam","scores":""}],
+        },
+        methods: {
+            redirect: function (matchID) {
+                localStorage.setItem("matchID",0); //used to clear it just in case something goes wrong
+                localStorage.setItem("matchID",matchID);
+                window.location.href = "http://178.62.9.140/adminMatchpage.html";
+            },
+            score: function (score,side) {
+                var splitScore=0;
+                if(score != ""){    //if there is a score
+                    if(side == "h"){    //if the score is for the home
+                        splitScore = score.substring(0, score.indexOf("-"))
+                    }else {
+                        splitScore =score.substring(score.indexOf("-")+1, score.length)
+                    }
+                }
+
+              return splitScore
+            },
+            fetchMatches: function (gametype) { //this is used to fetch the data of specific playoff games
+                var global = this;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log(this.responseText);
+                        var rawdata = this.responseText;
+                        var json = JSON.parse(rawdata);
+                        console.log(gametype)
+                        switch (gametype) {
+                            case "quarterFinal1":
+                                global.quarterFinal1 = json
+                                break;
+                            case "quarterFinal2":
+                                global.quarterFinal2 = json
+                                break;
+                            case "quarterFinal3":
+                                global.quarterFinal3 = json
+                                break;
+                            case "quarterFinal4":
+                                global.quarterFinal4 = json
+                                break;
+                            case "semiFinal1":
+                                global.semiFinal1 = json
+                                break;
+                            case "semiFinal2":
+                                global.semiFinal2 = json
+                                break;
+                            case "final":
+                                global.final = json
+                        }
+
+                    }
+                };
+
+                xhttp.open("GET", "http://178.62.9.140:3080/groupMatches/"+gametype, true);
+                xhttp.send();
+
+            }
+        },
+        created: function () {
+            this.fetchMatches("quarterFinal1");
+            this.fetchMatches("quarterFinal2");
+            this.fetchMatches("quarterFinal3");
+            this.fetchMatches("quarterFinal4");
+            this.fetchMatches("semiFinal1");
+            this.fetchMatches("semiFinal2");
+            this.fetchMatches("final");
+        },
+        mounted: function () {
+
+        }
+
+    })
+</script>
 </body>
 </html>

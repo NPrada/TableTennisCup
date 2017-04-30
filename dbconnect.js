@@ -222,6 +222,26 @@ app.post("/newTeam/:clubID/:teamName/:teamCaptainId/:contactEmail", function (re
     });
 
 });
+app.post("/newPlayer/:teamID/:name/:handicap", function (req,res) {
+
+    var teamID     = req.params.teamID;
+    var name       = req.params.name;
+    var handicap   = handicap;
+
+    connection.query("INSERT INTO conp2.players (teamID,name,handicap) VALUES ('"+teamID+"', '"+name+"', '"+handicap+"')", function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+
+});
 //the next three middlewares are used to fetch all the clubs teams and players
 //fethes the entire clubs table
 app.get("/allClubs", function (req,res) {
@@ -233,7 +253,7 @@ app.get("/allClubs", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -250,7 +270,7 @@ app.get("/allTeams", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -260,14 +280,14 @@ app.get("/allTeams", function (req,res) {
 //fethes the entire players table
 app.get("/allPlayers", function (req,res) {
 
-    connection.query("SELECT * FROM players" ,function (error, rows, fields){
+    connection.query("SELECT players.id, players.teamID, players.handicap, players.name, t.teamName AS teamName FROM players INNER JOIN teams t ON t.id=players.teamID" ,function (error, rows, fields){
 
         // callback aka when the query is done this fires
         if (!!error){
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -287,7 +307,7 @@ app.get("/playersOfTeam/:teamID", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -315,7 +335,7 @@ app.post("/updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h
                 console.log("Error in the query");
                 console.log(error);
             } else {
-                console.log(rows);
+                //console.log(rows);
                 console.log("allMatches sets Successful query");
                 res.send(rows);
             }
@@ -346,7 +366,7 @@ app.post("/updateDoubleSet/:setID/:hPlayer1ID/:hPlayer2ID/:aPlayer1ID/:aPlayer2I
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -364,7 +384,7 @@ app.get("/groupInfo/:groupNum", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -381,7 +401,7 @@ app.get("/2playerTeams", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -399,7 +419,7 @@ app.post("/addTeamToGroup/:group/:teamID", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -415,7 +435,7 @@ app.post("/removeFromGroup/:teamID", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
@@ -433,8 +453,8 @@ app.post("/makeMatch/:hteamID/:ateamID/:gametype", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
-            console.log("allMatches sets Successful query");
+           //console.log(rows);
+            console.log("the "+gametype+" was made");
             res.send(rows);
         }
     });
@@ -453,10 +473,11 @@ app.get("/groupMatches/:group", function (req,res) {
             console.log("Error in the query");
             console.log(error);
         } else {
-            console.log(rows);
+            //console.log(rows);
             console.log("allMatches sets Successful query");
             res.send(rows);
         }
     });
 });
+
 app.listen(port);

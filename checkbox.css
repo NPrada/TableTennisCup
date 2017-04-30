@@ -1,0 +1,289 @@
+
+.rkmd-checkbox {
+  color: #818181;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: .5px;
+}
+.rkmd-checkbox .input-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  vertical-align: -9px;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] + .checkbox:before {
+  position: absolute;
+  left: 4px;
+  bottom: 8px;
+  width: 18px;
+  height: 18px;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: -6px;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  z-index: 1;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] + .checkbox:before {
+  content: "\e835";
+  color: #717171;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:checked + .checkbox:before {
+  content: "\e834";
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:active:not(:disabled) + .checkbox:before {
+  -webkit-transform: scale3d(0.88, 0.88, 1);
+          transform: scale3d(0.88, 0.88, 1);
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:disabled + .checkbox:before {
+  color: rgba(0, 0, 0, 0.157) !important;
+}
+.rkmd-checkbox.checkbox-light label, .rkmd-checkbox.checkbox-light .label {
+  color: #FFF;
+}
+.rkmd-checkbox.checkbox-light input[type="checkbox"] + .checkbox:before {
+  color: #FFF;
+}
+.rkmd-checkbox.checkbox-light input[type="checkbox"]:disabled + .checkbox:before {
+  color: #5d5d5d !important;
+}
+.rkmd-checkbox.checkbox-light.checkbox-rotate input[type="checkbox"] + .checkbox:before {
+  border-color: #FFF;
+}
+.rkmd-checkbox.checkbox-light.checkbox-rotate input[type="checkbox"]:disabled + .checkbox:before {
+  border-color: #5d5d5d !important;
+}
+.rkmd-checkbox label, .rkmd-checkbox .label {
+  cursor: pointer;
+}
+
+/* ----------------------------------------------------------------------
+  Rotate Checkbox - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox {
+  cursor: pointer;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox:before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #717171;
+  border-radius: 2px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  z-index: 1;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]:checked + .checkbox:before {
+  left: 11px;
+  width: 12px;
+  height: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-top: transparent;
+  border-left: transparent;
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+  border-radius: 1px;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]:disabled + .checkbox:before {
+  border-color: rgba(0, 0, 0, 0.157) !important;
+}
+
+/* ----------------------------------------------------------------------
+  Normal Checkbox Color - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-teal input[type="checkbox"]:checked + .checkbox:before {
+  color: #009688;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-lightBlue input[type="checkbox"]:checked + .checkbox:before {
+  color: #03a9f4;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-green input[type="checkbox"]:checked + .checkbox:before {
+  color: #4caf50;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-amber input[type="checkbox"]:checked + .checkbox:before {
+  color: #ffc107;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-orange input[type="checkbox"]:checked + .checkbox:before {
+  color: #ff9800;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-cyan input[type="checkbox"]:checked + .checkbox:before {
+  color: #00bcd4;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-pink input[type="checkbox"]:checked + .checkbox:before {
+  color: #e91e63;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-deepPurple input[type="checkbox"]:checked + .checkbox:before {
+  color: #673ab7;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-indigo input[type="checkbox"]:checked + .checkbox:before {
+  color: #3f51b5;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-red input[type="checkbox"]:checked + .checkbox:before {
+  color: #f44336;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-yellow input[type="checkbox"]:checked + .checkbox:before {
+  color: #ffeb3b;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-lime input[type="checkbox"]:checked + .checkbox:before {
+  color: #cddc39;
+}
+.rkmd-checkbox:not(.checkbox-rotate) .checkbox-brown input[type="checkbox"]:checked + .checkbox:before {
+  color: #795548;
+}
+
+/* ----------------------------------------------------------------------
+  Rotate Checkbox Color - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-rotate .checkbox-teal input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #009688;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-lightBlue input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #03a9f4;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-green input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #4caf50;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-amber input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ffc107;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-orange input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ff9800;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-cyan input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #00bcd4;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-pink input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #e91e63;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-deepPurple input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #673ab7;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-indigo input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #3f51b5;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-red input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #f44336;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-yellow input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ffeb3b;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-lime input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #cddc39;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-brown input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #795548;
+}
+
+/* ----------------------------------------------------------------------
+  Checkbox Ripple Effect - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-ripple .ripple {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.rkmd-checkbox.checkbox-ripple .ripple.animated {
+  display: block;
+  -webkit-animation-name: checkbox-ripple;
+          animation-name: checkbox-ripple;
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+@-webkit-keyframes checkbox-ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+@keyframes checkbox-ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+/* ----------------------------------------------------------------------
+  Checkbox Ripple Effect Color - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox .checkbox-teal .ripple {
+  background-color: #009688 !important;
+}
+.rkmd-checkbox .checkbox-lightBlue .ripple {
+  background-color: #03a9f4 !important;
+}
+.rkmd-checkbox .checkbox-green .ripple {
+  background-color: #4caf50 !important;
+}
+.rkmd-checkbox .checkbox-amber .ripple {
+  background-color: #ffc107 !important;
+}
+.rkmd-checkbox .checkbox-orange .ripple {
+  background-color: #ff9800 !important;
+}
+.rkmd-checkbox .checkbox-cyan .ripple {
+  background-color: #00bcd4 !important;
+}
+.rkmd-checkbox .checkbox-pink .ripple {
+  background-color: #e91e63 !important;
+}
+.rkmd-checkbox .checkbox-deepPurple .ripple {
+  background-color: #673ab7 !important;
+}
+.rkmd-checkbox .checkbox-indigo .ripple {
+  background-color: #3f51b5 !important;
+}
+.rkmd-checkbox .checkbox-red .ripple {
+  background-color: #f44336 !important;
+}
+.rkmd-checkbox .checkbox-yellow .ripple {
+  background-color: #ffeb3b !important;
+}
+.rkmd-checkbox .checkbox-lime .ripple {
+  background-color: #cddc39 !important;
+}
+.rkmd-checkbox .checkbox-brown .ripple {
+  background-color: #795548 !important;
+}

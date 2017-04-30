@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Material Design lite framework -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <title>Lughborough Table Tennis Cup</title>
+    <link rel="stylesheet" type="text/css" href="CupPage.css">
+    <link rel="stylesheet" type="text/css" href="adminpanel.css">
+    <link rel="stylesheet" type="text/css" href="Group1.css">
+
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Admin Page</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="adminpanel.html" class="mdl-layout__tab ">Main panel</a>
+            <a href="adminFixtures.html" class="mdl-layout__tab">All Fixtures</a>
+            <a href="NewCup.html" class="mdl-layout__tab" >Group stage</a>
+            <a href="CupPage.html" class="mdl-layout__tab">Playoffs</a>
+            <a href="adminClubs.html" class="mdl-layout__tab ">Clubs</a>
+            <a href="adminTeams.html" class="mdl-layout__tab is-active">Teams</a>
+            <a href="adminPlayers.html" class="mdl-layout__tab">Players</a>
+
+        </div>
+
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+    </div>
+    <main class="mdl-layout__content" id="app">
+        <!-- Main section of the page -->
+
+        <div class="page-content">
+            <h3>Create a team:</h3>
+            <table class="mdl-data-table mdl-js-data-table Input-table">
+
+                <tbody>
+                <tr>
+                    <td  class="mdl-data-table__cell--non-numeric" >
+                        <b>Part of Team</b>
+                        <br>
+                        <div class="mdl-selectfield mdl-js-selectfield">
+                            <v-select v-model="allTeamsSelected" label="teamName" :options="allTeams"></v-select>
+                        </div>
+                    </td>
+                    <td  class="mdl-data-table__cell--non-numeric">
+                        <form action="#" style="width: 150px">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="sample3" v-model="newFirstName">
+                                <label class="mdl-textfield__label" for="sample3">First Name...</label>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" style="width: 150px">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="contactEmail" v-model="newSurname">
+                                <label class="mdl-textfield__label" for="contactEmail">Surname...</label>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" style="width: 100px">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" v-model="handicap">
+                                <label class="mdl-textfield__label" for="sample4">Handicap...</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                        </form>
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="newPlayer(allTeamsSelected.id, newFirstName,newSurname, handicap)">
+                            Submit
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+        </div>
+        <br>
+        <div class="fixtures-table-container mdl-card__supporting-text">
+            <table class="mdl-data-table mdl-js-data-table">
+                <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">#</th>
+                    <th class="mdl-data-table__cell--non-numeric">Team Name</th>
+                    <th class="mdl-data-table__cell--non-numeric">Name</th>
+                    <th class="mdl-data-table__cell--non-numeric">Handicap</th>
+                    <!--<th class="mdl-data-table__cell&#45;&#45;non-numeric">Email</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <template v-for="(item,index) in allPlayers">
+                    <tr style="cursor: pointer">
+                        <td class="mdl-data-table__cell--non-numeric">{{index+1}}</td>
+                        <td class="mdl-data-table__cell--non-numeric" >{{item.teamName}}</td>
+                        <td class="mdl-data-table__cell--non-numeric" >{{item.name}}</td>
+                        <td class="mdl-data-table__cell--non-numeric" >{{item.handicap}}</td>
+                        <!--<td class="mdl-data-table__cell&#45;&#45;non-numeric" >{{item.contactEmail}}</td>-->
+                        <!--<td class="mdl-data-table__cell&#45;&#45;non-numeric" v-on:click="directToMatchpage(item.id)">{{item.scores}}</td>-->
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src='https://unpkg.com/vue@latest'></script>
+    <script src='https://unpkg.com/vue-select@latest'></script>
+
+    <script>
+        Vue.component('v-select', VueSelect.VueSelect);
+
+        var vueApp = new Vue ({
+            el: '#app',
+
+            data: {
+
+                allClubs:[],
+                allClubsSelected:null,
+
+                allTeams:[],
+                allTeamsSelected:null,
+
+                allPlayers:[],
+                allPlayersSelected:null,
+
+                //data used to send the new player request
+                newSurname:null,
+                newFirstName:null,
+                handicap:null,
+                newName:"",
+                newTeamName:"",
+                //newTeamCaptainID:0,
+
+            },
+
+            methods: {
+
+                //adds a new club to the database
+
+                newPlayer: function(teamID, firstName, surname, handicap){
+                    var global = this;
+                    var name = firstName+" "+surname;
+                    console
+//                    console.log(teamID)
+//                    console.log(firstName+" "+surname)
+//                    console.log(handicap)
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            location.reload();
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/newPlayer/"+teamID+"/"+name+"/"+handicap, true);
+                    xhttp.send();
+                },
+
+//                fetchClubs: function(){
+//
+//                    var global = this;
+//
+//                    var xhttp = new XMLHttpRequest();
+//                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+//                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+//                            //console.log(this.responseText);
+//                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+//                            var rawdata = this.responseText;
+//                            var json = JSON.parse(rawdata); //parses the query result
+//
+//                            global.allClubs = json;        //stores the entire json structure that was returned
+//                        }
+//                    };
+//
+//                    xhttp.open("GET", "http://178.62.9.140:3080/allClubs", true);
+//                    xhttp.send();
+//                },
+
+                fetchTeams: function () {
+                    var global = this;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var rawdata = this.responseText;
+                            var json = JSON.parse(rawdata); //parses the query result
+
+                            global.allTeams = json;        //stores the entire json structure that was returned
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allTeams", true);
+                    xhttp.send();
+                },
+
+                fetchPlayers: function () {
+                    var global = this;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            console.log(this.responseText);
+                            //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
+                            var rawdata = this.responseText;
+                            var json = JSON.parse(rawdata); //parses the query result
+
+                            global.allPlayers = json;        //stores the entire json structure that was returned
+                        }
+                    };
+
+                    xhttp.open("GET", "http://178.62.9.140:3080/allPlayers", true);
+                    xhttp.send();
+                },
+
+                refreshDropdowns: function(){
+                    //this.fetchClubs();
+                    this.fetchTeams();
+                    this.fetchPlayers();
+                    location.reload();
+                }
+
+            },
+            mounted: function () {
+                //this.fetchClubs();
+                this.fetchTeams();
+                this.fetchPlayers();
+
+            }
+
+        })
+    </script>
+</div>
+</body>
+</html>
