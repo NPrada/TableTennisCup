@@ -439,4 +439,24 @@ app.post("/makeMatch/:hteamID/:ateamID/:gametype", function (req,res) {
         }
     });
 });
+app.get("/groupMatches/:group", function (req,res) {
+
+    var group =   req.params.group;
+
+    connection.query("SELECT matches.id, matches.date, matches.postponed, ht.teamName AS homeTeam, at.teamName AS awayTeam, matches.scores " +
+    "FROM matches " +
+    "INNER JOIN teams ht ON ht.id=matches.hteam " +
+    "INNER JOIN teams at ON at.id=matches.ateam WHERE matches.gametype ='"+group+"'" ,function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+});
 app.listen(port);
