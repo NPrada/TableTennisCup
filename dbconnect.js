@@ -421,4 +421,22 @@ app.post("/removeFromGroup/:teamID", function (req,res) {
         }
     });
 });
+app.post("/makeMatch/:hteamID/:ateamID/:gametype", function (req,res) {
+
+    var hteamID =   req.params.hteamID;
+    var ateamID =   req.params.ateamID;
+    var gametype = req.params.gametype;
+
+    connection.query("INSERT INTO matches (hteam, ateam,gametype) VALUES ('"+hteamID+"', '"+ateamID+"','"+gametype+"')", function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+});
 app.listen(port);

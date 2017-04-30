@@ -54,7 +54,21 @@
 <div style="width: 100%; height: 100%">
     <main style="width:80%; margin-right: 10%;margin-left: 10%" class="mdl-layout__content">
         <div id="app">
-            <h3>The cup has just started please set up the groups</h3>
+            <table>
+                <tr>
+                    <td>
+                        <h3>The cup has just started please set up the groups</h3>
+                    </td>
+                    <td style="width: 200px"></td>
+                    <td>
+                        <button id="show-modal" @click="errorChecks" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
+                            Start Cup
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <br><br>
             <table style="width: 100%">
                 <tr>
                     <td>Add team:   </td>
@@ -74,7 +88,7 @@
                     </td>
                     <td style="width: 10px"></td>
                     <td>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" v-on:click="addTeamToGroup(groupselected,teamselected.id)">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button mdl-js-ripple-effect" v-on:click="addTeamToGroup(groupselected,teamselected.id)">
                             Submit
                         </button>
                     </td>
@@ -523,12 +537,64 @@
                     </td>
                 </tr>
             </table>
+            <modal v-if="showModal" @close="showModal = false" startcup=startcup>
+                <!--
+                  you can use custom content here to overwrite
+                  default content
+                -->
+                <h3 slot="header">Are you sure you want to start the cup with these groups?</h3>
+            </modal>
         </div>
     </main>
 </div>
 
+<script type="text/x-template" id="modal-template">
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+
+                    <div class="modal-header">
+                        <slot name="header">
+                        </slot>
+                    </div>
+
+                    <div class="modal-body">
+                        <slot name="body">
+                       you can't go back!
+                        </slot>
+                    </div>
+
+                    <div class="modal-footer">
+                        <slot name="footer">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button mdl-js-ripple-effect" @click="$emit('close')">
+                                NO
+                            </button>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button mdl-js-ripple-effect" @click="someChildMethod">
+                                YES
+                            </button>
+
+                        </slot>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+</script>
+
 <script src='https://unpkg.com/vue-select@latest'></script>
 <script>
+    Vue.component('modal',{
+        template: '#modal-template',
+        props: ['startcup'],
+        methods:
+        {
+            someChildMethod: function () {
+                //var data = 'test';
+                this.$parent.startcup(); // How do I call a parent method?
+            }
+        }
+    });
 
     Vue.component('v-select', VueSelect.VueSelect);
 
@@ -567,6 +633,122 @@
         },
 
         methods: {
+            errorChecks: function () {
+
+                if(this.group1Info.length <3 && this.group1Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group2Info.length <3 && this.group2Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group3Info.length <3 && this.group3Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group4Info.length <3 && this.group4Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group5Info.length <3 && this.group5Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group6Info.length <3 && this.group6Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group7Info.length <3 && this.group7Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+                if(this.group8Info.length <3 && this.group8Info.length !=0){
+                    alert("error some groups have less than 3 teams")
+                    return
+                }
+
+                this.showModal = true
+            },
+            startcup: function () {
+                var i =0;
+                var k =0;
+                //this section generates all the needed matches for each group
+                for(i=0;i<this.group1Info.length;i++){
+                    for(k=i+1;k<this.group1Info.length;k++){
+                        if(this.group1Info[i].teamID != this.group1Info[k].teamID){
+                            this.generateMatch(this.group1Info[i].teamID,this.group1Info[k].teamID,"group1")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group2Info.length;i++){
+                    for(k=i+1;k<this.group2Info.length;k++){
+                        if(this.group2Info[i].teamID != this.group2Info[k].teamID){
+                            this.generateMatch(this.group2Info[i].teamID,this.group2Info[k].teamID,"group2")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group3Info.length;i++){
+                    for(k=i+1;k<this.group3Info.length;k++){
+                        if(this.group3Info[i].teamID != this.group3Info[k].teamID){
+                            this.generateMatch(this.group3Info[i].teamID,this.group3Info[k].teamID,"group3")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group4Info.length;i++){
+                    for(k=i+1;k<this.group4Info.length;k++){
+                        if(this.group4Info[i].teamID != this.group4Info[k].teamID){
+                            this.generateMatch(this.group4Info[i].teamID,this.group4Info[k].teamID,"group4")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group5Info.length;i++){
+                    for(k=i+1;k<this.group5Info.length;k++){
+                        if(this.group5Info[i].teamID != this.group5Info[k].teamID){
+                            this.generateMatch(this.group5Info[i].teamID,this.group5Info[k].teamID,"group5")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group6Info.length;i++){
+                    for(k=i+1;k<this.group6Info.length;k++){
+                        if(this.group6Info[i].teamID != this.group6Info[k].teamID){
+                            this.generateMatch(this.group6Info[i].teamID,this.group6Info[k].teamID,"group6")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group7Info.length;i++){
+                    for(k=i+1;k<this.group7Info.length;k++){
+                        if(this.group7Info[i].teamID != this.group7Info[k].teamID){
+                            this.generateMatch(this.group7Info[i].teamID,this.group7Info[k].teamID,"group7")
+                        }
+                    }
+                }
+
+                for(i=0;i<this.group8Info.length;i++){
+                    for(k=i+1;k<this.group8Info.length;k++){
+                        if(this.group8Info[i].teamID != this.group8Info[k].teamID){
+                            this.generateMatch(this.group8Info[i].teamID,this.group8Info[k].teamID,"group8")
+                        }
+                    }
+                }
+
+            },
+            generateMatch: function(hTeamID,aTeamID,gametype){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log(hTeamID+" VS "+ aTeamID+ "  created!")
+                    }
+                };
+                xhttp.open("POST", "http://178.62.9.140:3080/makeMatch/"+hTeamID+"/"+aTeamID+"/"+gametype, true);
+                xhttp.send();
+            },
             fetchTeams: function () {
                 var global = this;
 
