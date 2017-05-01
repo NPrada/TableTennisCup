@@ -59,7 +59,7 @@ app.get("/matches/:matchID", function (req,res) {
 
     var matchID = req.params.matchID;           //this fetches the variable value for the query
 
-    connection.query("SELECT matches.date, matches.postponed, matches.scores,  matches.hteam, ht.teamName AS homeTeam, matches.ateam, at.teamName AS awayTeam " +
+    connection.query("SELECT matches.date, matches.postponed, matches.scores,  matches.hteam,matches.gametype, ht.teamName AS homeTeam, matches.ateam, at.teamName AS awayTeam " +
         "FROM matches " +
         "INNER JOIN teams ht ON ht.id=matches.hteam " +
         "INNER JOIN teams at ON at.id=matches.ateam " +
@@ -82,8 +82,8 @@ app.get("/singleSets/:matchID", function (req,res) {
     connection.query("SELECT singleset.id, singleset.matchid, p2.name AS hplayer, p2.handicap AS hhandicap,  " +
         "p1.name AS aplayer, p1.handicap AS ahandicap, singleset.g1h, singleset.g1a, singleset.g2h, singleset.g2a, " +
         "singleset.g3h, singleset.g3a, singleset.g4h, singleset.g4a FROM singleset " +
-        "INNER JOIN players p1 ON p1.id=singleset.aplayer " +
-        "INNER JOIN players p2 ON p2.id=singleset.hplayer " +
+        "LEFT OUTER JOIN players p1 ON p1.id=singleset.aplayer " +
+        "LEFT OUTER JOIN players p2 ON p2.id=singleset.hplayer " +
         "WHERE singleset.matchid="+matchID, function (error, rows, fields){
 
         // callback aka when the query is done this fires
@@ -92,7 +92,7 @@ app.get("/singleSets/:matchID", function (req,res) {
             console.log(error);
         } else {
             //console.log(rows);
-            console.log("Single Sets Successful query");
+            console.log("Single Sets Successful query for matchID: "+matchID);
             res.send(rows);
         }
     });
@@ -107,8 +107,8 @@ app.get("/doubleSets/:matchID", function (req,res) {
         "p2.name AS hplayer2, p2.handicap AS hhandicap2, p3.name AS aplayer1,p3.handicap AS ahandicap1, " +
         "p4.name AS aplayer2,p4.handicap AS ahandicap2, doubleset.g1h, doubleset.g1a, doubleset.g2h, " +
         "doubleset.g2a, doubleset.g3h, doubleset.g3a, doubleset.g4h, doubleset.g4a FROM doubleset " +
-        "INNER JOIN players p1 ON p1.id=doubleset.hP1 INNER JOIN players p2 ON p2.id=doubleset.hP2 " +
-        "INNER JOIN players p3 ON p3.id=doubleset.aP1 INNER JOIN players p4 ON p4.id=doubleset.aP2 " +
+        "LEFT OUTER JOIN players p1 ON p1.id=doubleset.hP1 LEFT OUTER JOIN players p2 ON p2.id=doubleset.hP2 " +
+        "LEFT OUTER JOIN players p3 ON p3.id=doubleset.aP1 LEFT OUTER JOIN players p4 ON p4.id=doubleset.aP2 " +
         "WHERE doubleset.matchID="+matchID, function (error, rows, fields){
 
         // callback aka when the query is done this fires
@@ -156,7 +156,7 @@ app.post("/updateMatchDate/matchID/:matchID/newDate/:newDate", function (req,res
         } else {
             console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 
@@ -176,7 +176,7 @@ app.post("/updateMatchScore/matchID/:matchID/newScore/:newScore", function (req,
         } else {
             console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 
@@ -195,7 +195,7 @@ app.post("/newClub/:clubName", function (req,res) {
         } else {
             console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 
@@ -217,7 +217,7 @@ app.post("/newTeam/:clubID/:teamName/:teamCaptainId/:contactEmail", function (re
         } else {
             console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+           // res.send(rows);
         }
     });
 
@@ -237,7 +237,7 @@ app.post("/newPlayer/:teamID/:name/:handicap", function (req,res) {
         } else {
             console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 
@@ -336,8 +336,8 @@ app.post("/updateSingleSet/:setID/:hPlayerID/:aPlayerID/:g1h/:g1a/:g2h/:g2a/:g3h
                 console.log(error);
             } else {
                 //console.log(rows);
-                console.log("allMatches sets Successful query");
-                res.send(rows);
+                console.log("Single set of ID: "+setID+" has been updated");
+                //res.send(rows);
             }
         });
 });
@@ -367,8 +367,8 @@ app.post("/updateDoubleSet/:setID/:hPlayer1ID/:hPlayer2ID/:aPlayer1ID/:aPlayer2I
             console.log(error);
         } else {
             //console.log(rows);
-            console.log("allMatches sets Successful query");
-            res.send(rows);
+            console.log("Single set of ID:"+setID+"has been updated");
+            //res.send(rows);
         }
     });
 });
@@ -421,7 +421,7 @@ app.post("/addTeamToGroup/:group/:teamID", function (req,res) {
         } else {
             //console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 });
@@ -437,7 +437,7 @@ app.post("/removeFromGroup/:teamID", function (req,res) {
         } else {
             //console.log(rows);
             console.log("allMatches sets Successful query");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 });
@@ -455,7 +455,7 @@ app.post("/makeMatch/:hteamID/:ateamID/:gametype", function (req,res) {
         } else {
            //console.log(rows);
             console.log("the "+gametype+" was made");
-            res.send(rows);
+            //res.send(rows);
         }
     });
 });
@@ -479,5 +479,87 @@ app.get("/groupMatches/:group", function (req,res) {
         }
     });
 });
+app.get("/groupMatches/:group", function (req,res) {
 
+    var group =   req.params.group;
+
+    connection.query("SELECT matches.id, matches.date, matches.postponed, ht.teamName AS homeTeam, at.teamName AS awayTeam, matches.scores " +
+        "FROM matches " +
+        "INNER JOIN teams ht ON ht.id=matches.hteam " +
+        "INNER JOIN teams at ON at.id=matches.ateam WHERE matches.gametype ='"+group+"'" ,function (error, rows, fields){
+
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            //console.log(rows);
+            console.log("allMatches sets Successful query");
+            res.send(rows);
+        }
+    });
+});
+app.post("/updatePlayoffsMatch/:teamID/:side/:gametype", function (req,res) {
+
+    var teamID   = req.params.teamID;
+    var side     = req.params.side;
+    var gametype = req.params.gametype;
+
+    if(side == "h"){
+        connection.query("UPDATE matches SET  `hteam`='"+teamID+"' WHERE matches.gametype='"+gametype+"'", function (error, rows, fields){
+            // callback aka when the query is done this fires
+            if (!!error){
+                console.log("Error in the query");
+                console.log(error);
+            } else {
+                //console.log(rows);
+                console.log("the home team was sent on and added to the "+gametype)
+                //res.send(rows);
+            }
+        });
+    }else {
+        connection.query("UPDATE matches SET  `ateam`='"+teamID+"' WHERE matches.gametype='"+gametype+"'", function (error, rows, fields){
+            // callback aka when the query is done this fires
+            if (!!error){
+                console.log("Error in the query");
+                console.log(error);
+            } else {
+                //console.log(rows);
+                console.log("the away team was sent on and added to the "+gametype)
+                //res.send(rows);
+            }
+        });
+    }
+
+});
+app.post("/makeSingleSet/:matchID", function (req,res) {
+
+    var matchID =   req.params.matchID;
+
+    connection.query("INSERT INTO singleset (matchid) VALUES ('"+matchID+"')", function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            //console.log(rows);
+            res.send(rows);
+        }
+    });
+});
+app.post("/makeDoubleSet/:matchID", function (req,res) {
+
+    var matchID =   req.params.matchID;
+
+    connection.query("INSERT INTO doubleset  (matchid) VALUES ('"+matchID+"')", function (error, rows, fields){
+        // callback aka when the query is done this fires
+        if (!!error){
+            console.log("Error in the query");
+            console.log(error);
+        } else {
+            //console.log(rows);
+            res.send(rows);
+        }
+    });
+});
 app.listen(port);

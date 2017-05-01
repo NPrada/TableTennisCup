@@ -746,13 +746,46 @@
 
             },
             generateMatch: function(hTeamID,aTeamID,gametype){
+                var global = this
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                     if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                        console.log(hTeamID+" VS "+ aTeamID+ "  created!")
+                        //console.log(hTeamID+" VS "+ aTeamID+ "  created!")
+                        //console.log(this.responseText);
+                        var rawdata = this.responseText;
+                        var json = JSON.parse(rawdata);
+
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+
+                        global.generateDoubleSets(json.insertId);
+                        global.generateDoubleSets(json.insertId);
+                        console.log("sets Generated for "+json.insertId)
                     }
                 };
                 xhttp.open("POST", "http://178.62.9.140:3080/makeMatch/"+hTeamID+"/"+aTeamID+"/"+gametype, true);
+                xhttp.send();
+            },
+            generateSingleSets: function (matchID) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log()
+                    }
+                };
+                xhttp.open("POST", "http://178.62.9.140:3080/makeSingleSet/"+matchID, true);
+                xhttp.send();
+            },
+            generateDoubleSets: function (matchID) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+
+                    }
+                };
+                xhttp.open("POST", "http://178.62.9.140:3080/makeDoubleSet/"+matchID, true);
                 xhttp.send();
             },
             fetchTeams: function () {
@@ -761,7 +794,7 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                     if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                        console.log(this.responseText);
+                        //console.log(this.responseText);
                         //I parse the rawdata received into jason structure then I pass it into and call the manipulate function
                         var rawdata = this.responseText;
                         var json = JSON.parse(rawdata); //parses the query result
@@ -809,7 +842,7 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                     if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                        console.log(this.responseText);
+                        //console.log(this.responseText);
 
                         var rawdata = this.responseText;
                         var json = JSON.parse(rawdata); //parses the query result

@@ -49,7 +49,7 @@
     </header>
 
     <main class="mdl-layout__content" id="app">
-
+{{matchType}}
             <p class="date"> Date:
                 <input  style="font-size: 13px; width: 90px; " type="text"  v-model.lazy="date" placeholder="YYYY-MM-DD">
             </p>
@@ -84,7 +84,7 @@
 
 
 
-
+        {{matchType}}
         <div class="tableContainer">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" style="float: right" v-on:click="postSinglesSets">
                 Submit Changes
@@ -480,6 +480,8 @@
 
                 //the match ID
                 matchID:0,
+                //the match type
+                matchType:"",
 
                 //home player1 ID
                 hPlayer1IDsingles:null,
@@ -615,9 +617,87 @@
             },
 
             methods: {
+                matchTypeSpecificTasks: function (matchType) {
+                    switch (matchType) {
+                        case "quarterFinal1":
+                            alert(this.hteamID);
+                            //console.log(this.finalHomeScore+"-"+this.finalAwayScore);
+                            //this.WinnerForNextPlayoffs(this.hteamID,"semiFinal1","h")
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"semiFinal1","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"semiFinal1","a")
+                            }
+                            break;
+                        case "quarterFinal2":
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"semiFinal1","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"semiFinal1","a")
+                            }
+                            break;
+                        case "quarterFinal3":
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"semiFinal2","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"semiFinal2","a")
+                            }
+                            break;
+                        case "quarterFinal4":
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"semiFinal2","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"semiFinal2","a")
+                            }
+                            break;
+                        case "semiFinal1":
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"final","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"final","a")
+                            }
+                            break;
+                        case "semiFinal2":
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"final","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"final","a")
+                            }
+                            break;
+                        case "final":
+                            //day = "Saturday";
+                            break
+                        default:
+                            if(this.finalHomeScore>this.finalAwayScore){
+                                this.WinnerForNextPlayoffs(this.hteamID,"final","h")
+                            } else {
+                                this.WinnerForNextPlayoffs(this.ateamID,"final","a")
+                            }
+                    }
+                },
+                WinnerForNextPlayoffs: function(matchid,nextGametype,side){
+                    //var score = this.finalHomeScore+"-"+this.finalAwayScore;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                            //console.log(this.responseText);
+                            console.log("sent succesfully")
+                        }
+                    };
+
+                    xhttp.open("POST", "http://178.62.9.140:3080/updatePlayoffsMatch/"+matchid+"/"+side+"/"+nextGametype, true);
+                    xhttp.send();
+
+                },
+                updateGroupPoints: function () {
+
+                },
                 //this function starts a chain of functions that post any data that could have been changed back into the database
                 postSinglesSets: function () {
                     var global =this;
+
+                    //alert(this.set1ID)
+                    global.matchTypeSpecificTasks(this.matchType);
 
                     global.addup();
                     global.updateDate(global.date,global.matchID);
@@ -981,11 +1061,11 @@
 
                 //fetches the scores of all the sets
                 fetchSinglesSetsScore: function (matchID, manipulate) {
-
+                    //alert("matchID that is sent:"+matchID)
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                            //console.log(this.responseText);                                                         //raw data received is posted for debugging purposes
+                            console.log("The match Id that was sent is: "+matchID+" Single sets all info recieved:"+this.responseText);                                                         //raw data received is posted for debugging purposes
                             var data = tallier.parserSinglesSetsScore(this.responseText);
                             manipulate(data);
                         }
@@ -1014,7 +1094,7 @@
                     function manipulate(json) {     //this is where I do all the assigning of data to their correct places in the html
 
                         niko.matchID = localStorage.getItem("matchID");
-
+                        console.log("this should be set 1s ID: "+json[0].id)
                         niko.set1ID =json[0].id;
                         niko.set2ID =json[1].id;
                         niko.set3ID =json[2].id;
@@ -1211,10 +1291,6 @@
                             }
                         }
 
-
-
-
-
                         //total score before handicap and compensation
                         niko.homescore = niko.homeScore1 + niko.homeScore2 + niko.hdoubles ;
                         niko.awayscore = niko.awayScore1 + niko.awayScore2 + niko.adoubles ;
@@ -1295,9 +1371,13 @@
                 updateMatchInfo: function (matchID) {
                     var niko = this;
                     function manipulate(json) {
-
+                        //alert(json[0].gametype)
                         niko.matchInfo = json; //the raw jason is stored here
-                        console.log(json[0].hteam)
+                        niko.matchType = json[0].gametype //assigns the match type
+
+                        niko.hteamID = json[0].hteam;
+                        niko.ateamID = json[0].ateam;
+
                         niko.hteam = json[0].homeTeam;
                         niko.ateam = json[0].awayTeam;
                         niko.date = json[0].date.substring(0,json[0].date.search("T"));
