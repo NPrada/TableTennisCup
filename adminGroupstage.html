@@ -646,7 +646,6 @@
                 this.generateMatch(teamArr[6],teamArr[7],"quarterFinal4");
                 this.generateMatch(0,0,"semiFinal1");
                 this.generateMatch(0,0,"semiFinal2");
-
                 this.generateMatch(0,0,"final");
             },
             selectedTeams: function (teamID) {
@@ -776,19 +775,53 @@
                         }
                     }
                 }
-
             },
+
             generateMatch: function(hTeamID,aTeamID,gametype){
+                var global = this;
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
                     if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
-                        console.log(gametype +"   "+hTeamID+" VS "+ aTeamID+ "  created!")
+                        //console.log(gametype +"   "+hTeamID+" VS "+ aTeamID+ "  created!")
+                        var rawdata = this.responseText;
+                        var json = JSON.parse(rawdata);
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+                        global.generateSingleSets(json.insertId);
+
+                        global.generateDoubleSets(json.insertId);
+                        global.generateDoubleSets(json.insertId);
+                        console.log("sets Generated for "+json.insertId)
+
                         if(gametype== "final"){ //final is the last gametype called so that is when the next page can be started
+                            setTimeout(check, 1000);
                             window.location.href = "http://178.62.9.140/adminPlayoffs.html";
                         }
                     }
                 };
                 xhttp.open("POST", "http://178.62.9.140:3080/makeMatch/"+hTeamID+"/"+aTeamID+"/"+gametype, true);
+                xhttp.send();
+            },
+            generateSingleSets: function (matchID) {
+                console.log("single sets is sent!")
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+                        console.log("single sets")
+                    }
+                };
+                xhttp.open("POST", "http://178.62.9.140:3080/makeSingleSet/"+matchID, true);
+                xhttp.send();
+            },
+            generateDoubleSets: function (matchID) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {                                                         //(callback function)this function runs after xhttp.open because we have asynchronous data sending so as soon as the data is recieved this is run
+                    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status == 200) {
+
+                    }
+                };
+                xhttp.open("POST", "http://178.62.9.140:3080/makeDoubleSet/"+matchID, true);
                 xhttp.send();
             },
             fetchTeams: function () {

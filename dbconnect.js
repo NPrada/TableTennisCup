@@ -455,7 +455,7 @@ app.post("/makeMatch/:hteamID/:ateamID/:gametype", function (req,res) {
         } else {
            //console.log(rows);
             console.log("the "+gametype+" was made");
-            //res.send(rows);
+            res.send(rows);
         }
     });
 });
