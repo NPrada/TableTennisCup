@@ -8,10 +8,10 @@ var app = express();
 
 var connection = mysql.createConnection({
     //DB properies..
-    host: "178.62.9.140",
-    user: "root",
-    password: "niccolo123456789",
-    database: "conp2"
+    host: "***.***.***.***",
+    user: "******",
+    password: "**********",
+    database: "*****"
 });
 var port = 3080;
 connection.connect(function (error) {       //connect to database
